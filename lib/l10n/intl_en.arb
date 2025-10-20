@@ -1,0 +1,11 @@
+{
+  "appName": "Health Profile",
+  "skip": "Skip",
+  "next": "Next",
+  "onboardingFirstHeadline": "Quickly look up medical records and schedule appointments",
+  "onBoardingSecondHeadline": "Clinical disease diagnosis tool",
+  "onBoardingThirdHeadline": "Make medical visits no longer about waiting or complicated procedures",
+  "onBoardingFirstDetail": "The app helps you access your medical records as soon as results are available. Book doctor appointments quickly and tailored to your needs.",
+  "onBoardingSecondDetail": "Integrated disease diagnosis tool that uses specialized medical knowledge to identify clinical symptoms.",
+  "onBoardingThirdDetail": "Minimalist and user-friendly design."
+}
