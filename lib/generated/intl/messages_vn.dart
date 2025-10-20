@@ -23,6 +23,7 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "appName": MessageLookupByLibrary.simpleMessage("Hồ sơ sức khoẻ"),
+    "getStarted": MessageLookupByLibrary.simpleMessage("Bắt đầu"),
     "next": MessageLookupByLibrary.simpleMessage("Tiếp tục"),
     "onBoardingFirstDetail": MessageLookupByLibrary.simpleMessage(
       "Ứng dụng hỗ trợ tra cứu hồ sơ bệnh án ngay khi có kết quả. Đặt lịch khám với bác sỹ nhanh ngọn và đúng nhu cầu của bản thân.",

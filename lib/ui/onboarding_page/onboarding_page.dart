@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -62,16 +64,16 @@ class _OnboardingChildPageState extends State<OnboardingChildPage> {
                 buildWhen: (previous, current) =>
                     previous.currentPage != current.currentPage,
                 builder: (context, state) {
-                  return Opacity(
-                    opacity: state.currentPage == 3 ? 0 : 1,
-                    child: Padding(
-                      padding: const EdgeInsets.all(AppDimens.marginNormal),
-                      child: Align(
-                        alignment: Alignment.centerRight,
-                        child: InkWell(
-                          onTap: () {
-                            _cubit.onSkip();
-                          },
+                  return Padding(
+                    padding: const EdgeInsets.all(AppDimens.marginNormal),
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: InkWell(
+                        onTap: () {
+                          _cubit.onSkip();
+                        },
+                        child: Opacity(
+                          opacity: state.currentPage == 2 ? 0 : 1,
                           child: Text(
                             S.of(context).skip,
                             style: Theme.of(context).textTheme.titleMedium,
@@ -127,7 +129,7 @@ class _OnboardingChildPageState extends State<OnboardingChildPage> {
                       await _cubit.nextPage();
                     },
                     child: Text(
-                      S.of(context).next,
+                      _cubit.state.currentPage != 2 ? S.of(context).next : S.of(context).getStarted,
                       style: Theme.of(context).textTheme.labelLarge?.copyWith(
                         color: Theme.of(context).colorScheme.onPrimary,
                       ),

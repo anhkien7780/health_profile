@@ -2,6 +2,7 @@
   "appName": "Health Profile",
   "skip": "Skip",
   "next": "Next",
+  "getStarted": "Get Started",
   "onboardingFirstHeadline": "Quickly look up medical records and schedule appointments",
   "onBoardingSecondHeadline": "Clinical disease diagnosis tool",
   "onBoardingThirdHeadline": "Make medical visits no longer about waiting or complicated procedures",

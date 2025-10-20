@@ -23,6 +23,7 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "appName": MessageLookupByLibrary.simpleMessage("Health Profile"),
+    "getStarted": MessageLookupByLibrary.simpleMessage("Get Started"),
     "next": MessageLookupByLibrary.simpleMessage("Next"),
     "onBoardingFirstDetail": MessageLookupByLibrary.simpleMessage(
       "The app helps you access your medical records as soon as results are available. Book doctor appointments quickly and tailored to your needs.",

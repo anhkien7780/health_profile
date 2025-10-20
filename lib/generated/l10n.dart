@@ -69,6 +69,11 @@ class S {
     return Intl.message('Next', name: 'next', desc: '', args: []);
   }
 
+  /// `Get Started`
+  String get getStarted {
+    return Intl.message('Get Started', name: 'getStarted', desc: '', args: []);
+  }
+
   /// `Quickly look up medical records and schedule appointments`
   String get onboardingFirstHeadline {
     return Intl.message(
