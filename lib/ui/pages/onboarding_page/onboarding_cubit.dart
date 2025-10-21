@@ -7,8 +7,6 @@ class OnboardingCubit extends Cubit<OnboardingState> {
   final pageController = PageController();
 
   Future<void> nextPage() async {
-    final page = state.currentPage + 1;
-    emit(state.copyWith(currentPage: page));
     await pageController.nextPage(
       duration: Duration(milliseconds: 400),
       curve: Curves.linear,
@@ -20,7 +18,6 @@ class OnboardingCubit extends Cubit<OnboardingState> {
   }
 
   Future<void> onSkip() async {
-    emit(state.copyWith(currentPage: 3));
     await pageController.animateToPage(
       3,
       duration: Duration(milliseconds: 400),
