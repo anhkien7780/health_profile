@@ -6,6 +6,7 @@ import 'package:health_profile/generated/l10n.dart';
 import 'package:health_profile/ui/pages/splash_page/splash_cubit.dart';
 import 'package:health_profile/ui/pages/splash_page/splash_navigator.dart';
 import 'package:health_profile/ui/pages/splash_page/splash_state.dart';
+import 'package:health_profile/ui/widgets/logos/app_logo.dart';
 
 class SplashPage extends StatelessWidget {
   const SplashPage({super.key});
@@ -37,7 +38,11 @@ class _SplashChildPageState extends State<SplashChildPage> {
   void initState() {
     super.initState();
     _cubit = context.read<SplashCubit>();
-    _cubit.openOnboardingPage();
+    init();
+  }
+
+  Future<void> init() async {
+    await _cubit.checkLogin();
   }
 
   @override
@@ -48,11 +53,7 @@ class _SplashChildPageState extends State<SplashChildPage> {
           spacing: AppDimens.marginNormal,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(
-              AppImages.icLogo,
-              width: AppDimens.logoSize.width,
-              height: AppDimens.logoSize.height,
-            ),
+            AppLogo(),
             Text(
               S.of(context).appName,
               style: Theme.of(context).textTheme.titleLarge,

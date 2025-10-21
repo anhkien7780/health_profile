@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:health_profile/common/app_dimens.dart';
 
-class AppOutlinedButton extends StatelessWidget {
-  const AppOutlinedButton({
+class AppElevatedButton extends StatelessWidget {
+  const AppElevatedButton({
     super.key,
     required this.onClick,
     required this.text,

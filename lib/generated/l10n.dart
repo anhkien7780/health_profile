@@ -74,6 +74,61 @@ class S {
     return Intl.message('Get Started', name: 'getStarted', desc: '', args: []);
   }
 
+  /// `Email`
+  String get emailTitle {
+    return Intl.message('Email', name: 'emailTitle', desc: '', args: []);
+  }
+
+  /// `Enter your email`
+  String get emailHint {
+    return Intl.message(
+      'Enter your email',
+      name: 'emailHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password`
+  String get passwordTitle {
+    return Intl.message('Password', name: 'passwordTitle', desc: '', args: []);
+  }
+
+  /// `Enter your password`
+  String get passwordHint {
+    return Intl.message(
+      'Enter your password',
+      name: 'passwordHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Login`
+  String get loginButton {
+    return Intl.message('Login', name: 'loginButton', desc: '', args: []);
+  }
+
+  /// `Register new account`
+  String get registerAccount {
+    return Intl.message(
+      'Register new account',
+      name: 'registerAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Forget password?`
+  String get forgetPassword {
+    return Intl.message(
+      'Forget password?',
+      name: 'forgetPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Quickly look up medical records and schedule appointments`
   String get onboardingFirstHeadline {
     return Intl.message(

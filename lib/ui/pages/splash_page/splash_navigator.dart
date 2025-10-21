@@ -5,7 +5,11 @@ class SplashNavigator extends AppNavigator {
   SplashNavigator(super.context);
 
 
-  Future<void> goToOnboarding() {
+  Future<void> goToOnboardingPage() {
     return pushReplacementNamed(AppRouter.onboarding);
+  }
+
+  Future<void> goToLoginPage(){
+    return pushReplacementNamed(AppRouter.login);
   }
 }

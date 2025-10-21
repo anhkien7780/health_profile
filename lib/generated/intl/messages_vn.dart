@@ -23,7 +23,11 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "appName": MessageLookupByLibrary.simpleMessage("Hồ sơ sức khoẻ"),
+    "emailHint": MessageLookupByLibrary.simpleMessage("Nhập email của bạn"),
+    "emailTitle": MessageLookupByLibrary.simpleMessage("Email"),
+    "forgetPassword": MessageLookupByLibrary.simpleMessage("Quên mật khẩu?"),
     "getStarted": MessageLookupByLibrary.simpleMessage("Bắt đầu"),
+    "loginButton": MessageLookupByLibrary.simpleMessage("Đăng nhập"),
     "next": MessageLookupByLibrary.simpleMessage("Tiếp tục"),
     "onBoardingFirstDetail": MessageLookupByLibrary.simpleMessage(
       "Ứng dụng hỗ trợ tra cứu hồ sơ bệnh án ngay khi có kết quả. Đặt lịch khám với bác sỹ nhanh ngọn và đúng nhu cầu của bản thân.",
@@ -42,6 +46,13 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "onboardingFirstHeadline": MessageLookupByLibrary.simpleMessage(
       "Tra cứu hồ sơ bệnh án, hẹn lịch khám bệnh nhanh chóng",
+    ),
+    "passwordHint": MessageLookupByLibrary.simpleMessage(
+      "Nhập mật khẩu của bạn",
+    ),
+    "passwordTitle": MessageLookupByLibrary.simpleMessage("Mật khẩu"),
+    "registerAccount": MessageLookupByLibrary.simpleMessage(
+      "Đăng ký tài khoản mới",
     ),
     "skip": MessageLookupByLibrary.simpleMessage("Bỏ qua"),
   };

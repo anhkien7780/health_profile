@@ -8,15 +8,13 @@ class SplashCubit extends Cubit<SplashState> {
 
   final SplashNavigator navigator;
 
-  Future<void> openOnboardingPage() async{
-    await Future.delayed(const Duration(seconds: 2));
-    await navigator.goToOnboarding();
-  }
-
   Future<void> checkLogin() async {
+    await Future.delayed(const Duration(seconds: 2));
     final isFirstRun = await SharedPreferencesHelper.isFirstRun();
     if (isFirstRun) {
-      await navigator.goToOnboarding();
+      await navigator.goToOnboardingPage();
+    } else {
+      await navigator.goToLoginPage();
     }
   }
 }

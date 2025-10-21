@@ -121,7 +121,7 @@ class _OnboardingChildPageState extends State<OnboardingChildPage> {
               const Spacer(),
               Padding(
                 padding: const EdgeInsets.only(bottom: AppDimens.marginBigger),
-                child: AppOutlinedButton(
+                child: AppElevatedButton(
                   onClick: () async {
                     await _cubit.nextPage();
                   },

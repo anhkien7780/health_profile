@@ -23,7 +23,11 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "appName": MessageLookupByLibrary.simpleMessage("Health Profile"),
+    "emailHint": MessageLookupByLibrary.simpleMessage("Enter your email"),
+    "emailTitle": MessageLookupByLibrary.simpleMessage("Email"),
+    "forgetPassword": MessageLookupByLibrary.simpleMessage("Forget password?"),
     "getStarted": MessageLookupByLibrary.simpleMessage("Get Started"),
+    "loginButton": MessageLookupByLibrary.simpleMessage("Login"),
     "next": MessageLookupByLibrary.simpleMessage("Next"),
     "onBoardingFirstDetail": MessageLookupByLibrary.simpleMessage(
       "The app helps you access your medical records as soon as results are available. Book doctor appointments quickly and tailored to your needs.",
@@ -42,6 +46,11 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "onboardingFirstHeadline": MessageLookupByLibrary.simpleMessage(
       "Quickly look up medical records and schedule appointments",
+    ),
+    "passwordHint": MessageLookupByLibrary.simpleMessage("Enter your password"),
+    "passwordTitle": MessageLookupByLibrary.simpleMessage("Password"),
+    "registerAccount": MessageLookupByLibrary.simpleMessage(
+      "Register new account",
     ),
     "skip": MessageLookupByLibrary.simpleMessage("Skip"),
   };
