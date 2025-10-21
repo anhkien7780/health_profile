@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:health_profile/common/app_dimens.dart';
 import 'package:health_profile/common/app_images.dart';
 import 'package:health_profile/generated/l10n.dart';
+import 'package:health_profile/ui/widgets/buttons/app_outlined_button.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import 'onboarding_cubit.dart';
@@ -62,16 +63,16 @@ class _OnboardingChildPageState extends State<OnboardingChildPage> {
                 buildWhen: (previous, current) =>
                     previous.currentPage != current.currentPage,
                 builder: (context, state) {
-                  return Opacity(
-                    opacity: state.currentPage == 3 ? 0 : 1,
-                    child: Padding(
-                      padding: const EdgeInsets.all(AppDimens.marginNormal),
-                      child: Align(
-                        alignment: Alignment.centerRight,
-                        child: InkWell(
-                          onTap: () {
-                            _cubit.onSkip();
-                          },
+                  return Padding(
+                    padding: const EdgeInsets.all(AppDimens.marginNormal),
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: InkWell(
+                        onTap: () {
+                          _cubit.onSkip();
+                        },
+                        child: Opacity(
+                          opacity: state.currentPage == 2 ? 0 : 1,
                           child: Text(
                             S.of(context).skip,
                             style: Theme.of(context).textTheme.titleMedium,
@@ -86,7 +87,7 @@ class _OnboardingChildPageState extends State<OnboardingChildPage> {
                 height: screenHeight * 0.7,
                 child: PageView(
                   controller: _cubit.pageController,
-                  onPageChanged: (index){
+                  onPageChanged: (index) {
                     _cubit.updatePage(index);
                   },
                   children: [
@@ -120,19 +121,13 @@ class _OnboardingChildPageState extends State<OnboardingChildPage> {
               const Spacer(),
               Padding(
                 padding: const EdgeInsets.only(bottom: AppDimens.marginBigger),
-                child: SizedBox(
-                  width: double.infinity,
-                  child: OutlinedButton(
-                    onPressed: () async {
-                      await _cubit.nextPage();
-                    },
-                    child: Text(
-                      S.of(context).next,
-                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                        color: Theme.of(context).colorScheme.onPrimary,
-                      ),
-                    ),
-                  ),
+                child: AppOutlinedButton(
+                  onClick: () async {
+                    await _cubit.nextPage();
+                  },
+                  text: _cubit.state.currentPage == 2
+                      ? S.of(context).getStarted
+                      : S.of(context).next,
                 ),
               ),
             ],
