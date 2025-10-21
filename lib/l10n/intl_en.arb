@@ -8,12 +8,16 @@
   "passwordTitle": "Password",
   "passwordHint": "Enter your password",
   "loginButton": "Login",
+  "registerButton": "Register",
   "registerAccount": "Register new account",
   "forgetPassword": "Forget password?",
+  "confirmPasswordTitle": "Confirm Password",
+  "confirmPasswordHint": "Enter your password again",
   "onboardingFirstHeadline": "Quickly look up medical records and schedule appointments",
   "onBoardingSecondHeadline": "Clinical disease diagnosis tool",
   "onBoardingThirdHeadline": "Make medical visits no longer about waiting or complicated procedures",
   "onBoardingFirstDetail": "The app helps you access your medical records as soon as results are available. Book doctor appointments quickly and tailored to your needs.",
   "onBoardingSecondDetail": "Integrated disease diagnosis tool that uses specialized medical knowledge to identify clinical symptoms.",
-  "onBoardingThirdDetail": "Minimalist and user-friendly design."
+  "onBoardingThirdDetail": "Minimalist and user-friendly design.",
+  "backToLogin": "Back to login"
 }

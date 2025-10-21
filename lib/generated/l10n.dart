@@ -109,6 +109,11 @@ class S {
     return Intl.message('Login', name: 'loginButton', desc: '', args: []);
   }
 
+  /// `Register`
+  String get registerButton {
+    return Intl.message('Register', name: 'registerButton', desc: '', args: []);
+  }
+
   /// `Register new account`
   String get registerAccount {
     return Intl.message(
@@ -124,6 +129,26 @@ class S {
     return Intl.message(
       'Forget password?',
       name: 'forgetPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm Password`
+  String get confirmPasswordTitle {
+    return Intl.message(
+      'Confirm Password',
+      name: 'confirmPasswordTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter your password again`
+  String get confirmPasswordHint {
+    return Intl.message(
+      'Enter your password again',
+      name: 'confirmPasswordHint',
       desc: '',
       args: [],
     );
@@ -184,6 +209,16 @@ class S {
     return Intl.message(
       'Minimalist and user-friendly design.',
       name: 'onBoardingThirdDetail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Back to login`
+  String get backToLogin {
+    return Intl.message(
+      'Back to login',
+      name: 'backToLogin',
       desc: '',
       args: [],
     );

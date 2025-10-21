@@ -27,6 +27,7 @@ dependencies:
   shared_preferences: ^2.5.3
   intl: ^0.20.2
   smooth_page_indicator: ^1.2.1
+  loader_overlay: ^5.0.0
 
 dev_dependencies:
   flutter_test:

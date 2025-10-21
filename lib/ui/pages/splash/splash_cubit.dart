@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_profile/database/shared_preferences_helper.dart';
-import 'package:health_profile/ui/pages/splash_page/splash_navigator.dart';
-import 'package:health_profile/ui/pages/splash_page/splash_state.dart';
+import 'package:health_profile/ui/pages/splash/splash_navigator.dart';
+import 'package:health_profile/ui/pages/splash/splash_state.dart';
 
 class SplashCubit extends Cubit<SplashState> {
   SplashCubit({required this.navigator}) : super(SplashState());

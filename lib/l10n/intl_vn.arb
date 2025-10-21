@@ -8,12 +8,16 @@
   "passwordTitle": "Mật khẩu",
   "passwordHint": "Nhập mật khẩu của bạn",
   "loginButton": "Đăng nhập",
+  "registerButton": "Đăng ký",
   "registerAccount": "Đăng ký tài khoản mới",
   "forgetPassword": "Quên mật khẩu?",
+  "confirmPasswordTitle": "Nhập lại mật khẩu",
+  "confirmPasswordHint": "Nhập lại mật khẩu",
   "onboardingFirstHeadline": "Tra cứu hồ sơ bệnh án, hẹn lịch khám bệnh nhanh chóng",
   "onBoardingSecondHeadline": "Công cụ chuẩn đoán bệnh lâm sàn",
   "onBoardingThirdHeadline": "Để khám bệnh không còn là chờ đợi và thủ tục khó khăn",
   "onBoardingFirstDetail": "Ứng dụng hỗ trợ tra cứu hồ sơ bệnh án ngay khi có kết quả. Đặt lịch khám với bác sỹ nhanh ngọn và đúng nhu cầu của bản thân.",
   "onBoardingSecondDetail": "Tích hợp công cụ chuẩn đoán bệnh, sử dụng các kiến thức chuyên khoa để xác định lâm sàn triệu chứng bệnh.",
-  "onBoardingThirdDetail": "Thiết kế tối giản và thân thiện với người sử dụng."
+  "onBoardingThirdDetail": "Thiết kế tối giản và thân thiện với người sử dụng.",
+  "backToLogin": "Quay lại đăng nhập"
 }

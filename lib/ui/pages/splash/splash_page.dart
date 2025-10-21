@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_profile/common/app_dimens.dart';
-import 'package:health_profile/common/app_images.dart';
 import 'package:health_profile/generated/l10n.dart';
-import 'package:health_profile/ui/pages/splash_page/splash_cubit.dart';
-import 'package:health_profile/ui/pages/splash_page/splash_navigator.dart';
-import 'package:health_profile/ui/pages/splash_page/splash_state.dart';
+import 'package:health_profile/ui/pages/splash/splash_cubit.dart';
+import 'package:health_profile/ui/pages/splash/splash_navigator.dart';
+import 'package:health_profile/ui/pages/splash/splash_state.dart';
 import 'package:health_profile/ui/widgets/logos/app_logo.dart';
 
 class SplashPage extends StatelessWidget {

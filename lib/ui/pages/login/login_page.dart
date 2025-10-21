@@ -31,6 +31,15 @@ class LoginChildPage extends StatefulWidget {
 }
 
 class _LoginChildPageState extends State<LoginChildPage> {
+
+  late final LoginCubit _cubit;
+
+  @override
+  void initState() {
+    super.initState();
+    _cubit = context.read<LoginCubit>();
+  }
+
   @override
   Widget build(BuildContext context) {
     return AuthBaseScreen(
@@ -58,7 +67,9 @@ class _LoginChildPageState extends State<LoginChildPage> {
               Row(
                 children: [
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      _cubit.navigator.openSignUpPage();
+                    },
                     child: Text(
                       S.of(context).registerAccount,
                       style: Theme.of(context).textTheme.titleMedium,
