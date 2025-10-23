@@ -26,9 +26,14 @@ class MyApp extends StatelessWidget {
             previous.currentLanguage != current.currentLanguage,
         builder: (context, state) {
           return GlobalLoaderOverlay(
-            child: _createMaterialApp(
-              context,
-              locale: state.currentLanguage.local,
+            child: GestureDetector(
+              onTap: () {
+                _hideKeyboard(context);
+              },
+              child: _createMaterialApp(
+                context,
+                locale: state.currentLanguage.local,
+              ),
             ),
           );
         },
@@ -53,5 +58,11 @@ class MyApp extends StatelessWidget {
       ],
       locale: locale,
     );
+  }
+
+  void _hideKeyboard(BuildContext context) {
+    if (FocusScope.of(context).hasFocus) {
+      FocusScope.of(context).unfocus();
+    }
   }
 }

@@ -8,6 +8,7 @@ import 'package:health_profile/ui/widgets/buttons/app_outlined_button.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import 'onboarding_cubit.dart';
+import 'onboarding_navigator.dart';
 import 'onboarding_state.dart';
 
 class OnboardingPage extends StatelessWidget {
@@ -16,7 +17,8 @@ class OnboardingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<OnboardingCubit>(
-      create: (context) => OnboardingCubit(),
+      create: (context) =>
+          OnboardingCubit(navigator: OnboardingNavigator(context)),
       child: BlocBuilder<OnboardingCubit, OnboardingState>(
         builder: (context, state) {
           return OnboardingChildPage();
@@ -123,7 +125,11 @@ class _OnboardingChildPageState extends State<OnboardingChildPage> {
                 padding: const EdgeInsets.only(bottom: AppDimens.marginBigger),
                 child: AppElevatedButton(
                   onClick: () async {
-                    await _cubit.nextPage();
+                    if (_cubit.state.currentPage != 2) {
+                      await _cubit.nextPage();
+                    } else {
+                      await _cubit.onGetStarted();
+                    }
                   },
                   text: _cubit.state.currentPage == 2
                       ? S.of(context).getStarted
