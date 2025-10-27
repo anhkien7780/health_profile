@@ -6,6 +6,9 @@ class AppDimens {
   static final logoSize = Size(120, 120);
   static final onboardingImageSize = Size(366, 422);
 
+  // Icon
+  static const double iconSizeNormal = 24;
+
   // Button
   static const double buttonHeightBig = 80;
   static const double buttonHeightNormal = 50;
