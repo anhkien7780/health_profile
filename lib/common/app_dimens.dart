@@ -11,6 +11,9 @@ class AppDimens {
   static const double buttonHeightNormal = 50;
   static const double buttonHeightSmall = 44;
 
+  // NavigationBar
+  static const double navigationBarHeight = 68;
+
   // TextField
   static const double textFieldHeight = 44;
 

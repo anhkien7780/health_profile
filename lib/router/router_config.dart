@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
+import 'package:health_profile/ui/pages/home/home_page.dart';
 import 'package:health_profile/ui/pages/login/login_page.dart';
 import 'package:health_profile/ui/pages/onboarding/onboarding_page.dart';
 import 'package:health_profile/ui/pages/sign_up/sign_up_page.dart';
@@ -12,6 +13,7 @@ class AppRouter {
   static final onboarding = "/onboarding";
   static final login = "/login";
   static final signUp = "/signUp";
+  static final home = "/home";
 
   static final GoRouter routers = GoRouter(
     routes: _routers,
@@ -45,6 +47,13 @@ class AppRouter {
       name: signUp,
       builder: (context, state) {
         return SignUpPage();
+      },
+    ),
+    GoRoute(
+      path: home,
+      name: home,
+      builder: (context, state) {
+        return HomePage();
       },
     ),
   ];

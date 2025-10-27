@@ -61,7 +61,9 @@ class _LoginChildPageState extends State<LoginChildPage> {
                 obscureText: true,
               ),
               AppElevatedButton(
-                onClick: () {},
+                onClick: () {
+                  _cubit.openHomePage();
+                },
                 text: S.of(context).loginButton,
               ),
               Row(

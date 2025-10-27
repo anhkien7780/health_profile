@@ -7,4 +7,8 @@ class LoginNavigator extends AppNavigator {
   Future<void> openSignUpPage() async {
     await pushReplacementNamed(AppRouter.signUp);
   }
+
+  Future<void> openHomePage() async {
+    await pushReplacementNamed(AppRouter.home);
+  }
 }
