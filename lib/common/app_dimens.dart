@@ -3,7 +3,8 @@ import 'dart:ui';
 class AppDimens {
   AppDimens._();
 
-  static final logoSize = Size(120, 120);
+  static final logoSizeNormal = Size(120, 120);
+  static final double logoSizeSmall = 50;
   static final onboardingImageSize = Size(366, 422);
 
   // Icon

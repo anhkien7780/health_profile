@@ -9,8 +9,8 @@ class AppLogo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Image.asset(
       AppImages.icLogo,
-      width: AppDimens.logoSize.width,
-      height: AppDimens.logoSize.height,
+      width: AppDimens.logoSizeNormal.width,
+      height: AppDimens.logoSizeNormal.height,
     );
   }
 }

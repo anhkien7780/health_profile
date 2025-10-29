@@ -1,9 +1,12 @@
 import "package:flutter/material.dart";
 
+import "app_dimens.dart";
+
 class AppTheme {
   final TextTheme textTheme;
+  final Brightness brightness;
 
-  const AppTheme(this.textTheme);
+  const AppTheme({required this.textTheme, required this.brightness});
 
   static ColorScheme lightScheme() {
     return const ColorScheme(
@@ -331,10 +334,41 @@ class AppTheme {
     );
   }
 
+  NavigationBarThemeData createNavigationBarThemeData() {
+    NavigationBarThemeData navigationBarTheme;
+    if (brightness == Brightness.light) {
+      navigationBarTheme = NavigationBarThemeData(
+        height: AppDimens.navigationBarHeight,
+        indicatorColor: Colors.transparent,
+        backgroundColor: lightScheme().primary,
+        elevation: 4,
+        iconTheme: WidgetStatePropertyAll(
+          IconThemeData(
+            size: AppDimens.iconSizeNormal,
+            color: lightScheme().onPrimary,
+          ),
+        ),
+      );
+    } else {
+      navigationBarTheme = NavigationBarThemeData(
+        height: AppDimens.navigationBarHeight,
+        backgroundColor: darkScheme().primary,
+        indicatorColor: Colors.transparent,
+        elevation: 4,
+        iconTheme: WidgetStatePropertyAll(
+          IconThemeData(
+            size: AppDimens.iconSizeNormal,
+            color: darkScheme().onPrimary,
+          ),
+        ),
+      );
+    }
+    return navigationBarTheme;
+  }
+
   ThemeData darkHighContrast() {
     return theme(darkHighContrastScheme());
   }
-
 
   ThemeData theme(ColorScheme colorScheme) => ThemeData(
     useMaterial3: true,
@@ -346,6 +380,7 @@ class AppTheme {
         iconColor: colorScheme.onPrimary,
       ),
     ),
+    navigationBarTheme: createNavigationBarThemeData(),
     colorScheme: colorScheme,
     textTheme: textTheme.apply(
       bodyColor: colorScheme.onSurface,

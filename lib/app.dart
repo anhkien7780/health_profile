@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
   }) {
     final brightness = View.of(context).platformDispatcher.platformBrightness;
     TextTheme textTheme = createTextTheme(context, "Roboto", "Roboto");
-    AppTheme theme = AppTheme(textTheme);
+    AppTheme theme = AppTheme(textTheme: textTheme, brightness: brightness);
     return MaterialApp.router(
       theme: brightness == Brightness.light ? theme.light() : theme.dark(),
       routerConfig: AppRouter.routers,
