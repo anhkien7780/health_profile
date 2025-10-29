@@ -1,7 +1,16 @@
 import 'package:equatable/equatable.dart';
 
 class HomeState extends Equatable {
-  @override
-  List<Object?> get props => [];
+  const HomeState({this.selectedPageIndex = 1});
 
+  final int selectedPageIndex;
+
+  HomeState copyWith({int? selectedPageIndex}) {
+    return HomeState(
+      selectedPageIndex: selectedPageIndex ?? this.selectedPageIndex,
+    );
+  }
+
+  @override
+  List<Object?> get props => [selectedPageIndex];
 }

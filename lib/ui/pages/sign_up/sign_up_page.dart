@@ -4,8 +4,8 @@ import 'package:health_profile/common/app_dimens.dart';
 import 'package:health_profile/generated/l10n.dart';
 import 'package:health_profile/ui/pages/sign_up/sign_up_cubit.dart';
 import 'package:health_profile/ui/pages/sign_up/sign_up_navigator.dart';
-import 'package:health_profile/ui/widgets/auth_base_screen/auth_base_screen.dart';
-import 'package:health_profile/ui/widgets/buttons/app_outlined_button.dart';
+import 'package:health_profile/ui/widgets/auth_base_page/auth_base_page.dart';
+import 'package:health_profile/ui/widgets/buttons/app_elevated_button.dart';
 import 'package:health_profile/ui/widgets/text_fileds/app_text_form_field.dart';
 
 class SignUpPage extends StatelessWidget {
@@ -41,7 +41,7 @@ class _SignUpChildPageState extends State<SignUpChildPage> {
 
   @override
   Widget build(BuildContext context) {
-    return AuthBaseScreen(
+    return AuthBasePage(
       child: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: AppDimens.paddingNormal,

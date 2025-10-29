@@ -342,6 +342,9 @@ class AppTheme {
         indicatorColor: Colors.transparent,
         backgroundColor: lightScheme().primary,
         elevation: 4,
+        labelTextStyle: WidgetStatePropertyAll(
+          textTheme.labelLarge?.copyWith(color: lightScheme().onPrimary),
+        ),
         iconTheme: WidgetStatePropertyAll(
           IconThemeData(
             size: AppDimens.iconSizeNormal,
@@ -355,6 +358,9 @@ class AppTheme {
         backgroundColor: darkScheme().primary,
         indicatorColor: Colors.transparent,
         elevation: 4,
+        labelTextStyle: WidgetStatePropertyAll(
+          textTheme.labelLarge?.copyWith(color: darkScheme().onPrimary),
+        ),
         iconTheme: WidgetStatePropertyAll(
           IconThemeData(
             size: AppDimens.iconSizeNormal,
@@ -364,6 +370,23 @@ class AppTheme {
       );
     }
     return navigationBarTheme;
+  }
+
+  AppBarTheme createAppBarThemeData() {
+    return AppBarTheme(
+      leadingWidth: AppDimens.paddingNormal + AppDimens.logoSizeSmall,
+      toolbarHeight: AppDimens.paddingSmall * 2 + AppDimens.logoSizeSmall,
+      titleTextStyle: textTheme.titleMedium?.copyWith(
+        color: brightness == Brightness.light
+            ? lightScheme().primary
+            : darkScheme().primary,
+      ),
+      iconTheme: IconThemeData(
+        color: brightness == Brightness.light
+            ? lightScheme().primary
+            : darkScheme().primary,
+      ),
+    );
   }
 
   ThemeData darkHighContrast() {
@@ -381,6 +404,7 @@ class AppTheme {
       ),
     ),
     navigationBarTheme: createNavigationBarThemeData(),
+    appBarTheme: createAppBarThemeData(),
     colorScheme: colorScheme,
     textTheme: textTheme.apply(
       bodyColor: colorScheme.onSurface,

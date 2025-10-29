@@ -4,7 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:health_profile/common/app_dimens.dart';
 import 'package:health_profile/common/app_images.dart';
 import 'package:health_profile/generated/l10n.dart';
-import 'package:health_profile/ui/widgets/buttons/app_outlined_button.dart';
+import 'package:health_profile/ui/widgets/buttons/app_elevated_button.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import 'onboarding_cubit.dart';

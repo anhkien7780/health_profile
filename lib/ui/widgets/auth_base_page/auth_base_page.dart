@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:health_profile/ui/widgets/logos/app_logo.dart';
 
-class AuthBaseScreen extends StatelessWidget {
-  const AuthBaseScreen({super.key, required this.child});
+class AuthBasePage extends StatelessWidget {
+  const AuthBasePage({super.key, required this.child});
 
   final Widget child;
 

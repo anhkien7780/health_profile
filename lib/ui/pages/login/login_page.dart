@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_profile/common/app_dimens.dart';
 import 'package:health_profile/generated/l10n.dart';
-import 'package:health_profile/ui/widgets/auth_base_screen/auth_base_screen.dart';
-import 'package:health_profile/ui/widgets/buttons/app_outlined_button.dart';
+import 'package:health_profile/ui/widgets/auth_base_page/auth_base_page.dart';
+import 'package:health_profile/ui/widgets/buttons/app_elevated_button.dart';
 import 'package:health_profile/ui/widgets/text_fileds/app_text_form_field.dart';
 
 import 'login_cubit.dart';
@@ -42,7 +42,7 @@ class _LoginChildPageState extends State<LoginChildPage> {
 
   @override
   Widget build(BuildContext context) {
-    return AuthBaseScreen(
+    return AuthBasePage(
       child: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: AppDimens.paddingNormal,

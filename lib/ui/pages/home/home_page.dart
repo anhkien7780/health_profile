@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_profile/common/app_dimens.dart';
-import 'package:health_profile/common/app_images.dart';
 import 'package:health_profile/ui/pages/home/home_cubit.dart';
+import 'package:health_profile/ui/pages/home/home_state.dart';
 import 'package:health_profile/ui/pages/home/widgets/destination_item.dart';
+import 'package:health_profile/ui/widgets/buttons/app_elevated_button.dart';
+import 'package:health_profile/utils/create_app_bar.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -25,64 +27,91 @@ class HomeChildPage extends StatefulWidget {
 }
 
 class _HomeChildPageState extends State<HomeChildPage> {
+  late final HomeCubit _cubit;
+
+  @override
+  void initState() {
+    super.initState();
+    _cubit = context.read<HomeCubit>();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: createAppbar(context),
-      bottomNavigationBar: Container(
-        decoration: BoxDecoration(
-          border: Border.all(color: Colors.transparent, width: 1),
-          borderRadius: BorderRadius.circular(AppDimens.borderRadiusNormal),
-        ),
-        margin: EdgeInsets.all(AppDimens.marginNormal),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(AppDimens.borderRadiusNormal),
-          child: NavigationBar(
-            labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
-            destinations: const [
-              DestinationItem(
-                icon: Icons.account_circle_outlined,
-                label: "Profile",
-              ),
-              DestinationItem(icon: Icons.home, label: "Home"),
-              DestinationItem(icon: Icons.message_outlined, label: "Chat"),
-              DestinationItem(icon: Icons.settings_outlined, label: "Settings"),
-            ],
-            height: AppDimens.navigationBarHeight,
-            labelTextStyle: WidgetStatePropertyAll(
-              Theme.of(context).textTheme.labelLarge?.copyWith(
-                color: Theme.of(context).colorScheme.onPrimary,
+      bottomNavigationBar: _createBottomNavigationBar(),
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: AppDimens.paddingNormal),
+        child: Column(
+          spacing: AppDimens.paddingNormal,
+          children: [
+            SizedBox(width: double.infinity, height: 180, child: Placeholder()),
+            SizedBox(
+              height: 80,
+              child: Row(
+                spacing: AppDimens.paddingBig,
+                children: [
+                  Flexible(
+                    child: AppElevatedButton(
+                      onClick: () {},
+                      height: AppDimens.buttonHeightBig,
+                      icon: Icon(Icons.pending_actions, size: AppDimens.iconSizeNormal,),
+                      text: "Book an appointment",
+                    ),
+                  ),
+                  Flexible(
+                    child: AppElevatedButton(
+                      onClick: () {},
+                      height: AppDimens.buttonHeightBig,
+                      icon: Icon(Icons.search, size: AppDimens.iconSizeNormal),
+                      text: "Diagnose a disease",
+                    ),
+                  ),
+                ],
               ),
             ),
-            backgroundColor: Theme.of(context).primaryColor,
-          ),
+          ],
         ),
       ),
     );
   }
-}
 
-AppBar createAppbar(BuildContext context) {
-  return AppBar(
-    leadingWidth: AppDimens.paddingNormal + AppDimens.logoSizeSmall,
-    toolbarHeight: AppDimens.paddingSmall * 2 + AppDimens.logoSizeSmall,
-    leading: Padding(
-      padding: const EdgeInsets.only(
-        top: AppDimens.paddingSmall,
-        left: AppDimens.paddingNormal,
-        bottom: AppDimens.paddingSmall,
-      ),
-      child: Image.asset(
-        width: AppDimens.logoSizeSmall,
-        height: AppDimens.logoSizeSmall,
-        AppImages.icLogo,
-      ),
-    ),
-    title: Text(
-      "Health Profile",
-      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-        color: Theme.of(context).colorScheme.primary,
-      ),
-    ),
-  );
+  Widget _createBottomNavigationBar() {
+    return BlocBuilder<HomeCubit, HomeState>(
+      buildWhen: (pre, current) {
+        return pre.selectedPageIndex != current.selectedPageIndex;
+      },
+      builder: (BuildContext context, HomeState state) {
+        return Container(
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.transparent, width: 1),
+            borderRadius: BorderRadius.circular(AppDimens.borderRadiusBig),
+          ),
+          margin: EdgeInsets.all(AppDimens.marginNormal),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(AppDimens.borderRadiusBig),
+            child: NavigationBar(
+              onDestinationSelected: (index) {
+                _cubit.onDestinationPressed(index);
+              },
+              labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
+              selectedIndex: _cubit.state.selectedPageIndex,
+              destinations: const [
+                DestinationItem(
+                  icon: Icons.account_circle_outlined,
+                  label: "Profile",
+                ),
+                DestinationItem(icon: Icons.home, label: "Home"),
+                DestinationItem(icon: Icons.message_outlined, label: "Chat"),
+                DestinationItem(
+                  icon: Icons.settings_outlined,
+                  label: "Settings",
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
 }
