@@ -389,6 +389,28 @@ class AppTheme {
     );
   }
 
+  ListTileThemeData createListTileThemeData() {
+    return brightness == Brightness.light
+        ? ListTileThemeData(
+            iconColor: lightScheme().primary,
+            titleTextStyle: textTheme.titleSmall?.copyWith(
+              color: lightScheme().onSurface,
+            ),
+            subtitleTextStyle: textTheme.titleSmall?.copyWith(
+              color: lightScheme().onSurface,
+            ),
+          )
+        : ListTileThemeData(
+            iconColor: darkScheme().primary,
+            titleTextStyle: textTheme.titleSmall?.copyWith(
+              color: darkScheme().onSurface,
+            ),
+            subtitleTextStyle: textTheme.titleSmall?.copyWith(
+              color: darkScheme().onSurface,
+            ),
+          );
+  }
+
   ThemeData darkHighContrast() {
     return theme(darkHighContrastScheme());
   }
@@ -403,6 +425,8 @@ class AppTheme {
         iconColor: colorScheme.onPrimary,
       ),
     ),
+    listTileTheme: createListTileThemeData(),
+    iconTheme: IconThemeData(size: AppDimens.iconSizeNormal),
     navigationBarTheme: createNavigationBarThemeData(),
     appBarTheme: createAppBarThemeData(),
     colorScheme: colorScheme,
