@@ -39,7 +39,7 @@ class _HomeChildPageState extends State<HomeChildPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: createAppbar(context),
+      appBar: createAppbar(context, onAlarmActionPressed: () {}),
       bottomNavigationBar: _createBottomNavigationBar(),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: AppDimens.paddingNormal),
@@ -90,6 +90,11 @@ class _HomeChildPageState extends State<HomeChildPage> {
                   },
                 ),
               ],
+            ),
+            Expanded(
+              child: ListView.builder(
+                itemBuilder: (context, index) => Placeholder(),
+              ),
             ),
           ],
         ),

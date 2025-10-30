@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:health_profile/common/app_dimens.dart';
 import 'package:health_profile/common/app_images.dart';
 
-AppBar createAppbar(BuildContext context) {
+AppBar createAppbar(BuildContext context, {required VoidCallback onAlarmActionPressed}) {
   return AppBar(
     leading: Padding(
       padding: const EdgeInsets.only(
@@ -17,10 +17,13 @@ AppBar createAppbar(BuildContext context) {
       ),
     ),
     actions: [
-      IconButton(onPressed: () {}, icon: Icon(Icons.notifications)),
+      IconButton(
+        onPressed: () {
+          onAlarmActionPressed();
+        },
+        icon: Icon(Icons.notifications),
+      ),
     ],
-    title: Text(
-      "Health Profile",
-    ),
+    title: Text("Health Profile"),
   );
 }
