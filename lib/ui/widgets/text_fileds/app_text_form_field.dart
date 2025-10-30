@@ -9,8 +9,14 @@ class AppTextFormField extends StatelessWidget {
     this.obscureText = false,
     this.controller,
     this.validator,
+    this.prefixIcon,
+    this.suffixIcon,
+    this.onTap,
   });
 
+  final Icon? prefixIcon;
+  final Icon? suffixIcon;
+  final VoidCallback? onTap;
   final String title;
   final String? hint;
   final bool obscureText;
@@ -31,7 +37,10 @@ class AppTextFormField extends StatelessWidget {
             validator: validator,
             controller: controller,
             obscureText: obscureText,
+            onTap: onTap,
             decoration: InputDecoration(
+              prefixIcon: prefixIcon,
+              suffixIcon: suffixIcon,
               hint: Text(
                 hint ?? "",
                 style: Theme.of(context).textTheme.bodyMedium,
