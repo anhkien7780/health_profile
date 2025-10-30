@@ -19,5 +19,18 @@
   "onBoardingFirstDetail": "The app helps you access your medical records as soon as results are available. Book doctor appointments quickly and tailored to your needs.",
   "onBoardingSecondDetail": "Integrated disease diagnosis tool that uses specialized medical knowledge to identify clinical symptoms.",
   "onBoardingThirdDetail": "Minimalist and user-friendly design.",
-  "backToLogin": "Back to login"
+  "backToLogin": "Back to login",
+  "profile": "Profile",
+  "home": "Home",
+  "chat": "Chat",
+  "settings": "Settings",
+  "homeTitle": "Home",
+  "bookAppointment": "Book an appointment",
+  "diagnoseDisease": "Diagnose a disease",
+  "appointments": "Appointments",
+  "security": "Security",
+  "changePassword": "Change password",
+  "logout": "Log out",
+  "personalInformation": "Personal Information",
+  "edit": "Edit"
 }

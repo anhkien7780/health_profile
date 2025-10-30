@@ -23,18 +23,31 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "appName": MessageLookupByLibrary.simpleMessage("Health Profile"),
+    "appointments": MessageLookupByLibrary.simpleMessage("Appointments"),
     "backToLogin": MessageLookupByLibrary.simpleMessage("Back to login"),
+    "bookAppointment": MessageLookupByLibrary.simpleMessage(
+      "Book an appointment",
+    ),
+    "changePassword": MessageLookupByLibrary.simpleMessage("Change password"),
+    "chat": MessageLookupByLibrary.simpleMessage("Chat"),
     "confirmPasswordHint": MessageLookupByLibrary.simpleMessage(
       "Enter your password again",
     ),
     "confirmPasswordTitle": MessageLookupByLibrary.simpleMessage(
       "Confirm Password",
     ),
+    "diagnoseDisease": MessageLookupByLibrary.simpleMessage(
+      "Diagnose a disease",
+    ),
+    "edit": MessageLookupByLibrary.simpleMessage("Edit"),
     "emailHint": MessageLookupByLibrary.simpleMessage("Enter your email"),
     "emailTitle": MessageLookupByLibrary.simpleMessage("Email"),
     "forgetPassword": MessageLookupByLibrary.simpleMessage("Forget password?"),
     "getStarted": MessageLookupByLibrary.simpleMessage("Get Started"),
+    "home": MessageLookupByLibrary.simpleMessage("Home"),
+    "homeTitle": MessageLookupByLibrary.simpleMessage("Home"),
     "loginButton": MessageLookupByLibrary.simpleMessage("Login"),
+    "logout": MessageLookupByLibrary.simpleMessage("Log out"),
     "next": MessageLookupByLibrary.simpleMessage("Next"),
     "onBoardingFirstDetail": MessageLookupByLibrary.simpleMessage(
       "The app helps you access your medical records as soon as results are available. Book doctor appointments quickly and tailored to your needs.",
@@ -56,10 +69,16 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "passwordHint": MessageLookupByLibrary.simpleMessage("Enter your password"),
     "passwordTitle": MessageLookupByLibrary.simpleMessage("Password"),
+    "personalInformation": MessageLookupByLibrary.simpleMessage(
+      "Personal Information",
+    ),
+    "profile": MessageLookupByLibrary.simpleMessage("Profile"),
     "registerAccount": MessageLookupByLibrary.simpleMessage(
       "Register new account",
     ),
     "registerButton": MessageLookupByLibrary.simpleMessage("Register"),
+    "security": MessageLookupByLibrary.simpleMessage("Security"),
+    "settings": MessageLookupByLibrary.simpleMessage("Settings"),
     "skip": MessageLookupByLibrary.simpleMessage("Skip"),
   };
 }

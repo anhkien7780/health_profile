@@ -19,5 +19,18 @@
   "onBoardingFirstDetail": "Ứng dụng hỗ trợ tra cứu hồ sơ bệnh án ngay khi có kết quả. Đặt lịch khám với bác sỹ nhanh ngọn và đúng nhu cầu của bản thân.",
   "onBoardingSecondDetail": "Tích hợp công cụ chuẩn đoán bệnh, sử dụng các kiến thức chuyên khoa để xác định lâm sàn triệu chứng bệnh.",
   "onBoardingThirdDetail": "Thiết kế tối giản và thân thiện với người sử dụng.",
-  "backToLogin": "Quay lại đăng nhập"
+  "backToLogin": "Quay lại đăng nhập",
+  "profile": "Hồ sơ",
+  "home": "Trang chủ",
+  "chat": "Trò chuyện",
+  "settings": "Cài đặt",
+  "homeTitle": "Trang chủ",
+  "bookAppointment": "Đặt lịch hẹn",
+  "diagnoseDisease": "Chẩn đoán bệnh",
+  "appointments": "Lịch hẹn",
+  "security": "Bảo mật",
+  "changePassword": "Đổi mật khẩu",
+  "logout": "Đăng xuất",
+  "personalInformation": "Thông tin cá nhân",
+  "edit": "Sửa"
 }
