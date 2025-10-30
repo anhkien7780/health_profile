@@ -4,6 +4,7 @@ import 'package:health_profile/common/app_dimens.dart';
 import 'package:health_profile/ui/pages/home/home_cubit.dart';
 import 'package:health_profile/ui/pages/home/home_state.dart';
 import 'package:health_profile/ui/pages/home/widgets/destination_item.dart';
+import 'package:health_profile/ui/widgets/app_badge/app_badge.dart';
 import 'package:health_profile/ui/widgets/buttons/app_elevated_button.dart';
 import 'package:health_profile/utils/create_app_bar.dart';
 
@@ -55,7 +56,10 @@ class _HomeChildPageState extends State<HomeChildPage> {
                     child: AppElevatedButton(
                       onClick: () {},
                       height: AppDimens.buttonHeightBig,
-                      icon: Icon(Icons.pending_actions, size: AppDimens.iconSizeNormal,),
+                      icon: Icon(
+                        Icons.pending_actions,
+                        size: AppDimens.iconSizeNormal,
+                      ),
                       text: "Book an appointment",
                     ),
                   ),
@@ -69,6 +73,23 @@ class _HomeChildPageState extends State<HomeChildPage> {
                   ),
                 ],
               ),
+            ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              spacing: AppDimens.paddingSmall,
+              children: [
+                Text(
+                  "Appointments",
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
+                BlocBuilder<HomeCubit, HomeState>(
+                  buildWhen: (pre, current) =>
+                      pre.appointmentsCount != current.appointmentsCount,
+                  builder: (context, state) {
+                    return AppBadge(number: state.appointmentsCount);
+                  },
+                ),
+              ],
             ),
           ],
         ),
