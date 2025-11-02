@@ -6,6 +6,7 @@ class AppTextFormField extends StatelessWidget {
     super.key,
     required this.title,
     this.hint,
+    this.readOnly = false,
     this.obscureText = false,
     this.controller,
     this.validator,
@@ -20,6 +21,7 @@ class AppTextFormField extends StatelessWidget {
   final String title;
   final String? hint;
   final bool obscureText;
+  final bool readOnly;
   final FormFieldValidator<String>? validator;
   final TextEditingController? controller;
 
@@ -29,11 +31,15 @@ class AppTextFormField extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       spacing: AppDimens.paddingSmall,
       children: [
-        Text(title, style: Theme.of(context).textTheme.titleMedium),
+        Text(title, style: Theme
+            .of(context)
+            .textTheme
+            .titleMedium),
         SizedBox(
           width: double.infinity,
           height: AppDimens.textFieldHeight,
           child: TextFormField(
+            readOnly: readOnly,
             validator: validator,
             controller: controller,
             obscureText: obscureText,
@@ -43,7 +49,10 @@ class AppTextFormField extends StatelessWidget {
               suffixIcon: suffixIcon,
               hint: Text(
                 hint ?? "",
-                style: Theme.of(context).textTheme.bodyMedium,
+                style: Theme
+                    .of(context)
+                    .textTheme
+                    .bodyMedium,
               ),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(

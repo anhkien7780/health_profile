@@ -32,5 +32,15 @@
   "changePassword": "Change password",
   "logout": "Log out",
   "personalInformation": "Personal Information",
-  "edit": "Edit"
+  "edit": "Edit",
+  "editProfileTitle": "Edit profile",
+  "fullName": "Full name",
+  "birthday": "Birthday",
+  "phoneNumber": "Phone number",
+  "email": "Email",
+  "gender": "Gender",
+  "id": "ID",
+  "address": "Address",
+  "cancel": "Cancel",
+  "save": "Save"
 }

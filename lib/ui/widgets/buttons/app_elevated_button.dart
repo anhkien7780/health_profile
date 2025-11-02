@@ -7,8 +7,8 @@ class AppElevatedButton extends StatelessWidget {
     required this.onClick,
     required this.text,
     this.width = double.infinity,
-    this.height = AppDimens.buttonHeightNormal,
-    this.borderRadius = AppDimens.borderRadiusNormal,
+    this.height,
+    this.borderRadius,
     this.icon,
   });
 
