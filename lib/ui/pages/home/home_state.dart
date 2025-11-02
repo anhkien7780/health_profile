@@ -5,12 +5,12 @@ class HomeState extends Equatable {
   const HomeState({
     this.selectedPageIndex = 1,
     this.appointmentsCount = 0,
-    this.userProfile,
+    required this.userProfile,
   });
 
   final int selectedPageIndex;
   final int appointmentsCount;
-  final UserProfile? userProfile;
+  final UserProfile userProfile;
 
   HomeState copyWith({
     int? selectedPageIndex,

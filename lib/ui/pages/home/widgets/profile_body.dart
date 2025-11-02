@@ -4,8 +4,7 @@ import 'package:health_profile/common/app_dimens.dart';
 import 'package:health_profile/generated/l10n.dart';
 import 'package:health_profile/models/entities/user_profile.dart';
 import 'package:health_profile/ui/pages/home/home_cubit.dart';
-import 'package:health_profile/ui/widgets/buttons/app_elevated_button.dart';
-import 'package:health_profile/ui/widgets/text_fileds/app_text_form_field.dart';
+import 'package:health_profile/ui/pages/home/widgets/edit_info_dialog.dart';
 
 class ProfileBody extends StatelessWidget {
   const ProfileBody({super.key});
@@ -31,7 +30,9 @@ class ProfileBody extends StatelessWidget {
                   await showDialog(
                     context: context,
                     builder: (_) {
-                      return _createEditDialog(context: context);
+                      return EditInfoDialog(
+                        userProfile: cubit.state.userProfile,
+                      );
                     },
                   );
                 },
@@ -53,7 +54,7 @@ class ProfileBody extends StatelessWidget {
           ),
           _createPersonInformationListView(
             context: context,
-            userProfile: cubit.state.userProfile!,
+            userProfile: cubit.state.userProfile,
           ),
           Text(S.of(context).security, style: theme.textTheme.titleMedium),
           InkWell(
@@ -147,104 +148,6 @@ class ProfileBody extends StatelessWidget {
             subtitle: Text(info["value"]),
           );
         },
-      ),
-    );
-  }
-
-  Widget _createEditDialog({required BuildContext context}) {
-    final theme = Theme.of(context);
-    final cubit = BlocProvider.of<HomeCubit>(context);
-    final s = S.of(context);
-
-    Icon createPrimaryColorIcon({required IconData iconData}) =>
-        Icon(iconData, color: theme.colorScheme.primary);
-
-    return AlertDialog(
-      content: Container(
-        width: 350,
-        height: 472,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(AppDimens.borderRadiusNormal),
-        ),
-        child: SingleChildScrollView(
-          child: Column(
-            spacing: AppDimens.paddingNormal,
-            children: [
-              Text(
-                s.editProfileTitle,
-                style: theme.textTheme.titleLarge?.copyWith(
-                  color: theme.colorScheme.onSurface,
-                ),
-              ),
-              AppTextFormField(
-                title: s.fullName,
-                prefixIcon: createPrimaryColorIcon(iconData: Icons.person),
-                hint: cubit.state.userProfile?.fullName,
-              ),
-              AppTextFormField(
-                title: s.birthday,
-                readOnly: true,
-                prefixIcon: createPrimaryColorIcon(iconData: Icons.cake_outlined),
-                hint: cubit.state.userProfile?.birthDay,
-                suffixIcon:
-                createPrimaryColorIcon(iconData: Icons.calendar_today_outlined),
-                onTap: () {},
-              ),
-              AppTextFormField(
-                title: s.phoneNumber,
-                prefixIcon: createPrimaryColorIcon(iconData: Icons.phone_outlined),
-                hint: cubit.state.userProfile?.phoneNumber,
-              ),
-              AppTextFormField(
-                title: s.email,
-                prefixIcon: createPrimaryColorIcon(iconData: Icons.mail_outline),
-                hint: cubit.state.userProfile?.email ?? "N/A",
-              ),
-              AppTextFormField(
-                title: s.gender,
-                prefixIcon: createPrimaryColorIcon(iconData: Icons.wc_outlined),
-                hint: cubit.state.userProfile?.gender,
-              ),
-              AppTextFormField(
-                title: s.id,
-                prefixIcon: createPrimaryColorIcon(iconData: Icons.badge),
-                hint: cubit.state.userProfile?.id,
-              ),
-              AppTextFormField(
-                title: s.address,
-                prefixIcon: createPrimaryColorIcon(iconData: Icons.place_outlined),
-                hint: cubit.state.userProfile?.address,
-              ),
-              SizedBox(
-                height: AppDimens.buttonHeightSmall,
-                child: Row(
-                  spacing: AppDimens.paddingSmall,
-                  children: [
-                    Expanded(
-                      child: TextButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        child: Text(
-                          s.cancel,
-                          style: theme.textTheme.labelLarge?.copyWith(
-                            color: theme.colorScheme.onSurface,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: AppElevatedButton(
-                        onClick: () {},
-                        text: s.save,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
       ),
     );
   }

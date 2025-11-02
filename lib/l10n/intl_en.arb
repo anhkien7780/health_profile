@@ -42,5 +42,7 @@
   "id": "ID",
   "address": "Address",
   "cancel": "Cancel",
-  "save": "Save"
+  "save": "Save",
+  "male": "Male",
+  "female": "Female"
 }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:health_profile/generated/l10n.dart';
+import 'package:health_profile/models/enum/gender.dart';
 
 class UserProfile {
   const UserProfile({
@@ -17,7 +19,7 @@ class UserProfile {
   final String phoneNumber;
   final String? email;
   final String username;
-  final String gender;
+  final Gender gender;
   final String id;
   final String address;
 
@@ -47,7 +49,11 @@ class UserProfile {
         "label": "Username",
         "value": username,
       },
-      {"icon": Icons.wc_outlined, "label": "Gender", "value": gender},
+      {
+        "icon": Icons.wc_outlined,
+        "label": "Gender",
+        "value": gender == Gender.male ? S.current.male : S.current.female,
+      },
       {"icon": Icons.badge, "label": "ID", "value": id},
       {"icon": Icons.place_outlined, "label": "Address", "value": address},
     ];
@@ -70,7 +76,7 @@ class UserProfile {
     String? phoneNumber,
     String? email,
     String? username,
-    String? gender,
+    Gender? gender,
     String? id,
     String? address,
   }) {
