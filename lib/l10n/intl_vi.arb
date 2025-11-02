@@ -32,5 +32,15 @@
   "changePassword": "Đổi mật khẩu",
   "logout": "Đăng xuất",
   "personalInformation": "Thông tin cá nhân",
-  "edit": "Sửa"
+  "edit": "Sửa",
+  "editProfileTitle": "Chỉnh sửa hồ sơ",
+  "fullName": "Họ và tên",
+  "birthday": "Ngày sinh",
+  "phoneNumber": "Số điện thoại",
+  "email": "Email",
+  "gender": "Giới tính",
+  "id": "Mã định danh",
+  "address": "Địa chỉ",
+  "cancel": "Hủy",
+  "save": "Lưu"
 }
