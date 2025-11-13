@@ -31,6 +31,30 @@ class HomeCubit extends Cubit<HomeState> {
     log("Selected page: ${state.selectedPageIndex.toString()}");
   }
 
+  void updateUserProfile({
+    String? fullName,
+    String? birthDay,
+    String? phoneNumber,
+    String? email,
+    String? username,
+    Gender? gender,
+    String? id,
+    String? address,
+  }) {
+    final userProfile = state.userProfile.copyWith(
+      fullName: fullName ?? state.userProfile.fullName,
+      birthDay: birthDay ?? state.userProfile.birthDay,
+      phoneNumber: phoneNumber ?? state.userProfile.phoneNumber,
+      email: email ?? state.userProfile.email,
+      username: username ?? state.userProfile.username,
+      gender: gender ?? state.userProfile.gender,
+      id: id ?? state.userProfile.id,
+      address: address ?? state.userProfile.address,
+    );
+    log("Update user profile: $userProfile");
+    emit(state.copyWith(userProfile: userProfile));
+  }
+
   void selectedBirthDay(DateTime date) {
     final dateString = DateFormatHelper.dateToString(date);
     textController.text = dateString;

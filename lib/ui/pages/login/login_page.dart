@@ -4,7 +4,8 @@ import 'package:health_profile/common/app_dimens.dart';
 import 'package:health_profile/generated/l10n.dart';
 import 'package:health_profile/ui/widgets/auth_base_page/auth_base_page.dart';
 import 'package:health_profile/ui/widgets/buttons/app_elevated_button.dart';
-import 'package:health_profile/ui/widgets/text_fileds/app_text_form_field.dart';
+import 'package:health_profile/ui/widgets/text_fields/app_text_form_field.dart';
+
 
 import 'login_cubit.dart';
 import 'login_navigator.dart';

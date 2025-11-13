@@ -25,5 +25,9 @@ class HomeState extends Equatable {
   }
 
   @override
-  List<Object?> get props => [selectedPageIndex, appointmentsCount];
+  List<Object?> get props => [
+    selectedPageIndex,
+    appointmentsCount,
+    userProfile,
+  ];
 }

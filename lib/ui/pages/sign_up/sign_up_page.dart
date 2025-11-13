@@ -6,7 +6,7 @@ import 'package:health_profile/ui/pages/sign_up/sign_up_cubit.dart';
 import 'package:health_profile/ui/pages/sign_up/sign_up_navigator.dart';
 import 'package:health_profile/ui/widgets/auth_base_page/auth_base_page.dart';
 import 'package:health_profile/ui/widgets/buttons/app_elevated_button.dart';
-import 'package:health_profile/ui/widgets/text_fileds/app_text_form_field.dart';
+import 'package:health_profile/ui/widgets/text_fields/app_text_form_field.dart';
 
 class SignUpPage extends StatelessWidget {
   const SignUpPage({super.key});
