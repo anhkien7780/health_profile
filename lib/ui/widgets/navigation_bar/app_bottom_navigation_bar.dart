@@ -37,10 +37,6 @@ class AppBottomNavigationBar extends StatelessWidget {
               icon: Icons.message_outlined,
               label: S.of(context).chat,
             ),
-            DestinationItem(
-              icon: Icons.settings_outlined,
-              label: S.of(context).settings,
-            ),
           ],
         ),
       ),
