@@ -113,7 +113,9 @@ class _ProfileBodyState extends State<ProfileBody> {
 
   Widget _createLogoutButton() {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        context.read<HomeCubit>().logout();
+      },
       child: Ink(
         decoration: BoxDecoration(
           border: Border.all(

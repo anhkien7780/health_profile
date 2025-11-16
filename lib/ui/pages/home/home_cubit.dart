@@ -4,12 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_profile/models/entities/user_profile.dart';
 import 'package:health_profile/models/enum/gender.dart';
+import 'package:health_profile/ui/pages/home/home_navigator.dart';
 import 'package:health_profile/utils/date_format_helper.dart';
 
 import 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
-  HomeCubit()
+
+  final HomeNavigator navigator;
+
+  HomeCubit({required this.navigator})
     : super(
         HomeState(
           userProfile: UserProfile(
@@ -58,5 +62,9 @@ class HomeCubit extends Cubit<HomeState> {
   void selectedBirthDay(DateTime date) {
     final dateString = DateFormatHelper.dateToString(date);
     textController.text = dateString;
+  }
+
+  void logout() {
+    navigator.backToLoginPage();
   }
 }
