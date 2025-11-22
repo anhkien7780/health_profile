@@ -48,7 +48,11 @@ class _HomeChildPageState extends State<HomeChildPage> {
           buildWhen: (pre, current) =>
               pre.selectedPageIndex != current.selectedPageIndex,
           builder: (context, state) {
-            return <Widget>[ProfileBody(), HomeBody()][state.selectedPageIndex];
+            return <Widget>[
+              ProfileBody(),
+              HomeBody(),
+              const Placeholder(),
+            ][state.selectedPageIndex];
           },
         ),
       ),

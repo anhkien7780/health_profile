@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:health_profile/ui/pages/home/home_page.dart';
 import 'package:health_profile/ui/pages/login/login_page.dart';
 import 'package:health_profile/ui/pages/onboarding/onboarding_page.dart';
+import 'package:health_profile/ui/pages/profile_register/profile_register_page.dart';
 import 'package:health_profile/ui/pages/sign_up/sign_up_page.dart';
 import 'package:health_profile/ui/pages/splash/splash_page.dart';
 
@@ -12,6 +13,7 @@ class AppRouter {
   static final splash = "/";
   static final onboarding = "/onboarding";
   static final login = "/login";
+  static final profileRegister = "/profileRegister";
   static final signUp = "/signUp";
   static final home = "/home";
 
@@ -54,6 +56,13 @@ class AppRouter {
       name: home,
       builder: (context, state) {
         return HomePage();
+      },
+    ),
+    GoRoute(
+      path: profileRegister,
+      name: profileRegister,
+      builder: (context, state) {
+        return ProfileRegisterPage();
       },
     ),
   ];

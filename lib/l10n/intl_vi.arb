@@ -43,5 +43,7 @@
   "registerButton": "Đăng ký",
   "save": "Lưu",
   "security": "Bảo mật",
-  "skip": "Bỏ qua"
+  "skip": "Bỏ qua",
+  "completed": "Hoàn thành",
+  "profileRegister": "Đăng ký hồ sơ"
 }

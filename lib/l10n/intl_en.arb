@@ -43,5 +43,7 @@
   "cancel": "Cancel",
   "save": "Save",
   "male": "Male",
-  "female": "Female"
+  "female": "Female",
+  "completed": "Completed",
+  "profileRegister": "Profile Register"
 }

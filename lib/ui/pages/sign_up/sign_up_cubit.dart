@@ -10,4 +10,8 @@ class SignUpCubit extends Cubit<SignUpState> {
   Future<void> openLoginPage() async {
     await navigator.openLoginPage();
   }
+
+  Future<void> onRegisterSuccess() async {
+    await navigator.openProfileRegister();
+  }
 }

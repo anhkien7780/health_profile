@@ -7,4 +7,8 @@ class SignUpNavigator extends AppNavigator {
   Future<void> openLoginPage() async {
     await pushReplacementNamed(AppRouter.login);
   }
+
+  Future<void> openProfileRegister() async {
+    await pushReplacementNamed(AppRouter.profileRegister);
+  }
 }

@@ -30,7 +30,6 @@ class SignUpChildPage extends StatefulWidget {
 }
 
 class _SignUpChildPageState extends State<SignUpChildPage> {
-
   late final SignUpCubit _cubit;
 
   @override
@@ -65,7 +64,9 @@ class _SignUpChildPageState extends State<SignUpChildPage> {
                 obscureText: true,
               ),
               AppElevatedButton(
-                onClick: () {},
+                onClick: () {
+                  _cubit.onRegisterSuccess();
+                },
                 text: S.of(context).registerButton,
               ),
               Align(
