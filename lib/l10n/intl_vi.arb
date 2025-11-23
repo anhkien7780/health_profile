@@ -45,5 +45,10 @@
   "security": "Bảo mật",
   "skip": "Bỏ qua",
   "completed": "Hoàn thành",
-  "profileRegister": "Đăng ký hồ sơ"
+  "profileRegister": "Đăng ký hồ sơ",
+  "newPasswordHint": "Nhập mật khẩu mới",
+  "confirm": "Xác thực",
+  "verifyTitle": "Mã xác thực",
+  "verifyHint": "Nhập mã xác thực",
+  "resend": "Gửi lại"
 }

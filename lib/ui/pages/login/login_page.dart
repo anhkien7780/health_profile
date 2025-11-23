@@ -6,7 +6,6 @@ import 'package:health_profile/ui/widgets/auth_base_page/auth_base_page.dart';
 import 'package:health_profile/ui/widgets/buttons/app_elevated_button.dart';
 import 'package:health_profile/ui/widgets/text_fields/app_text_form_field.dart';
 
-
 import 'login_cubit.dart';
 import 'login_navigator.dart';
 
@@ -32,7 +31,6 @@ class LoginChildPage extends StatefulWidget {
 }
 
 class _LoginChildPageState extends State<LoginChildPage> {
-
   late final LoginCubit _cubit;
 
   @override
@@ -62,8 +60,10 @@ class _LoginChildPageState extends State<LoginChildPage> {
                 obscureText: true,
               ),
               AppElevatedButton(
+                width: double.infinity,
+                height: AppDimens.buttonHeightNormal,
                 onClick: () {
-                  _cubit.openHomePage();
+                  _cubit.onSignInButtonPressed();
                 },
                 text: S.of(context).loginButton,
               ),
@@ -71,7 +71,7 @@ class _LoginChildPageState extends State<LoginChildPage> {
                 children: [
                   InkWell(
                     onTap: () {
-                      _cubit.navigator.openSignUpPage();
+                      _cubit.onSignUpButtonPressed();
                     },
                     child: Text(
                       S.of(context).registerAccount,
@@ -80,7 +80,9 @@ class _LoginChildPageState extends State<LoginChildPage> {
                   ),
                   const Spacer(),
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      _cubit.onForgotPasswordTextPressed();
+                    },
                     child: Text(
                       S.of(context).forgetPassword,
                       style: Theme.of(context).textTheme.titleMedium,

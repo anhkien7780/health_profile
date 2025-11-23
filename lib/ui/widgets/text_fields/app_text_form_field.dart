@@ -13,12 +13,14 @@ class AppTextFormField extends StatelessWidget {
     this.prefixIcon,
     this.suffixIcon,
     this.onTap,
+    this.width,
   });
 
   final Icon? prefixIcon;
   final Icon? suffixIcon;
   final VoidCallback? onTap;
   final String title;
+  final double? width;
   final String? hint;
   final bool obscureText;
   final bool readOnly;
@@ -31,12 +33,9 @@ class AppTextFormField extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       spacing: AppDimens.paddingSmall,
       children: [
-        Text(title, style: Theme
-            .of(context)
-            .textTheme
-            .titleMedium),
+        Text(title, style: Theme.of(context).textTheme.titleMedium),
         SizedBox(
-          width: double.infinity,
+          width: width ?? double.infinity,
           height: AppDimens.textFieldHeight,
           child: TextFormField(
             readOnly: readOnly,
@@ -49,10 +48,7 @@ class AppTextFormField extends StatelessWidget {
               suffixIcon: suffixIcon,
               hint: Text(
                 hint ?? "",
-                style: Theme
-                    .of(context)
-                    .textTheme
-                    .bodyMedium,
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(

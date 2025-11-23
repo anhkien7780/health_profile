@@ -6,7 +6,7 @@ class AppElevatedButton extends StatelessWidget {
     super.key,
     required this.onClick,
     required this.text,
-    this.width = double.infinity,
+    this.width,
     this.height,
     this.borderRadius,
     this.icon,
@@ -37,7 +37,7 @@ class AppElevatedButton extends StatelessWidget {
           spacing: AppDimens.paddingSmall,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            icon ?? const SizedBox.shrink(),
+            if (icon != null) icon!,
             Text(
               text,
               style: Theme.of(context).textTheme.labelLarge?.copyWith(

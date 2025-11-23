@@ -8,7 +8,15 @@ class LoginCubit extends Cubit<LoginState> {
 
   final LoginNavigator navigator;
 
-  Future<void> openHomePage() async {
+  Future<void> onSignInButtonPressed() async {
     navigator.openHomePage();
+  }
+
+  Future<void> onSignUpButtonPressed() async {
+    navigator.openSignUpPage();
+  }
+
+  Future<void> onForgotPasswordTextPressed() async {
+    navigator.openForgotPasswordPage();
   }
 }

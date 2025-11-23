@@ -11,4 +11,8 @@ class LoginNavigator extends AppNavigator {
   Future<void> openHomePage() async {
     await pushReplacementNamed(AppRouter.home);
   }
+
+  Future<void> openForgotPasswordPage() async {
+    await pushReplacementNamed(AppRouter.forgotPassword);
+  }
 }

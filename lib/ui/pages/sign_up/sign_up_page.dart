@@ -64,6 +64,8 @@ class _SignUpChildPageState extends State<SignUpChildPage> {
                 obscureText: true,
               ),
               AppElevatedButton(
+                width: double.infinity,
+                height: AppDimens.buttonHeightNormal,
                 onClick: () {
                   _cubit.onRegisterSuccess();
                 },

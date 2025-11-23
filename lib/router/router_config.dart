@@ -1,11 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
+import 'package:health_profile/ui/pages/change_password/change_password_page.dart';
 import 'package:health_profile/ui/pages/home/home_page.dart';
 import 'package:health_profile/ui/pages/login/login_page.dart';
 import 'package:health_profile/ui/pages/onboarding/onboarding_page.dart';
 import 'package:health_profile/ui/pages/profile_register/profile_register_page.dart';
 import 'package:health_profile/ui/pages/sign_up/sign_up_page.dart';
 import 'package:health_profile/ui/pages/splash/splash_page.dart';
+import 'package:health_profile/ui/pages/verify_code/verify_code_page.dart';
+
+import '../ui/pages/forgot_password/forgot_password_page.dart';
 
 class AppRouter {
   static final navigationKey = GlobalKey<NavigatorState>();
@@ -14,6 +18,9 @@ class AppRouter {
   static final onboarding = "/onboarding";
   static final login = "/login";
   static final profileRegister = "/profileRegister";
+  static final forgotPassword = "/forgotPassword";
+  static final verifyCode = "/verifyCode";
+  static final changePassword = "/changePassword";
   static final signUp = "/signUp";
   static final home = "/home";
 
@@ -65,5 +72,26 @@ class AppRouter {
         return ProfileRegisterPage();
       },
     ),
+    GoRoute(
+      path: forgotPassword,
+      name: forgotPassword,
+      builder: (context, state) {
+        return ForgotPasswordPage();
+      },
+    ),
+    GoRoute(
+      path: verifyCode,
+      name: verifyCode,
+      builder: (context, state) {
+        return VerifyCodePage();
+      },
+    ),
+    GoRoute(
+      path: changePassword,
+      name: changePassword,
+      builder: (context, state) {
+        return ChangePasswordPage();
+      },
+    )
   ];
 }

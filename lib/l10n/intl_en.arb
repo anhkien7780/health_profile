@@ -45,5 +45,10 @@
   "male": "Male",
   "female": "Female",
   "completed": "Completed",
-  "profileRegister": "Profile Register"
+  "profileRegister": "Profile Register",
+  "newPasswordHint": "Enter new password",
+  "confirm": "Confirm",
+  "verifyTitle": "Verify Code",
+  "verifyHint": "Enter verify code",
+  "resend": "Resend"
 }
