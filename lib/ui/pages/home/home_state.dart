@@ -4,7 +4,7 @@ import 'package:health_profile/models/entities/user_profile.dart';
 class HomeState extends Equatable {
   const HomeState({
     this.selectedPageIndex = 1,
-    this.appointmentsCount = 0,
+    this.appointmentsCount = 10,
     required this.userProfile,
   });
 

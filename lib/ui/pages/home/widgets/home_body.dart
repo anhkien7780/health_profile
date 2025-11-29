@@ -4,6 +4,7 @@ import 'package:health_profile/common/app_dimens.dart';
 import 'package:health_profile/generated/l10n.dart';
 import 'package:health_profile/ui/pages/home/home_cubit.dart';
 import 'package:health_profile/ui/pages/home/home_state.dart';
+import 'package:health_profile/ui/pages/home/widgets/appointment_item.dart';
 import 'package:health_profile/ui/widgets/app_badge/app_badge.dart';
 import 'package:health_profile/ui/widgets/buttons/app_elevated_button.dart';
 
@@ -12,6 +13,7 @@ class HomeBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Column(
       spacing: AppDimens.paddingNormal,
       children: [
@@ -19,6 +21,7 @@ class HomeBody extends StatelessWidget {
         SizedBox(
           height: 80,
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             spacing: AppDimens.paddingBig,
             children: [
               Flexible(
@@ -49,11 +52,11 @@ class HomeBody extends StatelessWidget {
           children: [
             Text(
               S.of(context).appointments,
-              style: Theme.of(context).textTheme.titleMedium,
+              style: theme.textTheme.titleMedium,
             ),
             BlocBuilder<HomeCubit, HomeState>(
               buildWhen: (pre, current) =>
-              pre.appointmentsCount != current.appointmentsCount,
+                  pre.appointmentsCount != current.appointmentsCount,
               builder: (context, state) {
                 return AppBadge(number: state.appointmentsCount);
               },
@@ -62,7 +65,16 @@ class HomeBody extends StatelessWidget {
         ),
         Expanded(
           child: ListView.builder(
-            itemBuilder: (context, index) => Placeholder(),
+            itemCount: 10,
+            itemBuilder: (context, index) => Padding(
+              padding: const EdgeInsets.only(top: AppDimens.paddingSmall),
+              child: AppointmentItem(
+                orderNumber: 10,
+                hospitalName: "Bệnh viện K Cơ sở 1",
+                time: "13:30",
+                doctorName: "Bác sỹ A",
+              ),
+            ),
           ),
         ),
       ],

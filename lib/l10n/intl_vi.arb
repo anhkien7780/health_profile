@@ -50,5 +50,6 @@
   "confirm": "Xác thực",
   "verifyTitle": "Mã xác thực",
   "verifyHint": "Nhập mã xác thực",
-  "resend": "Gửi lại"
+  "resend": "Gửi lại",
+  "doctor": "Bác sĩ"
 }

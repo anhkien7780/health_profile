@@ -50,5 +50,6 @@
   "confirm": "Confirm",
   "verifyTitle": "Verify Code",
   "verifyHint": "Enter verify code",
-  "resend": "Resend"
+  "resend": "Resend",
+  "doctor": "Doctor"
 }
