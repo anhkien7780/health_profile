@@ -51,5 +51,6 @@
   "verifyTitle": "Mã xác thực",
   "verifyHint": "Nhập mã xác thực",
   "resend": "Gửi lại",
-  "doctor": "Bác sĩ"
+  "doctor": "Bác sĩ",
+  "conversations": "Đoạn hội thoại"
 }

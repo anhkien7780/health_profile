@@ -9,6 +9,7 @@ class AppDimens {
 
   // Icon
   static const double iconSizeNormal = 24;
+  static const double iconChatRadius = 25;
 
   // Button
   static const double buttonHeightBig = 80;

@@ -4,6 +4,7 @@ import 'package:health_profile/common/app_dimens.dart';
 import 'package:health_profile/ui/pages/home/home_cubit.dart';
 import 'package:health_profile/ui/pages/home/home_navigator.dart';
 import 'package:health_profile/ui/pages/home/home_state.dart';
+import 'package:health_profile/ui/pages/home/widgets/chat_body.dart';
 import 'package:health_profile/ui/pages/home/widgets/home_body.dart';
 import 'package:health_profile/ui/pages/home/widgets/profile_body.dart';
 import 'package:health_profile/ui/widgets/app_bar/base_app_bar.dart';
@@ -51,7 +52,7 @@ class _HomeChildPageState extends State<HomeChildPage> {
             return <Widget>[
               ProfileBody(),
               HomeBody(),
-              const Placeholder(),
+              ChatBody(),
             ][state.selectedPageIndex];
           },
         ),

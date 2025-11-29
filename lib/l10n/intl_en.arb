@@ -51,5 +51,6 @@
   "verifyTitle": "Verify Code",
   "verifyHint": "Enter verify code",
   "resend": "Resend",
-  "doctor": "Doctor"
+  "doctor": "Doctor",
+  "conversations": "Conversations"
 }

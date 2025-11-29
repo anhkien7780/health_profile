@@ -94,17 +94,17 @@ class _OnboardingChildPageState extends State<OnboardingChildPage> {
                   },
                   children: [
                     OnboardingPageViewChild(
-                      svgImagePath: AppImages.iPlaceHolder,
+                      svgImagePath: AppImages.icPlaceHolder,
                       headline: S.of(context).onboardingFirstHeadline,
                       detail: S.of(context).onBoardingFirstDetail,
                     ),
                     OnboardingPageViewChild(
-                      svgImagePath: AppImages.iPlaceHolder,
+                      svgImagePath: AppImages.icPlaceHolder,
                       headline: S.of(context).onBoardingSecondHeadline,
                       detail: S.of(context).onBoardingSecondDetail,
                     ),
                     OnboardingPageViewChild(
-                      svgImagePath: AppImages.iPlaceHolder,
+                      svgImagePath: AppImages.icPlaceHolder,
                       headline: S.of(context).onBoardingThirdHeadline,
                       detail: S.of(context).onBoardingThirdDetail,
                     ),
