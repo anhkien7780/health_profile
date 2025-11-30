@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:health_profile/ui/pages/change_password/change_password_page.dart';
+import 'package:health_profile/ui/pages/chat/chat_page.dart';
 import 'package:health_profile/ui/pages/home/home_page.dart';
 import 'package:health_profile/ui/pages/login/login_page.dart';
 import 'package:health_profile/ui/pages/onboarding/onboarding_page.dart';
@@ -23,6 +24,7 @@ class AppRouter {
   static final changePassword = "/changePassword";
   static final signUp = "/signUp";
   static final home = "/home";
+  static final chat = "/chat";
 
   static final GoRouter routers = GoRouter(
     routes: _routers,
@@ -92,6 +94,13 @@ class AppRouter {
       builder: (context, state) {
         return ChangePasswordPage();
       },
-    )
+    ),
+    GoRoute(
+      path: chat,
+      name: chat,
+      builder: (context, state) {
+        return ChatPage();
+      },
+    ),
   ];
 }

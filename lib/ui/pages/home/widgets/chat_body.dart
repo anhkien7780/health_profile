@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:health_profile/common/app_dimens.dart';
 import 'package:health_profile/common/app_images.dart';
 import 'package:health_profile/generated/l10n.dart';
+import 'package:health_profile/router/router_config.dart';
 
 class ChatBody extends StatelessWidget {
   const ChatBody({super.key});
@@ -22,6 +24,9 @@ class ChatBody extends StatelessWidget {
             itemCount: 2,
             itemBuilder: (context, index) {
               return ListTile(
+                onTap: () {
+                  context.pushNamed(AppRouter.chat);
+                },
                 tileColor: theme.colorScheme.surface,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(

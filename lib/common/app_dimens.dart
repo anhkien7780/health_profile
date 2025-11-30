@@ -23,6 +23,7 @@ class AppDimens {
   static const double textFieldHeight = 44;
 
   // Padding
+  static const double paddingSmallest = 4;
   static const double paddingSmall = 8;
   static const double paddingNormal = 12;
   static const double paddingBig = 24;
