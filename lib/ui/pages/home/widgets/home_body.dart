@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:health_profile/common/app_dimens.dart';
 import 'package:health_profile/generated/l10n.dart';
+import 'package:health_profile/router/router_config.dart';
 import 'package:health_profile/ui/pages/home/home_cubit.dart';
 import 'package:health_profile/ui/pages/home/home_state.dart';
 import 'package:health_profile/ui/pages/home/widgets/appointment_item.dart';
@@ -26,7 +28,9 @@ class HomeBody extends StatelessWidget {
             children: [
               Flexible(
                 child: AppElevatedButton(
-                  onClick: () {},
+                  onClick: () {
+                    context.pushNamed(AppRouter.bookAppointment);
+                  },
                   height: AppDimens.buttonHeightBig,
                   icon: Icon(
                     Icons.pending_actions,

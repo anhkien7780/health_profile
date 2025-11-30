@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
+import 'package:health_profile/ui/pages/book_appointment/book_appointment_page.dart';
 import 'package:health_profile/ui/pages/change_password/change_password_page.dart';
 import 'package:health_profile/ui/pages/chat/chat_page.dart';
 import 'package:health_profile/ui/pages/home/home_page.dart';
@@ -25,6 +26,7 @@ class AppRouter {
   static final signUp = "/signUp";
   static final home = "/home";
   static final chat = "/chat";
+  static final bookAppointment = "/bookAppointment";
 
   static final GoRouter routers = GoRouter(
     routes: _routers,
@@ -100,6 +102,13 @@ class AppRouter {
       name: chat,
       builder: (context, state) {
         return ChatPage();
+      },
+    ),
+    GoRoute(
+      path: bookAppointment,
+      name: bookAppointment,
+      builder: (context, state) {
+        return BookAppointmentPage();
       },
     ),
   ];

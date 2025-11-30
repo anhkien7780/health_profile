@@ -10,11 +10,19 @@ class AppDimens {
   // Icon
   static const double iconSizeNormal = 24;
   static const double iconChatRadius = 25;
+  static const double circle40 = 40;
+
+  // StepItem
+  static const double stepItemWidth = 74;
+
+  // Appointment
+  static const double buttonBookMethodHeight = 80;
 
   // Button
   static const double buttonHeightBig = 80;
   static const double buttonHeightNormal = 50;
   static const double buttonHeightSmall = 44;
+  static const double buttonHeightExtraSmall = 40;
 
   // NavigationBar
   static const double navigationBarHeight = 68;
