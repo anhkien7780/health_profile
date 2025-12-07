@@ -5,5 +5,4 @@ class ForgotPasswordState extends Equatable {
 
   @override
   List<Object> get props => [];
-
 }

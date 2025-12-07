@@ -10,7 +10,6 @@ import 'package:health_profile/utils/date_format_helper.dart';
 import 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
-
   final HomeNavigator navigator;
 
   HomeCubit({required this.navigator})

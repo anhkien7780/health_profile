@@ -5,5 +5,4 @@ class VerifyCodeState extends Equatable {
 
   @override
   List<Object> get props => [];
-
 }

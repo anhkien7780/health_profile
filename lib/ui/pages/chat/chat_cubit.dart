@@ -40,7 +40,8 @@ class ChatCubit extends Cubit<ChatState> {
       ),
       ChatMessage(
         id: '5',
-        text: 'This is a looooooooooooooooooooooooooooooooooooooooooong message.',
+        text:
+            'This is a looooooooooooooooooooooooooooooooooooooooooong message.',
         isMe: true,
         timestamp: DateTime.now().subtract(const Duration(minutes: 2)),
       ),
@@ -61,10 +62,10 @@ class ChatCubit extends Cubit<ChatState> {
 
     final updatedMessages = List<ChatMessage>.from(state.messages)
       ..add(newMessage);
-    
+
     emit(state.copyWith(messages: updatedMessages));
     messageController.clear();
-    
+
     Future.delayed(const Duration(milliseconds: 100), () {
       if (scrollController.hasClients) {
         scrollController.animateTo(

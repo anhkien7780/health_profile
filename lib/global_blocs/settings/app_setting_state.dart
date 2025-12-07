@@ -6,9 +6,7 @@ class AppSettingState extends Equatable {
 
   final Language currentLanguage;
 
-  AppSettingState copyWith({
-    Language? currentLanguage,
-  }) {
+  AppSettingState copyWith({Language? currentLanguage}) {
     return AppSettingState(
       currentLanguage: currentLanguage ?? this.currentLanguage,
     );

@@ -4,9 +4,7 @@ import 'package:health_profile/router/router_config.dart';
 class ProfileRegisterNavigator extends AppNavigator {
   ProfileRegisterNavigator(super.context);
 
-
-  Future<void> openHomePage(){
+  Future<void> openHomePage() {
     return pushReplacementNamed(AppRouter.home);
   }
-
 }
