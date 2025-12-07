@@ -10,10 +10,12 @@ class AppElevatedButton extends StatelessWidget {
     this.height,
     this.borderRadius,
     this.icon,
+    this.prefixIcon,
   });
 
   final VoidCallback onClick;
   final Icon? icon;
+  final Icon? prefixIcon;
   final String text;
   final double? width;
   final double? height;
@@ -38,11 +40,18 @@ class AppElevatedButton extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             if (icon != null) icon!,
-            Text(
-              text,
-              style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                color: Theme.of(context).colorScheme.onPrimary,
-              ),
+            Row(
+              spacing: AppDimens.paddingSmallest,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                if (prefixIcon != null) prefixIcon!,
+                Text(
+                  text,
+                  style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  ),
+                ),
+              ],
             ),
           ],
         ),

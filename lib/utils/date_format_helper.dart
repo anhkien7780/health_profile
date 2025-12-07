@@ -10,4 +10,12 @@ class DateFormatHelper {
   static DateTime stringToDate(String dateString) {
     return AppConfigs.format.parse(dateString);
   }
+
+  static String dateToTimeString(DateTime date) {
+    return AppConfigs.timeFormat.format(date);
+  }
+
+  static DateTime stringToTime(String timeString) {
+    return AppConfigs.timeFormat.parse(timeString);
+  }
 }

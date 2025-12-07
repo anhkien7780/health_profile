@@ -52,5 +52,17 @@
   "verifyHint": "Enter verify code",
   "resend": "Resend",
   "doctor": "Doctor",
-  "conversations": "Conversations"
+  "conversations": "Conversations",
+  "selectHospital": "Select Hospital",
+  "selectHospitalDesc": "Choose a medical department, the system will suggest the most suitable doctor",
+  "selectDoctor": "Select Doctor",
+  "selectDoctorDesc": "Directly choose the doctor you want to examine",
+  "chooseHospital": "Choose Hospital",
+  "chooseSchedule": "Choose Schedule",
+  "confirmAppointment": "Confirm",
+  "continueStep": "Continue",
+  "chooseDate": "Date",
+  "chooseTime": "Time",
+  "pleaseSelectDate": "Please select a date",
+  "chooseTimeButton": "Choose time"
 }

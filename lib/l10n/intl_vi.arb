@@ -52,5 +52,17 @@
   "verifyHint": "Nhập mã xác thực",
   "resend": "Gửi lại",
   "doctor": "Bác sĩ",
-  "conversations": "Đoạn hội thoại"
+  "conversations": "Đoạn hội thoại",
+  "selectHospital": "Chọn bệnh viện",
+  "selectHospitalDesc": "Chọn khoa khám, hệ thống sẽ gợi ý bác sỹ phù hợp nhất",
+  "selectDoctor": "Chọn bác sĩ",
+  "selectDoctorDesc": "Chọn trực tiếp bác sỹ mong muốn khám",
+  "chooseHospital": "Chọn bệnh viện",
+  "chooseSchedule": "Chọn lịch khám",
+  "confirmAppointment": "Xác nhận",
+  "continueStep": "Tiếp tục",
+  "chooseDate": "Ngày khám",
+  "chooseTime": "Giờ khám",
+  "pleaseSelectDate": "Vui lòng chọn ngày khám",
+  "chooseTimeButton": "Chọn giờ khám"
 }

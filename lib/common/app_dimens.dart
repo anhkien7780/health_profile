@@ -23,6 +23,8 @@ class AppDimens {
   static const double buttonHeightNormal = 50;
   static const double buttonHeightSmall = 44;
   static const double buttonHeightExtraSmall = 40;
+  static const double buttonHeightSmallest = 36;
+  static const double buttonMinWidth = 64;
 
   // NavigationBar
   static const double navigationBarHeight = 68;

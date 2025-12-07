@@ -54,10 +54,7 @@ class _ForgotPasswordChildPageState extends State<ChangePasswordChildPage> {
         child: Column(
           spacing: AppDimens.paddingNormal,
           children: [
-            AppTextFormField(
-              title: s.passwordTitle,
-              hint: s.newPasswordHint,
-            ),
+            AppTextFormField(title: s.passwordTitle, hint: s.newPasswordHint),
             AppTextFormField(
               title: s.confirmPasswordTitle,
               hint: s.confirmPasswordHint,
