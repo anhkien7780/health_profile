@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:health_profile/generated/l10n.dart';
 import 'package:health_profile/models/entities/selection_item.dart';
 import 'package:health_profile/models/enum/loading_status.dart';
 import 'package:health_profile/repositories/appointment_repository.dart';
 import 'package:health_profile/ui/pages/book_appointment/book_appointment_navigator.dart';
 import 'package:health_profile/ui/pages/book_appointment/book_appointment_state.dart';
-import 'package:health_profile/ui/widgets/app_snackbar.dart';
 
 class BookAppointmentCubit extends Cubit<BookAppointmentState> {
   BookAppointmentCubit({
@@ -51,70 +49,12 @@ class BookAppointmentCubit extends Cubit<BookAppointmentState> {
     emit(state.copyWith(selectedDate: date));
   }
 
-  Future<void> onChooseHospitalPressed() async {
-    emit(state.copyWith(loadingStatus: LoadingStatus.loading));
-    try {
-      final hospitals = await appointmentRepository.getHospitals();
-      final items = hospitals.map((hospital) {
-        return SelectionItem(
-          id: hospital.id,
-          title: hospital.name,
-          subtitle: hospital.address,
-          imageUrl: hospital.imageUrl,
-        );
-      }).toList();
-      return navigator.showSelectionSheet(
-        title: S.current.selectHospital,
-        items: items,
-        onItemSelected: (item) => selectHospital(item.id),
-      );
-    } catch (_) {
-      emit(state.copyWith(loadingStatus: LoadingStatus.error));
-      rethrow;
-    } finally {
-      emit(state.copyWith(loadingStatus: LoadingStatus.idle));
-    }
+  void selectDoctor(SelectionItem? doctor) {
+    emit(state.copyWith(doctor: doctor));
   }
 
-  Future<void> onChooseDoctorPressed() async {
-    if (state.hospitalID == null) {
-      AppSnackBar.show(
-        navigator.context,
-        S.current.pleaseSelectHospitalFirst,
-        isError: true,
-      );
-      return;
-    }
-    emit(state.copyWith(loadingStatus: LoadingStatus.loading));
-    try {
-      final doctors = await appointmentRepository.getDoctors();
-      final items = doctors.map((doctor) {
-        return SelectionItem(
-          id: doctor.id,
-          title: doctor.fullName,
-          subtitle: doctor.specialty,
-          imageUrl: doctor.avatarUrl,
-        );
-      }).toList();
-      return navigator.showSelectionSheet(
-        title: S.current.selectDoctor,
-        items: items,
-        onItemSelected: (item) => selectDoctor(item.id),
-      );
-    } catch (_) {
-      emit(state.copyWith(loadingStatus: LoadingStatus.error));
-      rethrow;
-    } finally {
-      emit(state.copyWith(loadingStatus: LoadingStatus.idle));
-    }
-  }
-
-  void selectDoctor(int id) {
-    emit(state.copyWith(doctorID: id));
-  }
-
-  void selectHospital(int id) {
-    emit(state.copyWith(hospitalID: id));
+  void selectHospital(SelectionItem? hospital) {
+    emit(state.copyWith(hospital: hospital));
   }
 
   void onNextPressed() {
@@ -123,9 +63,7 @@ class BookAppointmentCubit extends Cubit<BookAppointmentState> {
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
       );
-    } else {
-      // Handle completion
-    }
+    } else {}
   }
 
   void onBackPressed() {

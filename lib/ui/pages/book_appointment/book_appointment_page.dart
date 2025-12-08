@@ -7,7 +7,7 @@ import 'package:health_profile/repositories/appointment_repository.dart';
 import 'package:health_profile/ui/pages/book_appointment/book_appointment_cubit.dart';
 import 'package:health_profile/ui/pages/book_appointment/book_appointment_navigator.dart';
 import 'package:health_profile/ui/pages/book_appointment/book_appointment_state.dart';
-import 'package:health_profile/ui/pages/book_appointment/widgets/choose_hospital_step_content.dart';
+import 'package:health_profile/ui/pages/book_appointment/choose_hospital_step/choose_hospital_step_page.dart';
 import 'package:health_profile/ui/pages/book_appointment/widgets/choose_schedule_step_content.dart';
 import 'package:health_profile/ui/widgets/app_loading/app_loading.dart';
 import 'package:health_profile/ui/widgets/buttons/app_elevated_button.dart';
@@ -58,13 +58,10 @@ class _BookAppointmentChildPageState extends State<BookAppointmentChildPage> {
     return BlocBuilder<BookAppointmentCubit, BookAppointmentState>(
       buildWhen: (pre, current) => pre.loadingStatus != current.loadingStatus,
       builder: (context, state) {
-        return AppLoadingOverlay(
-          isLoading: state.loadingStatus == LoadingStatus.loading,
-          child: Scaffold(
-            backgroundColor: theme.colorScheme.surface,
-            appBar: _createAppBar(),
-            body: _createBody(),
-          ),
+        return Scaffold(
+          backgroundColor: theme.colorScheme.surface,
+          appBar: _createAppBar(),
+          body: _createBody(),
         );
       },
     );
@@ -128,7 +125,7 @@ class _BookAppointmentChildPageState extends State<BookAppointmentChildPage> {
           _cubit.changeStep(index);
         },
         children: [
-          ChooseHospitalStepContent(),
+          ChooseHospitalStepPage(),
           ChooseScheduleStepContent(),
           _buildPlaceholderStep(context, s.confirmAppointment),
         ],

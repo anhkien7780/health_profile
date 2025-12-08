@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:health_profile/common/app_dimens.dart';
 import 'package:health_profile/models/entities/selection_item.dart';
+import 'package:health_profile/ui/pages/book_appointment/widgets/selection_item_card.dart';
 
 class SelectionBottomSheet extends StatelessWidget {
   const SelectionBottomSheet({
@@ -59,57 +60,12 @@ class SelectionBottomSheet extends StatelessWidget {
                       const SizedBox(height: AppDimens.paddingSmall),
                   itemBuilder: (context, index) {
                     final item = items[index];
-                    return Card(
-                      color: theme.colorScheme.surfaceContainerHighest,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(
-                          AppDimens.borderRadiusNormal,
-                        ),
-                      ),
-                      child: InkWell(
-                        onTap: () {
-                          onItemSelected(item);
-                          Navigator.pop(context);
-                        },
-                        borderRadius: BorderRadius.circular(
-                          AppDimens.borderRadiusNormal,
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(
-                            AppDimens.paddingNormal,
-                          ),
-                          child: Row(
-                            spacing: AppDimens.paddingSmall,
-                            children: [
-                              CircleAvatar(
-                                radius: AppDimens.avatarRadius,
-                                backgroundColor:
-                                    theme.colorScheme.primaryContainer,
-                                backgroundImage: NetworkImage(item.imageUrl),
-                              ),
-                              Expanded(
-                                child: Column(
-                                  spacing: AppDimens.paddingSmallest,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      item.title,
-                                      style: theme.textTheme.titleMedium
-                                          ?.copyWith(
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                    ),
-                                    Text(
-                                      item.subtitle,
-                                      style: theme.textTheme.bodySmall,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
+                    return SelectionItemCard(
+                      item: item,
+                      onTap: () {
+                        onItemSelected(item);
+                        Navigator.pop(context);
+                      },
                     );
                   },
                 ),
