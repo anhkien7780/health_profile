@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:health_profile/models/enum/loading_status.dart';
 
 class BookAppointmentState extends Equatable {
   final DateTime? selectedDate;
@@ -7,6 +8,7 @@ class BookAppointmentState extends Equatable {
   final int? hospitalID;
   final String? note;
   final DateTime? selectedTime;
+  final LoadingStatus loadingStatus;
 
   const BookAppointmentState({
     this.doctorID,
@@ -15,6 +17,7 @@ class BookAppointmentState extends Equatable {
     this.currentStep = 0,
     this.note,
     this.selectedTime,
+    this.loadingStatus = LoadingStatus.idle,
   });
 
   BookAppointmentState copyWith({
@@ -24,6 +27,7 @@ class BookAppointmentState extends Equatable {
     DateTime? selectedDate,
     int? currentStep,
     String? note,
+    LoadingStatus? loadingStatus,
   }) {
     return BookAppointmentState(
       doctorID: doctorID ?? this.doctorID,
@@ -32,6 +36,7 @@ class BookAppointmentState extends Equatable {
       currentStep: currentStep ?? this.currentStep,
       note: note ?? this.note,
       selectedTime: selectedTime ?? this.selectedTime,
+      loadingStatus: loadingStatus ?? this.loadingStatus,
     );
   }
 
@@ -43,5 +48,6 @@ class BookAppointmentState extends Equatable {
     selectedDate,
     currentStep,
     selectedTime,
+    loadingStatus,
   ];
 }

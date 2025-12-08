@@ -64,5 +64,8 @@
   "chooseDate": "Ngày khám",
   "chooseTime": "Giờ khám",
   "pleaseSelectDate": "Vui lòng chọn ngày khám",
-  "chooseTimeButton": "Chọn giờ khám"
+  "chooseTimeButton": "Chọn giờ khám",
+  "searchDoctorHint": "Nhập tên bác sĩ",
+  "searchHospitalHint": "Nhập tên bệnh viện",
+  "pleaseSelectHospitalFirst": "Vui lòng chọn bệnh viện trước"
 }

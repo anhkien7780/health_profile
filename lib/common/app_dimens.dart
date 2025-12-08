@@ -12,6 +12,9 @@ class AppDimens {
   static const double iconChatRadius = 25;
   static const double circle40 = 40;
 
+  // Image
+  static const double avatarRadius = 25;
+
   // StepItem
   static const double stepItemWidth = 74;
 

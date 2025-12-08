@@ -64,5 +64,8 @@
   "chooseDate": "Date",
   "chooseTime": "Time",
   "pleaseSelectDate": "Please select a date",
-  "chooseTimeButton": "Choose time"
+  "chooseTimeButton": "Choose time",
+  "searchDoctorHint": "Search doctor",
+  "searchHospitalHint": "Search hospital",
+  "pleaseSelectHospitalFirst": "Please select a hospital first"
 }

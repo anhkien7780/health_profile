@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_profile/common/app_dimens.dart';
 import 'package:health_profile/generated/l10n.dart';
+import 'package:health_profile/models/enum/loading_status.dart';
+import 'package:health_profile/repositories/appointment_repository.dart';
 import 'package:health_profile/ui/pages/book_appointment/book_appointment_cubit.dart';
 import 'package:health_profile/ui/pages/book_appointment/book_appointment_navigator.dart';
 import 'package:health_profile/ui/pages/book_appointment/book_appointment_state.dart';
 import 'package:health_profile/ui/pages/book_appointment/widgets/choose_hospital_step_content.dart';
 import 'package:health_profile/ui/pages/book_appointment/widgets/choose_schedule_step_content.dart';
+import 'package:health_profile/ui/widgets/app_loading/app_loading.dart';
 import 'package:health_profile/ui/widgets/buttons/app_elevated_button.dart';
 
 class BookAppointmentPage extends StatelessWidget {
@@ -15,8 +18,10 @@ class BookAppointmentPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          BookAppointmentCubit(navigator: BookAppointmentNavigator(context)),
+      create: (context) => BookAppointmentCubit(
+        navigator: BookAppointmentNavigator(context),
+        appointmentRepository: context.read<AppointmentRepository>(),
+      ),
       child: const BookAppointmentChildPage(),
     );
   }
@@ -50,10 +55,18 @@ class _BookAppointmentChildPageState extends State<BookAppointmentChildPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: theme.colorScheme.surface,
-      appBar: _createAppBar(),
-      body: _createBody(),
+    return BlocBuilder<BookAppointmentCubit, BookAppointmentState>(
+      buildWhen: (pre, current) => pre.loadingStatus != current.loadingStatus,
+      builder: (context, state) {
+        return AppLoadingOverlay(
+          isLoading: state.loadingStatus == LoadingStatus.loading,
+          child: Scaffold(
+            backgroundColor: theme.colorScheme.surface,
+            appBar: _createAppBar(),
+            body: _createBody(),
+          ),
+        );
+      },
     );
   }
 

@@ -1,5 +1,7 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:health_profile/models/entities/selection_item.dart';
+import 'package:health_profile/ui/pages/book_appointment/widgets/selection_bottom_sheet.dart';
 
 class AppNavigator {
   BuildContext context;
@@ -36,5 +38,26 @@ class AppNavigator {
       queryParameters: queryParameters,
       extra: extra,
     );
+  }
+
+  void showSelectionSheet({
+    required String title,
+    required List<SelectionItem> items,
+    required Function(SelectionItem) onItemSelected,
+  }) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (context) => SelectionBottomSheet(
+        searchHint: title,
+        items: items,
+        onItemSelected: onItemSelected,
+      ),
+      backgroundColor: Colors.transparent,
+    );
+  }
+
+  void showSnackBar(SnackBar snackBar) {
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }

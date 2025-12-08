@@ -4,6 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:health_profile/generated/l10n.dart';
 import 'package:health_profile/global_blocs/settings/app_setting_cubit.dart';
 import 'package:health_profile/models/enum/language.dart';
+import 'package:health_profile/repositories/appointment_repository.dart';
 import 'package:health_profile/router/router_config.dart';
 import 'package:health_profile/utils/create_text_theme.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -14,29 +15,35 @@ import 'global_blocs/settings/app_setting_state.dart';
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<AppSettingCubit>(
-      create: (context) {
-        return AppSettingCubit();
-      },
-      child: BlocBuilder<AppSettingCubit, AppSettingState>(
-        buildWhen: (previous, current) =>
-            previous.currentLanguage != current.currentLanguage,
-        builder: (context, state) {
-          return GlobalLoaderOverlay(
-            child: GestureDetector(
-              onTap: () {
-                _hideKeyboard(context);
-              },
-              child: _createMaterialApp(
-                context,
-                locale: state.currentLanguage.local,
-              ),
-            ),
-          );
+    return MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider<AppointmentRepository>(
+          create: (context) => AppointmentRepositoryImpl(),
+        ),
+      ],
+      child: BlocProvider<AppSettingCubit>(
+        create: (context) {
+          return AppSettingCubit();
         },
+        child: BlocBuilder<AppSettingCubit, AppSettingState>(
+          buildWhen: (previous, current) =>
+              previous.currentLanguage != current.currentLanguage,
+          builder: (context, state) {
+            return GlobalLoaderOverlay(
+              child: GestureDetector(
+                onTap: () {
+                  _hideKeyboard(context);
+                },
+                child: _createMaterialApp(
+                  context,
+                  locale: state.currentLanguage.local,
+                ),
+              ),
+            );
+          },
+        ),
       ),
     );
   }
