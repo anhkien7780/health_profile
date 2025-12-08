@@ -2,14 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_profile/common/app_dimens.dart';
 import 'package:health_profile/generated/l10n.dart';
-import 'package:health_profile/models/enum/loading_status.dart';
 import 'package:health_profile/repositories/appointment_repository.dart';
 import 'package:health_profile/ui/pages/book_appointment/book_appointment_cubit.dart';
 import 'package:health_profile/ui/pages/book_appointment/book_appointment_navigator.dart';
 import 'package:health_profile/ui/pages/book_appointment/book_appointment_state.dart';
 import 'package:health_profile/ui/pages/book_appointment/choose_hospital_step/choose_hospital_step_page.dart';
-import 'package:health_profile/ui/pages/book_appointment/widgets/choose_schedule_step_content.dart';
-import 'package:health_profile/ui/widgets/app_loading/app_loading.dart';
+import 'package:health_profile/ui/pages/book_appointment/choose_schedule_step/choose_schedule_step_page.dart';
 import 'package:health_profile/ui/widgets/buttons/app_elevated_button.dart';
 
 class BookAppointmentPage extends StatelessWidget {
@@ -126,7 +124,7 @@ class _BookAppointmentChildPageState extends State<BookAppointmentChildPage> {
         },
         children: [
           ChooseHospitalStepPage(),
-          ChooseScheduleStepContent(),
+          ChooseScheduleStepPage(),
           _buildPlaceholderStep(context, s.confirmAppointment),
         ],
       ),
