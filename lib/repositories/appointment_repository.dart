@@ -1,10 +1,13 @@
 import 'package:health_profile/models/entities/doctor.dart';
 import 'package:health_profile/models/entities/hospital.dart';
+import 'package:health_profile/models/entities/schedule_slot.dart';
 
 abstract class AppointmentRepository {
   Future<List<Hospital>> getHospitals();
 
   Future<List<Doctor>> getDoctors();
+
+  Future<List<ScheduleSlot>> getScheduleSlots();
 }
 
 class AppointmentRepositoryImpl extends AppointmentRepository {
@@ -104,6 +107,23 @@ class AppointmentRepositoryImpl extends AppointmentRepository {
         experienceYears: 15,
         consultationFee: 700000,
         avatarUrl: "https://i.pravatar.cc/150?img=12",
+      ),
+    ];
+  }
+
+  @override
+  Future<List<ScheduleSlot>> getScheduleSlots() async {
+    await Future.delayed(const Duration(seconds: 1));
+    return [
+      ScheduleSlot(
+        id: 1,
+        roomName: "Phòng khám dị ứng (P.312 Nhà C)",
+        slots: ["07:00", "07:15", "07:30", "08:00", "13:00"],
+      ),
+      ScheduleSlot(
+        id: 2,
+        roomName: "Phòng khám dị ứng (P.412 Nhà C)",
+        slots: ["08:00", "13:00", "13:30", "14:00", "14:30"],
       ),
     ];
   }

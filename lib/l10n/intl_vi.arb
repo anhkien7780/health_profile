@@ -67,5 +67,10 @@
   "chooseTimeButton": "Chọn giờ khám",
   "searchDoctorHint": "Nhập tên bác sĩ",
   "searchHospitalHint": "Nhập tên bệnh viện",
-  "pleaseSelectHospitalFirst": "Vui lòng chọn bệnh viện trước"
+  "pleaseSelectHospitalFirst": "Vui lòng chọn bệnh viện trước",
+  "day": "Ngày",
+  "pleaseCompleteAllStep": "Vui lòng hoàn thành tất cả các bước để tiếp tục",
+  "pleaseSelectHospital": "Vui lòng chọn bệnh viện",
+  "pleaseSelectDoctor": "Vui lòng chọn bác sĩ",
+  "pleaseSelectTime": "Vui lòng chọn thời gian"
 }

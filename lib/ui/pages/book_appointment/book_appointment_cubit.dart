@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:health_profile/generated/l10n.dart';
 import 'package:health_profile/models/entities/selection_item.dart';
 import 'package:health_profile/repositories/appointment_repository.dart';
 import 'package:health_profile/ui/pages/book_appointment/book_appointment_navigator.dart';
@@ -56,7 +57,36 @@ class BookAppointmentCubit extends Cubit<BookAppointmentState> {
     emit(state.copyWith(hospital: hospital));
   }
 
+  String? getErrorMessage() {
+    switch (state.currentStep) {
+      case 0:
+        if (state.hospital == null) {
+          return S.current.pleaseSelectHospital;
+        }
+        if (state.doctor == null) {
+          return S.current.pleaseSelectDoctor;
+        }
+        return null;
+      case 1:
+        if (state.selectedDate == null) {
+          return S.current.pleaseSelectDate;
+        }
+        if (state.selectedTime == null) {
+          return S.current.pleaseSelectTime;
+        }
+        return null;
+      default:
+        return null;
+    }
+  }
+
   void onNextPressed() {
+    final errorMessage = getErrorMessage();
+    if (errorMessage != null) {
+      navigator.showErrorSnackBar(errorMessage);
+      return;
+    }
+
     if (state.currentStep < 2) {
       pageController.nextPage(
         duration: const Duration(milliseconds: 300),

@@ -67,5 +67,10 @@
   "chooseTimeButton": "Choose time",
   "searchDoctorHint": "Search doctor",
   "searchHospitalHint": "Search hospital",
-  "pleaseSelectHospitalFirst": "Please select a hospital first"
+  "pleaseSelectHospitalFirst": "Please select a hospital first",
+  "day": "Day",
+  "pleaseCompleteAllStep": "Please complete all steps to continue",
+  "pleaseSelectHospital": "Please select a hospital",
+  "pleaseSelectDoctor": "Please select a doctor",
+  "pleaseSelectTime": "Please select a time"
 }
