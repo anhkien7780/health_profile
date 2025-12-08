@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:health_profile/common/app_dimens.dart';
 import 'package:health_profile/generated/l10n.dart';
+import 'package:health_profile/ui/pages/book_appointment/widgets/appointment_method_card.dart';
+import 'package:health_profile/ui/pages/book_appointment/widgets/selection_bottom_sheet.dart';
 
 class ChooseHospitalStepContent extends StatefulWidget {
   const ChooseHospitalStepContent({super.key});
@@ -21,84 +23,34 @@ class _ChooseHospitalStepContentState extends State<ChooseHospitalStepContent> {
     s = S.of(context);
   }
 
+  void _showSelectionSheet(String title) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) => SelectionBottomSheet(title: title),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         spacing: AppDimens.paddingNormal,
         children: [
-          _buildCardButton(
+          AppointmentMethodCard(
             iconData: Icons.medical_services,
             title: s.selectHospital,
             subtitle: s.selectHospitalDesc,
-            onTap: () {},
+            onTap: () => _showSelectionSheet(s.doctor), // Using generic title for demo
           ),
-          _buildCardButton(
+          AppointmentMethodCard(
             iconData: Icons.person_search,
             title: s.selectDoctor,
             subtitle: s.selectDoctorDesc,
-            onTap: () {},
+            onTap: () => _showSelectionSheet(s.doctor),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget _buildCardButton({
-    required IconData iconData,
-    required String title,
-    required String subtitle,
-    required VoidCallback onTap,
-  }) {
-    return InkWell(
-      onTap: onTap,
-      borderRadius: BorderRadius.circular(AppDimens.borderRadiusNormal),
-      child: Container(
-        height: AppDimens.buttonBookMethodHeight,
-        padding: const EdgeInsets.all(AppDimens.paddingNormal),
-        decoration: BoxDecoration(
-          color: theme.colorScheme.primary,
-          borderRadius: BorderRadius.circular(AppDimens.borderRadiusNormal),
-        ),
-        child: Row(
-          spacing: AppDimens.paddingNormal,
-          children: [
-            Container(
-              padding: const EdgeInsets.all(AppDimens.paddingSmall),
-              decoration: BoxDecoration(
-                color: theme.colorScheme.inversePrimary,
-                borderRadius: BorderRadius.circular(
-                  AppDimens.borderRadiusNormal,
-                ),
-              ),
-              child: Icon(
-                iconData,
-                size: AppDimens.iconSizeNormal,
-                color: theme.colorScheme.onPrimary,
-              ),
-            ),
-            Expanded(
-              child: Column(
-                spacing: AppDimens.paddingSmallest,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    style: theme.textTheme.titleSmall?.copyWith(
-                      color: theme.colorScheme.onPrimary,
-                    ),
-                  ),
-                  Text(
-                    subtitle,
-                    style: theme.textTheme.bodySmall?.copyWith(
-                      color: theme.colorScheme.onPrimary.withValues(alpha: 0.9),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }
