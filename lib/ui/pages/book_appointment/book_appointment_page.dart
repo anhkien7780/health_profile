@@ -90,7 +90,7 @@ class _BookAppointmentChildPageState extends State<BookAppointmentChildPage> {
         IconButton(
           icon: const Icon(Icons.refresh),
           color: theme.colorScheme.onPrimaryFixed,
-          onPressed: () {},
+          onPressed: _cubit.onRefresh,
         ),
       ],
     );

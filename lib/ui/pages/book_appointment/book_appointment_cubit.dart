@@ -110,4 +110,14 @@ class BookAppointmentCubit extends Cubit<BookAppointmentState> {
       navigator.pop();
     }
   }
+
+  void onRefresh() {
+    noteController.clear();
+    emit(const BookAppointmentState());
+    pageController.animateToPage(
+      0,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeInOut,
+    );
+  }
 }
