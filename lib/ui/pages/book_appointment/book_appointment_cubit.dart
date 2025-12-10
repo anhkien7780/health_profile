@@ -15,10 +15,12 @@ class BookAppointmentCubit extends Cubit<BookAppointmentState> {
   final BookAppointmentNavigator navigator;
   final AppointmentRepository appointmentRepository;
   final PageController pageController = PageController();
+  final TextEditingController noteController = TextEditingController();
 
   @override
   Future<void> close() {
     pageController.dispose();
+    noteController.dispose();
     return super.close();
   }
 
@@ -92,7 +94,10 @@ class BookAppointmentCubit extends Cubit<BookAppointmentState> {
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
       );
-    } else {}
+    } else {
+      final note = noteController.text;
+      emit(state.copyWith(note: note));
+    }
   }
 
   void onBackPressed() {

@@ -8,6 +8,7 @@ import 'package:health_profile/ui/pages/book_appointment/book_appointment_naviga
 import 'package:health_profile/ui/pages/book_appointment/book_appointment_state.dart';
 import 'package:health_profile/ui/pages/book_appointment/choose_hospital_step/choose_hospital_step_page.dart';
 import 'package:health_profile/ui/pages/book_appointment/choose_schedule_step/choose_schedule_step_page.dart';
+import 'package:health_profile/ui/pages/book_appointment/confirm_appointment_step/confirm_appointment_step_page.dart';
 import 'package:health_profile/ui/widgets/buttons/app_elevated_button.dart';
 
 class BookAppointmentPage extends StatelessWidget {
@@ -125,7 +126,7 @@ class _BookAppointmentChildPageState extends State<BookAppointmentChildPage> {
         children: [
           ChooseHospitalStepPage(),
           ChooseScheduleStepPage(),
-          _buildPlaceholderStep(context, s.confirmAppointment),
+          ConfirmAppointmentStepPage(),
         ],
       ),
     );
@@ -138,10 +139,6 @@ class _BookAppointmentChildPageState extends State<BookAppointmentChildPage> {
       text: _cubit.state.currentStep == 2 ? s.completed : s.continueStep,
       onClick: _cubit.onNextPressed,
     );
-  }
-
-  Widget _buildPlaceholderStep(BuildContext context, String title) {
-    return Center(child: Text(title));
   }
 
   Widget _createStepIndicator(int currentStep) {
