@@ -9,6 +9,7 @@ class BookAppointmentState extends Equatable {
   final SelectionItem? hospital;
   final String? note;
   final DateTime? selectedTime;
+  final String? roomName;
   final LoadingStatus loadingStatus;
 
   const BookAppointmentState({
@@ -18,6 +19,7 @@ class BookAppointmentState extends Equatable {
     this.currentStep = 0,
     this.note,
     this.selectedTime,
+    this.roomName,
     this.loadingStatus = LoadingStatus.idle,
   });
 
@@ -28,6 +30,7 @@ class BookAppointmentState extends Equatable {
     DateTime? selectedDate,
     int? currentStep,
     String? note,
+    String? roomName,
     LoadingStatus? loadingStatus,
   }) {
     return BookAppointmentState(
@@ -37,6 +40,7 @@ class BookAppointmentState extends Equatable {
       currentStep: currentStep ?? this.currentStep,
       note: note ?? this.note,
       selectedTime: selectedTime ?? this.selectedTime,
+      roomName: roomName ?? this.roomName,
       loadingStatus: loadingStatus ?? this.loadingStatus,
     );
   }
@@ -49,6 +53,7 @@ class BookAppointmentState extends Equatable {
     selectedDate,
     currentStep,
     selectedTime,
+    roomName,
     loadingStatus,
   ];
 }

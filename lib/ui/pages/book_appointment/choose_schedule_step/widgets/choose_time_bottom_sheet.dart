@@ -15,7 +15,7 @@ class ChooseTimeBottomSheet extends StatelessWidget {
 
   final DateTime selectedDate;
   final List<ScheduleSlot> scheduleSlots;
-  final Function(String) onTimeSelected;
+  final Function(String, String) onTimeSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -129,7 +129,7 @@ class ChooseTimeBottomSheet extends StatelessWidget {
               time: time,
               isSelected: false,
               onTap: () {
-                onTimeSelected(time);
+                onTimeSelected(time, scheduleSlot.roomName);
                 Navigator.pop(context);
               },
             );

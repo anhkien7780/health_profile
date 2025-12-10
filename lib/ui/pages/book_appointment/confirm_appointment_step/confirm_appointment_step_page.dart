@@ -23,7 +23,7 @@ class ConfirmAppointmentStepPage extends StatelessWidget {
               if (state.hospital != null)
                 SelectionItemCard(item: state.hospital!),
               if (state.doctor != null) SelectionItemCard(item: state.doctor!),
-              _buildLocationInfo(context),
+              _buildLocationInfo(context, state),
               _buildTimeInfo(context, state),
               _buildNoteSection(context),
             ],
@@ -33,7 +33,7 @@ class ConfirmAppointmentStepPage extends StatelessWidget {
     );
   }
 
-  Widget _buildLocationInfo(BuildContext context) {
+  Widget _buildLocationInfo(BuildContext context, BookAppointmentState state) {
     final theme = Theme.of(context);
     return Row(
       spacing: AppDimens.paddingSmall,
@@ -41,7 +41,7 @@ class ConfirmAppointmentStepPage extends StatelessWidget {
         Icon(Icons.add_box_outlined, size: AppDimens.iconSizeNormal),
         Expanded(
           child: Text(
-            "Phòng khám dị ứng (P.312 Nhà C)",
+            state.roomName ?? "",
             style: theme.textTheme.bodyMedium?.copyWith(
               fontWeight: FontWeight.bold,
             ),

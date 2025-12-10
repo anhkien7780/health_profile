@@ -47,6 +47,10 @@ class BookAppointmentCubit extends Cubit<BookAppointmentState> {
     emit(state.copyWith(selectedTime: time));
   }
 
+  void selectRoom(String roomName) {
+    emit(state.copyWith(roomName: roomName));
+  }
+
   void onDateSlotPressed(DateTime date) {
     emit(state.copyWith(selectedDate: date));
   }

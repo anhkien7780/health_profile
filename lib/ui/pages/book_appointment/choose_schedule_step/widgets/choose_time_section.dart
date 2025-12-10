@@ -21,7 +21,8 @@ class ChooseTimeSection extends StatelessWidget {
     return BlocBuilder<ChooseScheduleStepCubit, ChooseScheduleStepState>(
       buildWhen: (previous, current) =>
           previous.selectedDate != current.selectedDate ||
-          previous.selectedTime != current.selectedTime,
+          previous.selectedTime != current.selectedTime ||
+          previous.roomName != current.roomName,
       builder: (context, state) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -33,10 +34,23 @@ class ChooseTimeSection extends StatelessWidget {
                 style: Theme.of(context).textTheme.titleMedium,
               ),
               if (state.selectedTime != null)
-                TimeSlotItem(
-                  time: AppConfigs.timeFormat.format(state.selectedTime!),
-                  isSelected: true,
-                  onTap: () => _showTimeSelectionBottomSheet(context, cubit),
+                Column(
+                  spacing: AppDimens.paddingSmall,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    TimeSlotItem(
+                      time: AppConfigs.timeFormat.format(state.selectedTime!),
+                      isSelected: true,
+                      onTap: () => _showTimeSelectionBottomSheet(context, cubit),
+                    ),
+                    if (state.roomName != null)
+                      Text(
+                        state.roomName!,
+                        style: theme.textTheme.bodyLarge?.copyWith(
+                          color: theme.colorScheme.onSurfaceVariant,
+                        ),
+                      ),
+                  ],
                 )
               else
                 AppElevatedButton(
@@ -73,8 +87,8 @@ class ChooseTimeSection extends StatelessWidget {
               return ChooseTimeBottomSheet(
                 selectedDate: state.selectedDate!,
                 scheduleSlots: state.scheduleSlots,
-                onTimeSelected: (time) {
-                  cubit.onTimeSlotPressed(time);
+                onTimeSelected: (time, roomName) {
+                  cubit.onTimeSlotPressed(time, roomName);
                 },
               );
             },

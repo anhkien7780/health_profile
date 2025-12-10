@@ -57,7 +57,12 @@ class ChooseScheduleStepCubit extends Cubit<ChooseScheduleStepState> {
     bookAppointmentCubit.selectTime(time);
   }
 
-  void onTimeSlotPressed(String time) {
+  void selectRoom(String roomName) {
+    emit(state.copyWith(roomName: roomName));
+    bookAppointmentCubit.selectRoom(roomName);
+  }
+
+  void onTimeSlotPressed(String time, String roomName) {
     if (state.selectedDate == null) return;
     try {
       final parts = time.split(':');
@@ -71,6 +76,7 @@ class ChooseScheduleStepCubit extends Cubit<ChooseScheduleStepState> {
         minute,
       );
       selectTime(selectedTime);
+      selectRoom(roomName);
     } catch (_) {}
   }
 }
