@@ -74,5 +74,6 @@
   "pleaseSelectDoctor": "Vui lòng chọn bác sĩ",
   "pleaseSelectTime": "Vui lòng chọn thời gian",
   "note": "Ghi chú",
-  "noteHint": "VD: Tôi bị đau bụng, và đã sử dụng thuốc giảm đau..."
+  "noteHint": "VD: Tôi bị đau bụng, và đã sử dụng thuốc giảm đau...",
+  "appointmentBookedSuccessfully": "Đặt lịch khám thành công"
 }

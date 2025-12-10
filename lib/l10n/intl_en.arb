@@ -74,5 +74,6 @@
   "pleaseSelectDoctor": "Please select a doctor",
   "pleaseSelectTime": "Please select a time",
   "note": "Note",
-  "noteHint": "EX: I have a stomach ache..."
+  "noteHint": "EX: I have a stomach ache...",
+  "appointmentBookedSuccessfully": "Appointment booked successfully"
 }

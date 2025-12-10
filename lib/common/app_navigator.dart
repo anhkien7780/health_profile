@@ -58,6 +58,10 @@ class AppNavigator {
     );
   }
 
+  void showSnackBar(String message) {
+      AppSnackBar.show(context, message);
+  }
+
   void showErrorSnackBar(String message) {
     AppSnackBar.show(context, message, isError: true);
   }

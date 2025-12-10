@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_profile/generated/l10n.dart';
+import 'package:health_profile/models/entities/appointment.dart';
 import 'package:health_profile/models/entities/selection_item.dart';
+import 'package:health_profile/models/enum/loading_status.dart';
 import 'package:health_profile/repositories/appointment_repository.dart';
 import 'package:health_profile/ui/pages/book_appointment/book_appointment_navigator.dart';
 import 'package:health_profile/ui/pages/book_appointment/book_appointment_state.dart';
@@ -86,7 +88,7 @@ class BookAppointmentCubit extends Cubit<BookAppointmentState> {
     }
   }
 
-  void onNextPressed() {
+  Future<void> onNextPressed() async {
     final errorMessage = getErrorMessage();
     if (errorMessage != null) {
       navigator.showErrorSnackBar(errorMessage);
@@ -100,7 +102,24 @@ class BookAppointmentCubit extends Cubit<BookAppointmentState> {
       );
     } else {
       final note = noteController.text;
-      emit(state.copyWith(note: note));
+      emit(state.copyWith(note: note, loadingStatus: LoadingStatus.loading));
+      try {
+        final appointment = Appointment(
+          hospital: state.hospital!,
+          doctor: state.doctor!,
+          date: state.selectedDate!,
+          time: state.selectedTime!,
+          roomName: state.roomName!,
+          note: note,
+        );
+        await appointmentRepository.bookAppointment(appointment);
+        emit(state.copyWith(loadingStatus: LoadingStatus.idle));
+        navigator.pop();
+        navigator.showSnackBar(S.current.appointmentBookedSuccessfully);
+      } catch (e) {
+        emit(state.copyWith(loadingStatus: LoadingStatus.error));
+        navigator.showErrorSnackBar(e.toString());
+      }
     }
   }
 

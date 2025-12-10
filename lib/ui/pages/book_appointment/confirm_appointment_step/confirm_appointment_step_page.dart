@@ -3,9 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_profile/common/app_dimens.dart';
 import 'package:health_profile/configs/app_configs.dart';
 import 'package:health_profile/generated/l10n.dart';
+import 'package:health_profile/models/enum/loading_status.dart';
 import 'package:health_profile/ui/pages/book_appointment/book_appointment_cubit.dart';
 import 'package:health_profile/ui/pages/book_appointment/book_appointment_state.dart';
 import 'package:health_profile/ui/pages/book_appointment/widgets/selection_item_card.dart';
+import 'package:health_profile/ui/widgets/app_loading/app_loading.dart';
 import 'package:health_profile/ui/widgets/text_fields/app_text_form_field.dart';
 
 class ConfirmAppointmentStepPage extends StatelessWidget {
@@ -14,19 +16,24 @@ class ConfirmAppointmentStepPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<BookAppointmentCubit, BookAppointmentState>(
+      buildWhen: (pre, current) => pre.loadingStatus != current.loadingStatus,
       builder: (context, state) {
-        return SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            spacing: AppDimens.paddingNormal,
-            children: [
-              if (state.hospital != null)
-                SelectionItemCard(item: state.hospital!),
-              if (state.doctor != null) SelectionItemCard(item: state.doctor!),
-              _buildLocationInfo(context, state),
-              _buildTimeInfo(context, state),
-              _buildNoteSection(context),
-            ],
+        return AppLoadingOverlay(
+          isLoading: state.loadingStatus == LoadingStatus.loading,
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              spacing: AppDimens.paddingNormal,
+              children: [
+                if (state.hospital != null)
+                  SelectionItemCard(item: state.hospital!),
+                if (state.doctor != null)
+                  SelectionItemCard(item: state.doctor!),
+                _buildLocationInfo(context, state),
+                _buildTimeInfo(context, state),
+                _buildNoteSection(context),
+              ],
+            ),
           ),
         );
       },

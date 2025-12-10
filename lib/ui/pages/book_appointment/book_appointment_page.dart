@@ -54,15 +54,10 @@ class _BookAppointmentChildPageState extends State<BookAppointmentChildPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<BookAppointmentCubit, BookAppointmentState>(
-      buildWhen: (pre, current) => pre.loadingStatus != current.loadingStatus,
-      builder: (context, state) {
-        return Scaffold(
-          backgroundColor: theme.colorScheme.surface,
-          appBar: _createAppBar(),
-          body: _createBody(),
-        );
-      },
+    return Scaffold(
+      backgroundColor: theme.colorScheme.surface,
+      appBar: _createAppBar(),
+      body: _createBody(),
     );
   }
 

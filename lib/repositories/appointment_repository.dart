@@ -1,3 +1,4 @@
+import 'package:health_profile/models/entities/appointment.dart';
 import 'package:health_profile/models/entities/doctor.dart';
 import 'package:health_profile/models/entities/hospital.dart';
 import 'package:health_profile/models/entities/schedule_slot.dart';
@@ -8,6 +9,8 @@ abstract class AppointmentRepository {
   Future<List<Doctor>> getDoctors();
 
   Future<List<ScheduleSlot>> getScheduleSlots();
+
+  Future<void> bookAppointment(Appointment appointment);
 }
 
 class AppointmentRepositoryImpl extends AppointmentRepository {
@@ -126,5 +129,12 @@ class AppointmentRepositoryImpl extends AppointmentRepository {
         slots: ["08:00", "13:00", "13:30", "14:00", "14:30"],
       ),
     ];
+  }
+
+  @override
+  Future<void> bookAppointment(Appointment appointment) async {
+    await Future.delayed(const Duration(seconds: 2));
+    // Simulate success
+    return;
   }
 }
