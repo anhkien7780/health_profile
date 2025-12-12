@@ -6,7 +6,7 @@ import 'package:health_profile/repositories/appointment_repository.dart';
 import 'package:health_profile/ui/pages/book_appointment/book_appointment_cubit.dart';
 import 'package:health_profile/ui/pages/book_appointment/book_appointment_navigator.dart';
 import 'package:health_profile/ui/pages/book_appointment/choose_hospital_step/choose_hospital_step_state.dart';
-import 'package:health_profile/ui/widgets/app_snackbar.dart';
+import 'package:health_profile/ui/widgets/snack_bar/app_snackbar.dart';
 
 class ChooseHospitalStepCubit extends Cubit<ChooseHospitalStepState> {
   ChooseHospitalStepCubit({

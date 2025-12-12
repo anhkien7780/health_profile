@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:health_profile/models/entities/selection_item.dart';
 import 'package:health_profile/ui/pages/book_appointment/widgets/selection_bottom_sheet.dart';
-import 'package:health_profile/ui/widgets/app_snackbar.dart';
+import 'package:health_profile/ui/widgets/snack_bar/app_snackbar.dart';
 
 class AppNavigator {
   BuildContext context;

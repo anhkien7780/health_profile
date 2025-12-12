@@ -15,10 +15,23 @@ class ProfileBody extends StatefulWidget {
 }
 
 class _ProfileBodyState extends State<ProfileBody> {
+  late final HomeCubit cubit;
+  late final ThemeData theme;
+
+  @override
+  void initState() {
+    super.initState();
+    cubit = context.read<HomeCubit>();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    theme = Theme.of(context);
+  }
+
   @override
   Widget build(BuildContext context) {
-    final cubit = BlocProvider.of<HomeCubit>(context);
-    final theme = Theme.of(context);
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -114,7 +127,7 @@ class _ProfileBodyState extends State<ProfileBody> {
   Widget _createLogoutButton() {
     return InkWell(
       onTap: () {
-        context.read<HomeCubit>().logout();
+        cubit.logout();
       },
       child: Ink(
         decoration: BoxDecoration(

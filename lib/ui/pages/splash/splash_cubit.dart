@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:health_profile/database/secure_storage_helper.dart';
 import 'package:health_profile/database/shared_preferences_helper.dart';
 import 'package:health_profile/ui/pages/splash/splash_navigator.dart';
 import 'package:health_profile/ui/pages/splash/splash_state.dart';
@@ -14,7 +15,12 @@ class SplashCubit extends Cubit<SplashState> {
     if (isFirstRun) {
       await navigator.goToOnboardingPage();
     } else {
-      await navigator.goToLoginPage();
+      final token = await SecureStorageHelper.getAccessToken();
+      if (token != null && token.isNotEmpty) {
+        await navigator.goToHomePage();
+      } else {
+        await navigator.goToLoginPage();
+      }
     }
   }
 }

@@ -11,4 +11,8 @@ class SplashNavigator extends AppNavigator {
   Future<void> goToLoginPage() {
     return pushReplacementNamed(AppRouter.login);
   }
+
+  Future<void> goToHomePage() {
+    return pushReplacementNamed(AppRouter.home);
+  }
 }

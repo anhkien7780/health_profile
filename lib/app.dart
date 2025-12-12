@@ -5,9 +5,9 @@ import 'package:health_profile/generated/l10n.dart';
 import 'package:health_profile/global_blocs/settings/app_setting_cubit.dart';
 import 'package:health_profile/models/enum/language.dart';
 import 'package:health_profile/repositories/appointment_repository.dart';
+import 'package:health_profile/repositories/auth_repository.dart';
 import 'package:health_profile/router/router_config.dart';
 import 'package:health_profile/utils/create_text_theme.dart';
-import 'package:loader_overlay/loader_overlay.dart';
 
 import 'common/app_theme.dart';
 import 'global_blocs/settings/app_setting_state.dart';
@@ -22,6 +22,9 @@ class MyApp extends StatelessWidget {
         RepositoryProvider<AppointmentRepository>(
           create: (context) => AppointmentRepositoryImpl(),
         ),
+        RepositoryProvider<AuthRepository>(
+          create: (context) => AuthRepositoryImpl(),
+        ),
       ],
       child: BlocProvider<AppSettingCubit>(
         create: (context) {
@@ -31,15 +34,13 @@ class MyApp extends StatelessWidget {
           buildWhen: (previous, current) =>
               previous.currentLanguage != current.currentLanguage,
           builder: (context, state) {
-            return GlobalLoaderOverlay(
-              child: GestureDetector(
-                onTap: () {
-                  _hideKeyboard(context);
-                },
-                child: _createMaterialApp(
-                  context,
-                  locale: state.currentLanguage.local,
-                ),
+            return GestureDetector(
+              onTap: () {
+                _hideKeyboard(context);
+              },
+              child: _createMaterialApp(
+                context,
+                locale: state.currentLanguage.local,
               ),
             );
           },

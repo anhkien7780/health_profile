@@ -26,7 +26,7 @@
   "id": "Mã định danh",
   "loginButton": "Đăng nhập",
   "logout": "Đăng xuất",
-  "male": "Name",
+  "male": "Nam",
   "next": "Tiếp tục",
   "onBoardingFirstDetail": "Ứng dụng hỗ trợ tra cứu hồ sơ bệnh án ngay khi có kết quả. Đặt lịch khám với bác sỹ nhanh ngọn và đúng nhu cầu của bản thân.",
   "onboardingFirstHeadline": "Tra cứu hồ sơ bệnh án, hẹn lịch khám bệnh nhanh chóng",
@@ -75,5 +75,11 @@
   "pleaseSelectTime": "Vui lòng chọn thời gian",
   "note": "Ghi chú",
   "noteHint": "VD: Tôi bị đau bụng, và đã sử dụng thuốc giảm đau...",
-  "appointmentBookedSuccessfully": "Đặt lịch khám thành công"
+  "appointmentBookedSuccessfully": "Đặt lịch khám thành công",
+  "logoutSuccess": "Đăng xuất thành công",
+  "loginSuccess": "Đăng nhập thành công",
+  "emailNotEmpty": "Email không được để trống",
+  "invalidEmailFormat": "Định dạng email không hợp lệ",
+  "passwordNotEmpty": "Mật khẩu không được để trống",
+  "passwordMinLength": "Mật khẩu phải có ít nhất 6 ký tự"
 }
