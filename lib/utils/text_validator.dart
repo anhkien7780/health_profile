@@ -26,4 +26,21 @@ class TextValidator {
     }
     return null;
   }
+
+  static String? validateFullName(String? value) {
+    if (value == null || value.isEmpty) {
+      return S.current.fullNameNotEmpty;
+    }
+    return null;
+  }
+
+  static String? validateConfirmPassword(
+    String? password,
+    String? confirmPassword,
+  ) {
+    if (password != confirmPassword) {
+      return S.current.passwordNotMatch;
+    }
+    return null;
+  }
 }

@@ -8,7 +8,13 @@ class SignUpNavigator extends AppNavigator {
     await pushReplacementNamed(AppRouter.login);
   }
 
-  Future<void> openProfileRegister() async {
-    await pushReplacementNamed(AppRouter.profileRegister);
+  Future<void> openProfileRegister({
+    required String email,
+    required String password,
+  }) async {
+    await pushReplacementNamed(AppRouter.profileRegister, extra: {
+      'email': email,
+      'password': password,
+    });
   }
 }

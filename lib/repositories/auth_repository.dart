@@ -5,6 +5,8 @@ import 'package:health_profile/database/secure_storage_helper.dart';
 abstract class AuthRepository {
   Future<String> login(String email, String password);
 
+  Future<String> register(Map<String, dynamic> userData);
+
   Future<void> logout();
 }
 
@@ -43,6 +45,39 @@ class AuthRepositoryImpl implements AuthRepository {
         }
       } else {
         throw Exception("Login failed: ${response.statusMessage}");
+      }
+    } on DioException catch (e) {
+      if (e.response != null && e.response?.data != null) {
+        final data = e.response?.data;
+        if (data is Map<String, dynamic> && data['message'] != null) {
+          throw Exception(data['message']);
+        }
+      }
+      throw Exception("Network error: ${e.message}");
+    } catch (e) {
+      throw Exception("An unexpected error occurred: $e");
+    }
+  }
+
+  @override
+  Future<String> register(Map<String, dynamic> userData) async {
+    try {
+      final response = await _dio.post(
+        AppConfigs.registerEndpoint,
+        data: userData,
+      );
+
+      if ((response.statusCode == 200 || response.statusCode == 201) && response.data != null) {
+        final data = response.data;
+        if (data['success'] == true) {
+          final token = data['data']['token'];
+          await SecureStorageHelper.setAccessToken(token);
+          return token;
+        } else {
+          throw Exception(data['message'] ?? "Registration failed");
+        }
+      } else {
+        throw Exception("Registration failed: ${response.statusMessage}");
       }
     } on DioException catch (e) {
       if (e.response != null && e.response?.data != null) {

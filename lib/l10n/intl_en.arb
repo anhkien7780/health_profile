@@ -34,6 +34,7 @@
   "edit": "Edit",
   "editProfileTitle": "Edit profile",
   "fullName": "Full name",
+  "fullNameHint": "Enter your full name",
   "birthday": "Birthday",
   "phoneNumber": "Phone number",
   "email": "Email",
@@ -81,5 +82,11 @@
   "emailNotEmpty": "Email cannot be empty",
   "invalidEmailFormat": "Invalid email format",
   "passwordNotEmpty": "Password cannot be empty",
-  "passwordMinLength": "Password must be at least 6 characters"
+  "passwordMinLength": "Password must be at least 6 characters",
+  "errorOccurred": "An error occurred",
+  "fullNameNotEmpty": "Full name cannot be empty",
+  "passwordNotMatch": "Passwords do not match",
+  "emergencyContact": "Emergency Contact",
+  "bloodType": "Blood Type",
+  "allergies": "Allergies"
 }

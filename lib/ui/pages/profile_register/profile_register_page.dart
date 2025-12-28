@@ -1,26 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:health_profile/common/app_dimens.dart';
 import 'package:health_profile/generated/l10n.dart';
 import 'package:health_profile/models/enum/gender.dart';
+import 'package:health_profile/repositories/auth_repository.dart';
 import 'package:health_profile/ui/pages/profile_register/profile_register_cubit.dart';
 import 'package:health_profile/ui/pages/profile_register/profile_register_navigator.dart';
+import 'package:health_profile/ui/pages/profile_register/profile_register_state.dart';
+import 'package:health_profile/ui/widgets/app_loading/app_loading.dart';
 import 'package:health_profile/ui/widgets/buttons/app_elevated_button.dart';
+import 'package:health_profile/ui/widgets/snack_bar/app_snackbar.dart';
 import 'package:health_profile/ui/widgets/text_fields/app_text_form_field.dart';
-import 'package:health_profile/utils/date_format_helper.dart';
 
 class ProfileRegisterPage extends StatelessWidget {
   const ProfileRegisterPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final arguments = GoRouterState.of(context).extra as Map;
+
     return BlocProvider<ProfileRegisterCubit>(
       create: (context) {
         return ProfileRegisterCubit(
           navigator: ProfileRegisterNavigator(context),
+          email: arguments['email'],
+          password: arguments['password'],
+          authRepository: AuthRepositoryImpl(),
         );
       },
-      child: ProfileRegisterChildPage(),
+      child: const ProfileRegisterChildPage(),
     );
   }
 }
@@ -44,11 +53,23 @@ class _ProfileRegisterChildPageState extends State<ProfileRegisterChildPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: true,
-      appBar: _createAppBar(),
-      bottomNavigationBar: _createCompletedButton(),
-      body: _createBody(),
+    return BlocConsumer<ProfileRegisterCubit, ProfileRegisterState>(
+      listener: (context, state) {
+        if (state.error != null) {
+          AppSnackBar.show(context, state.error!, isError: true);
+        }
+      },
+      builder: (context, state) {
+        return AppLoadingOverlay(
+          isLoading: state.isLoading,
+          child: Scaffold(
+            resizeToAvoidBottomInset: true,
+            appBar: _createAppBar(),
+            bottomNavigationBar: _createCompletedButton(),
+            body: _createBody(),
+          ),
+        );
+      },
     );
   }
 
@@ -65,8 +86,8 @@ class _ProfileRegisterChildPageState extends State<ProfileRegisterChildPage> {
       title: Text(
         S.of(context).profileRegister,
         style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-          color: Theme.of(context).colorScheme.onPrimaryFixed,
-        ),
+              color: Theme.of(context).colorScheme.onPrimaryFixed,
+            ),
       ),
     );
   }
@@ -104,8 +125,7 @@ class _ProfileRegisterChildPageState extends State<ProfileRegisterChildPage> {
                 cancelText: S.of(context).cancel,
               );
               if (selectedDate != null) {
-                final dateString = DateFormatHelper.dateToString(selectedDate);
-                _cubit.birthDayTextController.text = dateString;
+                _cubit.onDateOfBirthChanged(selectedDate);
               }
             },
           ),
@@ -120,6 +140,7 @@ class _ProfileRegisterChildPageState extends State<ProfileRegisterChildPage> {
             controller: _cubit.emailTextController,
             prefixIcon: createPrimaryColorIcon(iconData: Icons.mail_outline),
             hint: s.email,
+            readOnly: true,
           ),
           AppTextFormField(
             controller: _cubit.genderTextController,
@@ -129,21 +150,33 @@ class _ProfileRegisterChildPageState extends State<ProfileRegisterChildPage> {
             },
             title: s.gender,
             prefixIcon: createPrimaryColorIcon(iconData: Icons.wc_outlined),
-            hint: s.gender == Gender.male.name
+            hint: _cubit.genderTextController.text == Gender.male.name
                 ? S.of(context).male
                 : S.of(context).female,
-          ),
-          AppTextFormField(
-            title: s.id,
-            controller: _cubit.idTextController,
-            prefixIcon: createPrimaryColorIcon(iconData: Icons.badge),
-            hint: s.id,
           ),
           AppTextFormField(
             title: s.address,
             controller: _cubit.addressTextController,
             prefixIcon: createPrimaryColorIcon(iconData: Icons.place_outlined),
             hint: s.address,
+          ),
+          AppTextFormField(
+            title: s.emergencyContact,
+            controller: _cubit.emergencyContactTextController,
+            prefixIcon: createPrimaryColorIcon(iconData: Icons.contact_phone_outlined),
+            hint: s.emergencyContact,
+          ),
+          AppTextFormField(
+            title: s.bloodType,
+            controller: _cubit.bloodTypeTextController,
+            prefixIcon: createPrimaryColorIcon(iconData: Icons.bloodtype_outlined),
+            hint: s.bloodType,
+          ),
+          AppTextFormField(
+            title: s.allergies,
+            controller: _cubit.allergiesTextController,
+            prefixIcon: createPrimaryColorIcon(iconData: Icons.medical_information_outlined),
+            hint: s.allergies,
           ),
         ],
       ),
@@ -155,8 +188,7 @@ class _ProfileRegisterChildPageState extends State<ProfileRegisterChildPage> {
       padding: EdgeInsets.only(
         left: AppDimens.paddingNormal,
         right: AppDimens.paddingNormal,
-        bottom:
-            MediaQuery.of(context).viewInsets.bottom + AppDimens.paddingNormal,
+        bottom: MediaQuery.of(context).viewInsets.bottom + AppDimens.paddingNormal,
       ),
       child: AppElevatedButton(
         height: AppDimens.buttonHeightNormal,

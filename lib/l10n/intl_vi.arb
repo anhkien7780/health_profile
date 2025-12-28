@@ -19,6 +19,7 @@
   "female": "Nữ",
   "forgetPassword": "Quên mật khẩu?",
   "fullName": "Họ và tên",
+  "fullNameHint": "Nhập họ và tên của bạn",
   "gender": "Giới tính",
   "getStarted": "Bắt đầu",
   "home": "Trang chủ",
@@ -81,5 +82,11 @@
   "emailNotEmpty": "Email không được để trống",
   "invalidEmailFormat": "Định dạng email không hợp lệ",
   "passwordNotEmpty": "Mật khẩu không được để trống",
-  "passwordMinLength": "Mật khẩu phải có ít nhất 6 ký tự"
+  "passwordMinLength": "Mật khẩu phải có ít nhất 6 ký tự",
+  "errorOccurred": "Đã có lỗi xảy ra",
+  "fullNameNotEmpty": "Họ và tên không được để trống",
+  "passwordNotMatch": "Mật khẩu không khớp",
+  "emergencyContact": "Liên hệ khẩn cấp",
+  "bloodType": "Nhóm máu",
+  "allergies": "Dị ứng"
 }

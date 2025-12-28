@@ -1,4 +1,5 @@
 import 'package:health_profile/configs/app_configs.dart';
+import 'package:intl/intl.dart';
 
 class DateFormatHelper {
   DateFormatHelper._();
@@ -17,5 +18,9 @@ class DateFormatHelper {
 
   static DateTime stringToTime(String timeString) {
     return AppConfigs.timeFormat.parse(timeString);
+  }
+
+  static String dateToApiString(DateTime date) {
+    return DateFormat('yyyy-MM-dd').format(date);
   }
 }
