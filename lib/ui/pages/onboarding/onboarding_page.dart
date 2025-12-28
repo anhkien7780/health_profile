@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:health_profile/common/app_dimens.dart';
 import 'package:health_profile/common/app_images.dart';
 import 'package:health_profile/generated/l10n.dart';
@@ -94,17 +93,17 @@ class _OnboardingChildPageState extends State<OnboardingChildPage> {
                   },
                   children: [
                     OnboardingPageViewChild(
-                      svgImagePath: AppImages.icPlaceHolder,
+                      imagePath: AppImages.onboardingRecords,
                       headline: S.of(context).onboardingFirstHeadline,
                       detail: S.of(context).onBoardingFirstDetail,
                     ),
                     OnboardingPageViewChild(
-                      svgImagePath: AppImages.icPlaceHolder,
+                      imagePath: AppImages.onboardingDiagnosis,
                       headline: S.of(context).onBoardingSecondHeadline,
                       detail: S.of(context).onBoardingSecondDetail,
                     ),
                     OnboardingPageViewChild(
-                      svgImagePath: AppImages.icPlaceHolder,
+                      imagePath: AppImages.onboardingWaiting,
                       headline: S.of(context).onBoardingThirdHeadline,
                       detail: S.of(context).onBoardingThirdDetail,
                     ),
@@ -147,12 +146,12 @@ class _OnboardingChildPageState extends State<OnboardingChildPage> {
 class OnboardingPageViewChild extends StatelessWidget {
   const OnboardingPageViewChild({
     super.key,
-    required this.svgImagePath,
+    required this.imagePath,
     required this.headline,
     required this.detail,
   });
 
-  final String svgImagePath;
+  final String imagePath;
   final String headline;
   final String detail;
 
@@ -161,8 +160,8 @@ class OnboardingPageViewChild extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        SvgPicture.asset(
-          svgImagePath,
+        Image.asset(
+          imagePath,
           width: AppDimens.onboardingImageSize.width,
           height: AppDimens.onboardingImageSize.height,
         ),

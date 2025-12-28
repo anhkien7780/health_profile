@@ -60,8 +60,24 @@ class MyApp extends StatelessWidget {
     final brightness = View.of(context).platformDispatcher.platformBrightness;
     TextTheme textTheme = createTextTheme(context, "Roboto", "Roboto");
     AppTheme theme = AppTheme(textTheme: textTheme, brightness: brightness);
+
+    final pageTransitionsTheme = const PageTransitionsTheme(
+      builders: {
+        TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+        TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+      },
+    );
+
+    ThemeData lightTheme = theme.light().copyWith(
+          pageTransitionsTheme: pageTransitionsTheme,
+        );
+
+    ThemeData darkTheme = theme.dark().copyWith(
+          pageTransitionsTheme: pageTransitionsTheme,
+        );
+
     return MaterialApp.router(
-      theme: brightness == Brightness.light ? theme.light() : theme.dark(),
+      theme: brightness == Brightness.light ? lightTheme : darkTheme,
       routerConfig: AppRouter.routers,
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
