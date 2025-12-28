@@ -20,7 +20,7 @@ class Doctor {
     required this.consultationFee,
     this.rating = 0.0,
     this.distance = 0.0,
-    this.avatarUrl = "https://i.pravatar.cc/150?img=11",
+    this.avatarUrl = "https://cdn.prod.website-files.com/62d4f06f9c1357a606c3b7ef/65ddf3cdf19abaf5688af2f8_shutterstock_1933145801%20(1).jpg",
   });
 
   factory Doctor.fromJson(Map<String, dynamic> json) {

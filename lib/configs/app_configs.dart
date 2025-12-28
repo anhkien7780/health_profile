@@ -7,6 +7,9 @@ class AppConfigs {
   static const String loginEndpoint = "/auth/login";
   static const String logoutEndpoint = "/auth/logout";
   static const String registerEndpoint = "/auth/register";
+  static const String hospitalsEndpoint = "/hospitals";
+
+  static String doctorsEndpoint(int hospitalId) => "/doctors/hospital/$hospitalId";
 
   static DateFormat get format => DateFormat("dd/MM/yyyy");
   static DateFormat get timeFormat => DateFormat("HH:mm");

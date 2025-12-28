@@ -18,7 +18,7 @@ class Hospital {
     required this.type,
     this.distance = 0.0,
     this.rating = 0.0,
-    this.imageUrl = "https://i.pravatar.cc/150?img=12", // Default mock image
+    this.imageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmqGKduI-GjZQdGvLjSXv7kwKC8d08en1pmA&s", // Default mock image
   });
 
   factory Hospital.fromJson(Map<String, dynamic> json) {

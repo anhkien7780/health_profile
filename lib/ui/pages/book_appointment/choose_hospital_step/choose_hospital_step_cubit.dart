@@ -62,7 +62,9 @@ class ChooseHospitalStepCubit extends Cubit<ChooseHospitalStepState> {
     }
     emit(state.copyWith(loadingStatus: LoadingStatus.loading));
     try {
-      final doctors = await appointmentRepository.getDoctors();
+      final doctors = await appointmentRepository.getDoctors(
+        state.hospital!.id,
+      );
       final items = doctors.map((doctor) {
         return SelectionItem(
           id: doctor.id,

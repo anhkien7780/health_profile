@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -17,6 +18,7 @@ class HomeCubit extends Cubit<HomeState> {
   final AuthRepository authRepository;
   final UserProfileRepository userProfileRepository;
   final AppointmentRepository appointmentRepository;
+  late final StreamSubscription _appointmentsSubscription;
 
   HomeCubit({
     required this.navigator,
@@ -25,7 +27,17 @@ class HomeCubit extends Cubit<HomeState> {
     required this.appointmentRepository,
   }) : super(const HomeState()) {
     _initialLoad();
+    _appointmentsSubscription = appointmentRepository.appointmentsStream.listen((appointments) {
+      emit(state.copyWith(appointments: appointments));
+    });
   }
+
+  @override
+  Future<void> close() {
+    _appointmentsSubscription.cancel();
+    return super.close();
+  }
+
 
   final TextEditingController textController = TextEditingController();
 

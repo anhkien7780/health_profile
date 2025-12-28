@@ -1,120 +1,98 @@
+import 'dart:async';
+
+import 'package:dio/dio.dart';
+import 'package:health_profile/configs/app_configs.dart';
 import 'package:health_profile/models/entities/appointment.dart';
 import 'package:health_profile/models/entities/appointment_display.dart';
 import 'package:health_profile/models/entities/doctor.dart';
 import 'package:health_profile/models/entities/hospital.dart';
 import 'package:health_profile/models/entities/schedule_slot.dart';
+import 'package:intl/intl.dart';
 
 abstract class AppointmentRepository {
   Future<List<Hospital>> getHospitals();
 
-  Future<List<Doctor>> getDoctors();
+  Future<List<Doctor>> getDoctors(int hospitalId);
 
   Future<List<ScheduleSlot>> getScheduleSlots();
 
   Future<void> bookAppointment(Appointment appointment);
 
   Future<List<AppointmentDisplay>> getAppointments();
+
+  Stream<List<AppointmentDisplay>> get appointmentsStream;
+
+  void dispose();
 }
 
 class AppointmentRepositoryImpl extends AppointmentRepository {
+  final Dio _dio;
+  final _appointmentsController =
+      StreamController<List<AppointmentDisplay>>.broadcast();
+  final List<AppointmentDisplay> _bookedAppointments = [];
+  final List<AppointmentDisplay> _predefinedAppointments = [
+    AppointmentDisplay(
+      orderNumber: 1,
+      hospitalName: 'Bệnh viện K Cơ sở 1',
+      time: '08:30',
+      doctorName: 'Bác sỹ A',
+    ),
+    AppointmentDisplay(
+      orderNumber: 2,
+      hospitalName: 'Bệnh viện K Cơ sở 2',
+      time: '09:00',
+      doctorName: 'Bác sỹ B',
+    ),
+    AppointmentDisplay(
+      orderNumber: 3,
+      hospitalName: 'Bệnh viện K Cơ sở 3',
+      time: '09:30',
+      doctorName: 'Bác sỹ C',
+    ),
+  ];
+
+  AppointmentRepositoryImpl({Dio? dio})
+      : _dio = dio ??
+            Dio(
+              BaseOptions(
+                baseUrl: AppConfigs.baseUrl,
+                connectTimeout: const Duration(seconds: 10),
+                receiveTimeout: const Duration(seconds: 10),
+              ),
+            );
+
+  @override
+  Stream<List<AppointmentDisplay>> get appointmentsStream =>
+      _appointmentsController.stream;
+
   @override
   Future<List<Hospital>> getHospitals() async {
-    await Future.delayed(const Duration(seconds: 1));
-    return [
-      Hospital(
-        id: 1,
-        name: "Bệnh viện Bạch Mai",
-        address: "78 Giải Phóng, Hà Nội",
-        phone: "02438693731",
-        email: "contact@bachmai.gov.vn",
-        type: "PUBLIC",
-        imageUrl: "https://picsum.photos/id/48/200/200",
-      ),
-      Hospital(
-        id: 2,
-        name: "Bệnh viện Việt Đức",
-        address: "40 Tràng Thi, Hà Nội",
-        phone: "02438253531",
-        email: "contact@vietduc.gov.vn",
-        type: "PUBLIC",
-        imageUrl: "https://picsum.photos/id/59/200/200",
-      ),
-      Hospital(
-        id: 3,
-        name: "Bệnh viện Đại học Y Hà Nội",
-        address: "1 Tôn Thất Tùng, Hà Nội",
-        phone: "02435747788",
-        email: "contact@hmu.edu.vn",
-        type: "PUBLIC",
-        imageUrl: "https://picsum.photos/id/88/200/200",
-      ),
-      Hospital(
-        id: 4,
-        name: "Bệnh viện Nhi Trung ương",
-        address: "18/879 La Thành, Hà Nội",
-        phone: "02462738532",
-        email: "contact@nhi.org.vn",
-        type: "PUBLIC",
-        imageUrl: "https://picsum.photos/id/111/200/200",
-      ),
-    ];
+    try {
+      final response = await _dio.get(AppConfigs.hospitalsEndpoint);
+      if (response.statusCode == 200 && response.data['success']) {
+        final List<dynamic> data = response.data['data'];
+        return data.map((json) => Hospital.fromJson(json)).toList();
+      } else {
+        throw Exception('Failed to load hospitals');
+      }
+    } catch (e) {
+      throw Exception('Failed to load hospitals: $e');
+    }
   }
 
   @override
-  Future<List<Doctor>> getDoctors() async {
-    await Future.delayed(const Duration(seconds: 1));
-    return [
-      Doctor(
-        id: 1,
-        fullName: "Bác Sĩ Nguyễn Văn B",
-        specialty: "Tim mạch",
-        hospitalId: 1,
-        departmentId: 1,
-        experienceYears: 10,
-        consultationFee: 500000,
-        avatarUrl: "https://i.pravatar.cc/150?img=11",
-      ),
-      Doctor(
-        id: 2,
-        fullName: "Bác Sĩ Trần Thị C",
-        specialty: "Nhi khoa",
-        hospitalId: 2,
-        departmentId: 2,
-        experienceYears: 8,
-        consultationFee: 400000,
-        avatarUrl: "https://i.pravatar.cc/150?img=5",
-      ),
-      Doctor(
-        id: 3,
-        fullName: "Bác Sĩ Lê Văn D",
-        specialty: "Chấn thương chỉnh hình",
-        hospitalId: 3,
-        departmentId: 3,
-        experienceYears: 12,
-        consultationFee: 600000,
-        avatarUrl: "https://i.pravatar.cc/150?img=3",
-      ),
-      Doctor(
-        id: 4,
-        fullName: "Bác Sĩ Phạm Thị E",
-        specialty: "Da liễu",
-        hospitalId: 1,
-        departmentId: 4,
-        experienceYears: 5,
-        consultationFee: 300000,
-        avatarUrl: "https://i.pravatar.cc/150?img=9",
-      ),
-      Doctor(
-        id: 5,
-        fullName: "Bác Sĩ Hoàng Văn F",
-        specialty: "Thần kinh",
-        hospitalId: 2,
-        departmentId: 5,
-        experienceYears: 15,
-        consultationFee: 700000,
-        avatarUrl: "https://i.pravatar.cc/150?img=12",
-      ),
-    ];
+  Future<List<Doctor>> getDoctors(int hospitalId) async {
+    try {
+      final response = await _dio.get(AppConfigs.doctorsEndpoint(hospitalId));
+      if (response.statusCode == 200 && response.data['success']) {
+        final List<dynamic> data = response.data['data'];
+        return data.map((json) => Doctor.fromJson(json)).toList();
+      } else {
+        throw Exception('Failed to load doctors');
+      }
+    } catch (e) {
+      throw Exception('Failed to load doctors: $e');
+    }
   }
 
   @override
@@ -137,32 +115,25 @@ class AppointmentRepositoryImpl extends AppointmentRepository {
   @override
   Future<void> bookAppointment(Appointment appointment) async {
     await Future.delayed(const Duration(seconds: 2));
-    // Simulate success
-    return;
+    final newAppointment = AppointmentDisplay(
+      orderNumber:
+          _predefinedAppointments.length + _bookedAppointments.length + 1,
+      hospitalName: appointment.hospital.title,
+      time: DateFormat('HH:mm').format(appointment.time),
+      doctorName: appointment.doctor.title,
+    );
+    _bookedAppointments.add(newAppointment);
+    _appointmentsController.add([..._predefinedAppointments, ..._bookedAppointments]);
   }
 
   @override
   Future<List<AppointmentDisplay>> getAppointments() async {
     await Future.delayed(const Duration(seconds: 1));
-    return [
-      AppointmentDisplay(
-        orderNumber: 1,
-        hospitalName: 'Bệnh viện K Cơ sở 1',
-        time: '08:30',
-        doctorName: 'Bác sỹ A',
-      ),
-      AppointmentDisplay(
-        orderNumber: 2,
-        hospitalName: 'Bệnh viện K Cơ sở 2',
-        time: '09:00',
-        doctorName: 'Bác sỹ B',
-      ),
-      AppointmentDisplay(
-        orderNumber: 3,
-        hospitalName: 'Bệnh viện K Cơ sở 3',
-        time: '09:30',
-        doctorName: 'Bác sỹ C',
-      ),
-    ];
+    return [..._predefinedAppointments, ..._bookedAppointments];
+  }
+
+  @override
+  void dispose() {
+    _appointmentsController.close();
   }
 }
