@@ -3,27 +3,44 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:health_profile/common/app_dimens.dart';
 import 'package:health_profile/common/app_images.dart';
+import 'package:health_profile/repositories/chat_repository.dart';
 import 'package:health_profile/ui/pages/chat/chat_cubit.dart';
 import 'package:health_profile/ui/pages/chat/chat_navigator.dart';
 import 'package:health_profile/ui/pages/chat/chat_state.dart';
 import 'package:intl/intl.dart';
 
 class ChatPage extends StatelessWidget {
-  const ChatPage({super.key});
+  const ChatPage({
+    super.key,
+    required this.conversationId,
+    required this.name,
+    required this.specialty,
+  });
+
+  final String conversationId;
+  final String name;
+  final String specialty;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) {
-        return ChatCubit(navigator: ChatNavigator(context: context));
+        return ChatCubit(
+          navigator: ChatNavigator(context: context),
+          chatRepository: ChatRepositoryImpl(),
+          conversationId: conversationId,
+        );
       },
-      child: const ChatChildPage(),
+      child: ChatChildPage(name: name, specialty: specialty),
     );
   }
 }
 
 class ChatChildPage extends StatefulWidget {
-  const ChatChildPage({super.key});
+  const ChatChildPage({super.key, required this.name, required this.specialty});
+
+  final String name;
+  final String specialty;
 
   @override
   State<ChatChildPage> createState() => _ChatChildPageState();
@@ -64,14 +81,14 @@ class _ChatChildPageState extends State<ChatChildPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Dr. Smith',
+                  widget.name,
                   style: theme.textTheme.titleMedium?.copyWith(
                     fontWeight: FontWeight.bold,
                     color: theme.colorScheme.onPrimaryContainer,
                   ),
                 ),
                 Text(
-                  'Cardiologist',
+                  widget.specialty,
                   style: theme.textTheme.bodySmall?.copyWith(
                     color: theme.colorScheme.onPrimaryContainer,
                   ),
@@ -138,7 +155,6 @@ class _ChatChildPageState extends State<ChatChildPage> {
                 ),
               ),
               child: Column(
-                spacing: AppDimens.paddingSmallest,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(

@@ -91,5 +91,6 @@
   "allergies": "Dị ứng",
   "dateOfBirth": "Ngày sinh",
   "username": "Tên người dùng",
-  "notAvailable": "Trống"
+  "notAvailable": "Trống",
+  "failedToLoadConversations": "Không thể tải cuộc trò chuyện"
 }

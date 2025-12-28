@@ -98,10 +98,17 @@ class AppRouter {
       },
     ),
     GoRoute(
-      path: chat,
+      path: '$chat/:conversationId',
       name: chat,
       builder: (context, state) {
-        return ChatPage();
+        final conversationId = state.pathParameters['conversationId']!;
+        final name = state.uri.queryParameters['name'] ?? '';
+        final specialty = state.uri.queryParameters['specialty'] ?? '';
+        return ChatPage(
+          conversationId: conversationId,
+          name: name,
+          specialty: specialty,
+        );
       },
     ),
     GoRoute(

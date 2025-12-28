@@ -91,5 +91,6 @@
   "allergies": "Allergies",
   "dateOfBirth": "Date of Birth",
   "username": "Username",
-  "notAvailable": "N/A"
+  "notAvailable": "N/A",
+  "failedToLoadConversations": "Failed to load conversations"
 }

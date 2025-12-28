@@ -1,51 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:health_profile/repositories/chat_repository.dart';
 import 'package:health_profile/ui/pages/chat/chat_navigator.dart';
 import 'package:health_profile/ui/pages/chat/chat_state.dart';
 
 class ChatCubit extends Cubit<ChatState> {
-  ChatCubit({required this.navigator}) : super(const ChatState()) {
-    _loadMockMessages();
+  ChatCubit({
+    required this.navigator,
+    required this.chatRepository,
+    required this.conversationId,
+  }) : super(const ChatState()) {
+    _loadMessages();
   }
 
   final ChatNavigator navigator;
+  final ChatRepository chatRepository;
+  final String conversationId;
   final messageController = TextEditingController();
   final scrollController = ScrollController();
 
-  void _loadMockMessages() {
-    final messages = [
-      ChatMessage(
-        id: '1',
-        text: 'Good morning, Doctor.',
-        isMe: true,
-        timestamp: DateTime.now().subtract(const Duration(minutes: 5)),
-      ),
-      ChatMessage(
-        id: '2',
-        text: 'Hi there! How can I help you?',
-        isMe: false,
-        timestamp: DateTime.now().subtract(const Duration(minutes: 4)),
-      ),
-      ChatMessage(
-        id: '3',
-        text: 'I have a question about my health profile.',
-        isMe: true,
-        timestamp: DateTime.now().subtract(const Duration(minutes: 3)),
-      ),
-      ChatMessage(
-        id: '4',
-        text: 'Sure, what is your concern.',
-        isMe: false,
-        timestamp: DateTime.now().subtract(const Duration(minutes: 3)),
-      ),
-      ChatMessage(
-        id: '5',
-        text:
-            'This is a looooooooooooooooooooooooooooooooooooooooooong message.',
-        isMe: true,
-        timestamp: DateTime.now().subtract(const Duration(minutes: 2)),
-      ),
-    ];
+  Future<void> _loadMessages() async {
+    final messages = await chatRepository.getChatMessages(conversationId);
     emit(state.copyWith(messages: messages));
   }
 
