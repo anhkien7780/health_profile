@@ -26,7 +26,7 @@ class ProfileRegisterPage extends StatelessWidget {
           navigator: ProfileRegisterNavigator(context),
           email: arguments['email'],
           password: arguments['password'],
-          authRepository: AuthRepositoryImpl(),
+          authRepository: context.read<AuthRepository>(),
         );
       },
       child: const ProfileRegisterChildPage(),
