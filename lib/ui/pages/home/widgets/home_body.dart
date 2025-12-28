@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:health_profile/common/app_dimens.dart';
+import 'package:health_profile/common/app_images.dart';
 import 'package:health_profile/generated/l10n.dart';
 import 'package:health_profile/router/router_config.dart';
 import 'package:health_profile/ui/pages/home/home_cubit.dart';
@@ -19,7 +20,11 @@ class HomeBody extends StatelessWidget {
     return Column(
       spacing: AppDimens.paddingNormal,
       children: [
-        SizedBox(width: double.infinity, height: 180, child: Placeholder()),
+        SizedBox(
+          width: double.infinity,
+          height: 180,
+          child: Image.asset(AppImages.bannerImg,),
+        ),
         SizedBox(
           height: 80,
           child: Row(
@@ -77,8 +82,7 @@ class HomeBody extends StatelessWidget {
                 itemBuilder: (context, index) {
                   final appointment = state.appointments[index];
                   return Padding(
-                    padding:
-                        const EdgeInsets.only(top: AppDimens.paddingSmall),
+                    padding: const EdgeInsets.only(top: AppDimens.paddingSmall),
                     child: AppointmentItem(
                       orderNumber: appointment.orderNumber,
                       hospitalName: appointment.hospitalName,
