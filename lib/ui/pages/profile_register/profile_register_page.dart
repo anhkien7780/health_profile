@@ -5,6 +5,7 @@ import 'package:health_profile/common/app_dimens.dart';
 import 'package:health_profile/generated/l10n.dart';
 import 'package:health_profile/models/enum/gender.dart';
 import 'package:health_profile/repositories/auth_repository.dart';
+import 'package:health_profile/repositories/user_profile_repository.dart';
 import 'package:health_profile/ui/pages/profile_register/profile_register_cubit.dart';
 import 'package:health_profile/ui/pages/profile_register/profile_register_navigator.dart';
 import 'package:health_profile/ui/pages/profile_register/profile_register_state.dart';
@@ -27,6 +28,7 @@ class ProfileRegisterPage extends StatelessWidget {
           email: arguments['email'],
           password: arguments['password'],
           authRepository: context.read<AuthRepository>(),
+          userProfileRepository: context.read<UserProfileRepository>(),
         );
       },
       child: const ProfileRegisterChildPage(),
@@ -86,8 +88,8 @@ class _ProfileRegisterChildPageState extends State<ProfileRegisterChildPage> {
       title: Text(
         S.of(context).profileRegister,
         style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-              color: Theme.of(context).colorScheme.onPrimaryFixed,
-            ),
+          color: Theme.of(context).colorScheme.onPrimaryFixed,
+        ),
       ),
     );
   }
@@ -163,19 +165,25 @@ class _ProfileRegisterChildPageState extends State<ProfileRegisterChildPage> {
           AppTextFormField(
             title: s.emergencyContact,
             controller: _cubit.emergencyContactTextController,
-            prefixIcon: createPrimaryColorIcon(iconData: Icons.contact_phone_outlined),
+            prefixIcon: createPrimaryColorIcon(
+              iconData: Icons.contact_phone_outlined,
+            ),
             hint: s.emergencyContact,
           ),
           AppTextFormField(
             title: s.bloodType,
             controller: _cubit.bloodTypeTextController,
-            prefixIcon: createPrimaryColorIcon(iconData: Icons.bloodtype_outlined),
+            prefixIcon: createPrimaryColorIcon(
+              iconData: Icons.bloodtype_outlined,
+            ),
             hint: s.bloodType,
           ),
           AppTextFormField(
             title: s.allergies,
             controller: _cubit.allergiesTextController,
-            prefixIcon: createPrimaryColorIcon(iconData: Icons.medical_information_outlined),
+            prefixIcon: createPrimaryColorIcon(
+              iconData: Icons.medical_information_outlined,
+            ),
             hint: s.allergies,
           ),
         ],
@@ -188,7 +196,8 @@ class _ProfileRegisterChildPageState extends State<ProfileRegisterChildPage> {
       padding: EdgeInsets.only(
         left: AppDimens.paddingNormal,
         right: AppDimens.paddingNormal,
-        bottom: MediaQuery.of(context).viewInsets.bottom + AppDimens.paddingNormal,
+        bottom:
+            MediaQuery.of(context).viewInsets.bottom + AppDimens.paddingNormal,
       ),
       child: AppElevatedButton(
         height: AppDimens.buttonHeightNormal,

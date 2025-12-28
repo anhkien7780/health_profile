@@ -53,7 +53,7 @@ class _ProfileBodyState extends State<ProfileBody> {
             builder: (context, state) {
               return _createPersonInformationListView(
                 context: context,
-                userProfile: cubit.state.userProfile,
+                userProfile: state.userProfile,
               );
             },
           ),
@@ -155,9 +155,9 @@ class _ProfileBodyState extends State<ProfileBody> {
 
   Widget _createPersonInformationListView({
     required BuildContext context,
-    required UserProfile userProfile,
+    required UserProfile? userProfile,
   }) {
-    final infoList = userProfile.toInfoList();
+    final infoList = userProfile?.toInfoList(S.of(context));
     final theme = Theme.of(context);
     return Container(
       decoration: BoxDecoration(
@@ -175,15 +175,15 @@ class _ProfileBodyState extends State<ProfileBody> {
       child: ListView.separated(
         shrinkWrap: true,
         physics: NeverScrollableScrollPhysics(),
-        itemCount: infoList.length,
+        itemCount: infoList?.length ?? 0,
         separatorBuilder: (context, index) =>
             Divider(height: 1, color: theme.colorScheme.outline),
         itemBuilder: (context, index) {
-          final info = infoList[index];
+          final info = infoList?[index];
           return ListTile(
-            leading: Icon(info["icon"]),
-            title: Text(info["label"]),
-            subtitle: Text(info["value"]),
+            leading: Icon(info?["icon"]),
+            title: Text(info?["label"] as String),
+            subtitle: Text(info?["value"] as String? ?? "N/A"),
           );
         },
       ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_profile/models/enum/gender.dart';
 import 'package:health_profile/repositories/auth_repository.dart';
+import 'package:health_profile/repositories/user_profile_repository.dart';
 import 'package:health_profile/ui/pages/profile_register/profile_register_navigator.dart';
 import 'package:health_profile/ui/pages/profile_register/profile_register_state.dart';
 import 'package:health_profile/utils/date_format_helper.dart';
@@ -12,6 +13,7 @@ class ProfileRegisterCubit extends Cubit<ProfileRegisterState> {
     required this.email,
     required this.password,
     required this.authRepository,
+    required this.userProfileRepository,
   }) : super(const ProfileRegisterState()) {
     emailTextController.text = email;
     genderTextController.text = Gender.male.name;
@@ -19,6 +21,7 @@ class ProfileRegisterCubit extends Cubit<ProfileRegisterState> {
 
   final ProfileRegisterNavigator navigator;
   final AuthRepository authRepository;
+  final UserProfileRepository userProfileRepository;
   final String email;
   final String password;
 
@@ -72,7 +75,9 @@ class ProfileRegisterCubit extends Cubit<ProfileRegisterState> {
       };
 
       if (_selectedDateOfBirth != null) {
-        userData['dateOfBirth'] = DateFormatHelper.dateToApiString(_selectedDateOfBirth!);
+        userData['dateOfBirth'] = DateFormatHelper.dateToApiString(
+          _selectedDateOfBirth!,
+        );
       }
       if (genderTextController.text.isNotEmpty) {
         userData['gender'] = genderTextController.text.toUpperCase();
@@ -94,6 +99,7 @@ class ProfileRegisterCubit extends Cubit<ProfileRegisterState> {
       }
 
       await authRepository.register(userData);
+      await userProfileRepository.saveUserProfile(userData);
       await navigator.openHomePage();
     } catch (e) {
       emit(state.copyWith(error: e.toString()));

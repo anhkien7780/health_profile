@@ -12,6 +12,9 @@ class UserProfile {
     required this.gender,
     required this.id,
     required this.address,
+    this.emergencyContact,
+    this.bloodType,
+    this.allergies,
   });
 
   final String fullName;
@@ -22,53 +25,87 @@ class UserProfile {
   final Gender gender;
   final String id;
   final String address;
+  final String? emergencyContact;
+  final String? bloodType;
+  final String? allergies;
 
   Map<String, dynamic> toJson() => {
-    "full_name": fullName,
-    "birth_day": birthDay,
-    "phone_number": phoneNumber,
-    "email": email,
+    "fullName": fullName,
+    "dateOfBirth": birthDay,
+    "phone": phoneNumber,
+    "email": email ?? '',
     "username": username,
-    "gender": gender,
+    "gender": gender.name.toUpperCase(),
     "id": id,
     "address": address,
+    "emergencyContact": emergencyContact ?? '',
+    "bloodType": bloodType ?? '',
+    "allergies": allergies ?? '',
   };
 
-  List<Map<String, dynamic>> toInfoList() {
+  List<Map<String, dynamic>> toInfoList(S s) {
     return [
-      {"icon": Icons.person_outline, "label": "Full Name", "value": fullName},
-      {"icon": Icons.cake_outlined, "label": "Birth Day", "value": birthDay},
+      {"icon": Icons.person_outline, "label": s.fullName, "value": fullName},
+      {"icon": Icons.cake_outlined, "label": s.dateOfBirth, "value": birthDay},
       {
         "icon": Icons.phone_outlined,
-        "label": "Phone Number",
+        "label": s.phoneNumber,
         "value": phoneNumber,
       },
-      {"icon": Icons.email_outlined, "label": "Email", "value": email ?? "N/A"},
+      {
+        "icon": Icons.email_outlined,
+        "label": s.email,
+        "value": (email?.isNotEmpty ?? false) ? email! : s.notAvailable,
+      },
       {
         "icon": Icons.account_circle_outlined,
-        "label": "Username",
+        "label": s.username,
         "value": username,
       },
       {
         "icon": Icons.wc_outlined,
-        "label": "Gender",
-        "value": gender == Gender.male ? S.current.male : S.current.female,
+        "label": s.gender,
+        "value": gender == Gender.male ? s.male : s.female,
       },
-      {"icon": Icons.badge, "label": "ID", "value": id},
-      {"icon": Icons.place_outlined, "label": "Address", "value": address},
+      {"icon": Icons.badge, "label": s.id, "value": id},
+      {"icon": Icons.place_outlined, "label": s.address, "value": address},
+      {
+        "icon": Icons.contact_emergency_outlined,
+        "label": s.emergencyContact,
+        "value": (emergencyContact?.isNotEmpty ?? false)
+            ? emergencyContact!
+            : s.notAvailable,
+      },
+      {
+        "icon": Icons.bloodtype_outlined,
+        "label": s.bloodType,
+        "value": (bloodType?.isNotEmpty ?? false) ? bloodType! : s.notAvailable,
+      },
+      {
+        "icon": Icons.warning_amber_outlined,
+        "label": s.allergies,
+        "value": (allergies?.isNotEmpty ?? false) ? allergies! : s.notAvailable,
+      },
     ];
   }
 
-  factory UserProfile.fromJson(Map<String, dynamic> json) => UserProfile(
-    fullName: json["full_name"],
-    birthDay: json["birth_day"],
-    phoneNumber: json["phone_number"],
-    email: json["email"],
-    username: json["username"],
-    gender: json["gender"],
-    id: json["id"],
-    address: json["address"],
-  );
+  factory UserProfile.fromJson(Map<String, dynamic> json) {
+    return UserProfile(
+      fullName: json["fullName"] ?? '',
+      birthDay: json["dateOfBirth"] ?? '',
+      phoneNumber: json["phone"] ?? '',
+      email: json["email"],
+      username: json["username"] ?? json["email"] ?? '',
+      gender: (json["gender"] as String? ?? 'MALE').toUpperCase() == 'FEMALE'
+          ? Gender.female
+          : Gender.male,
+      id: json["id"] ?? '',
+      address: json["address"] ?? '',
+      emergencyContact: json["emergencyContact"],
+      bloodType: json["bloodType"],
+      allergies: json["allergies"],
+    );
+  }
 
   UserProfile copyWith({
     String? fullName,
@@ -79,6 +116,9 @@ class UserProfile {
     Gender? gender,
     String? id,
     String? address,
+    String? emergencyContact,
+    String? bloodType,
+    String? allergies,
   }) {
     return UserProfile(
       fullName: fullName ?? this.fullName,
@@ -89,6 +129,9 @@ class UserProfile {
       gender: gender ?? this.gender,
       id: id ?? this.id,
       address: address ?? this.address,
+      emergencyContact: emergencyContact ?? this.emergencyContact,
+      bloodType: bloodType ?? this.bloodType,
+      allergies: allergies ?? this.allergies,
     );
   }
 }

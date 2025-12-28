@@ -2,10 +2,10 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:health_profile/models/entities/user_profile.dart';
 import 'package:health_profile/models/enum/gender.dart';
 import 'package:health_profile/models/enum/loading_status.dart';
 import 'package:health_profile/repositories/auth_repository.dart';
+import 'package:health_profile/repositories/user_profile_repository.dart';
 import 'package:health_profile/ui/pages/home/home_navigator.dart';
 import 'package:health_profile/utils/date_format_helper.dart';
 
@@ -14,32 +14,31 @@ import 'home_state.dart';
 class HomeCubit extends Cubit<HomeState> {
   final HomeNavigator navigator;
   final AuthRepository authRepository;
+  final UserProfileRepository userProfileRepository;
 
   HomeCubit({
     required this.navigator,
     required this.authRepository,
-  }) : super(
-          HomeState(
-            userProfile: UserProfile(
-              fullName: "Nguyễn Văn Kiên",
-              birthDay: "27/10/2002",
-              phoneNumber: "0123423543",
-              username: "NgVanKien",
-              gender: Gender.male,
-              id: "030202005908",
-              address: "Phú Quý Bò Viên 1",
-            ),
-          ),
-        );
+    required this.userProfileRepository,
+  }) : super(const HomeState()) {
+    _loadUserProfile();
+  }
 
   final TextEditingController textController = TextEditingController();
+
+  Future<void> _loadUserProfile() async {
+    final userProfile = await userProfileRepository.getUserProfile();
+    if (userProfile != null) {
+      emit(state.copyWith(userProfile: userProfile));
+    }
+  }
 
   void onDestinationPressed(int? selectedPageIndex) {
     emit(state.copyWith(selectedPageIndex: selectedPageIndex));
     log("Selected page: ${state.selectedPageIndex.toString()}");
   }
 
-  void updateUserProfile({
+  Future<void> updateUserProfile({
     String? fullName,
     String? birthDay,
     String? phoneNumber,
@@ -48,19 +47,28 @@ class HomeCubit extends Cubit<HomeState> {
     Gender? gender,
     String? id,
     String? address,
-  }) {
-    final userProfile = state.userProfile.copyWith(
-      fullName: fullName ?? state.userProfile.fullName,
-      birthDay: birthDay ?? state.userProfile.birthDay,
-      phoneNumber: phoneNumber ?? state.userProfile.phoneNumber,
-      email: email ?? state.userProfile.email,
-      username: username ?? state.userProfile.username,
-      gender: gender ?? state.userProfile.gender,
-      id: id ?? state.userProfile.id,
-      address: address ?? state.userProfile.address,
+    String? emergencyContact,
+    String? bloodType,
+    String? allergies,
+  }) async {
+    final userProfile = state.userProfile?.copyWith(
+      fullName: fullName,
+      birthDay: birthDay,
+      phoneNumber: phoneNumber,
+      email: email,
+      username: username,
+      gender: gender,
+      id: id,
+      address: address,
+      emergencyContact: emergencyContact,
+      bloodType: bloodType,
+      allergies: allergies,
     );
     log("Update user profile: $userProfile");
-    emit(state.copyWith(userProfile: userProfile));
+    if (userProfile != null) {
+      emit(state.copyWith(userProfile: userProfile));
+      await userProfileRepository.saveUserProfile(userProfile.toJson());
+    }
   }
 
   void selectedBirthDay(DateTime date) {

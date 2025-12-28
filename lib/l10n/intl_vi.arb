@@ -88,5 +88,8 @@
   "passwordNotMatch": "Mật khẩu không khớp",
   "emergencyContact": "Liên hệ khẩn cấp",
   "bloodType": "Nhóm máu",
-  "allergies": "Dị ứng"
+  "allergies": "Dị ứng",
+  "dateOfBirth": "Ngày sinh",
+  "username": "Tên người dùng",
+  "notAvailable": "Trống"
 }

@@ -88,5 +88,8 @@
   "passwordNotMatch": "Passwords do not match",
   "emergencyContact": "Emergency Contact",
   "bloodType": "Blood Type",
-  "allergies": "Allergies"
+  "allergies": "Allergies",
+  "dateOfBirth": "Date of Birth",
+  "username": "Username",
+  "notAvailable": "N/A"
 }

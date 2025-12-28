@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_profile/common/app_dimens.dart';
 import 'package:health_profile/models/enum/loading_status.dart';
 import 'package:health_profile/repositories/auth_repository.dart';
+import 'package:health_profile/repositories/user_profile_repository.dart';
 import 'package:health_profile/ui/pages/home/home_cubit.dart';
 import 'package:health_profile/ui/pages/home/home_navigator.dart';
 import 'package:health_profile/ui/pages/home/home_state.dart';
@@ -22,6 +23,7 @@ class HomePage extends StatelessWidget {
       create: (context) => HomeCubit(
         navigator: HomeNavigator(context),
         authRepository: context.read<AuthRepository>(),
+        userProfileRepository: context.read<UserProfileRepository>(),
       ),
       child: const HomeChildPage(),
     );
@@ -57,7 +59,8 @@ class _HomeChildPageState extends State<HomeChildPage> {
             bottomNavigationBar: _createBottomNavigationBar(),
             body: Padding(
               padding: const EdgeInsets.symmetric(
-                  horizontal: AppDimens.paddingNormal),
+                horizontal: AppDimens.paddingNormal,
+              ),
               child: BlocBuilder<HomeCubit, HomeState>(
                 buildWhen: (pre, current) =>
                     pre.selectedPageIndex != current.selectedPageIndex,

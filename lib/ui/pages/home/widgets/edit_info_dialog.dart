@@ -12,7 +12,7 @@ import 'package:health_profile/utils/date_format_helper.dart';
 class EditInfoDialog extends StatefulWidget {
   const EditInfoDialog({super.key, required this.userProfile});
 
-  final UserProfile userProfile;
+  final UserProfile? userProfile;
 
   @override
   State<EditInfoDialog> createState() => _EditInfoDialogState();
@@ -20,7 +20,7 @@ class EditInfoDialog extends StatefulWidget {
 
 class _EditInfoDialogState extends State<EditInfoDialog> {
   late HomeCubit cubit;
-  late UserProfile userProfile;
+  late UserProfile? userProfile;
   late TextEditingController birthDayTextController;
   late TextEditingController genderTextController;
   late TextEditingController fullNameTextController;
@@ -28,19 +28,42 @@ class _EditInfoDialogState extends State<EditInfoDialog> {
   late TextEditingController emailTextController;
   late TextEditingController idTextController;
   late TextEditingController addressTextController;
+  late TextEditingController emergencyContactController;
+  late TextEditingController bloodTypeController;
+  late TextEditingController allergiesController;
+  bool _isInit = true;
 
   @override
-  void initState() {
-    super.initState();
-    userProfile = widget.userProfile;
-    birthDayTextController = TextEditingController();
-    genderTextController = TextEditingController();
-    fullNameTextController = TextEditingController();
-    phoneNumberTextController = TextEditingController();
-    emailTextController = TextEditingController();
-    idTextController = TextEditingController();
-    addressTextController = TextEditingController();
-    cubit = BlocProvider.of<HomeCubit>(context);
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (_isInit) {
+      userProfile = widget.userProfile;
+      cubit = context.read<HomeCubit>();
+
+      birthDayTextController = TextEditingController(
+        text: userProfile?.birthDay,
+      );
+      genderTextController = TextEditingController(
+        text: userProfile?.gender == Gender.male
+            ? S.of(context).male
+            : S.of(context).female,
+      );
+      fullNameTextController = TextEditingController(
+        text: userProfile?.fullName,
+      );
+      phoneNumberTextController = TextEditingController(
+        text: userProfile?.phoneNumber,
+      );
+      emailTextController = TextEditingController(text: userProfile?.email);
+      idTextController = TextEditingController(text: userProfile?.id);
+      addressTextController = TextEditingController(text: userProfile?.address);
+      emergencyContactController = TextEditingController(
+        text: userProfile?.emergencyContact,
+      );
+      bloodTypeController = TextEditingController(text: userProfile?.bloodType);
+      allergiesController = TextEditingController(text: userProfile?.allergies);
+      _isInit = false;
+    }
   }
 
   @override
@@ -48,7 +71,7 @@ class _EditInfoDialogState extends State<EditInfoDialog> {
     return AlertDialog(
       content: Container(
         width: 350,
-        height: 472,
+        height: 600,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(AppDimens.borderRadiusNormal),
         ),
@@ -87,13 +110,13 @@ class _EditInfoDialogState extends State<EditInfoDialog> {
           title: s.fullName,
           controller: fullNameTextController,
           prefixIcon: createPrimaryColorIcon(iconData: Icons.person),
-          hint: userProfile.fullName,
+          hint: userProfile?.fullName,
         ),
         AppTextFormField(
           controller: birthDayTextController,
           title: s.birthday,
           readOnly: true,
-          hint: userProfile.birthDay,
+          hint: userProfile?.birthDay,
           prefixIcon: createPrimaryColorIcon(iconData: Icons.cake_outlined),
           suffixIcon: createPrimaryColorIcon(
             iconData: Icons.calendar_today_outlined,
@@ -115,32 +138,32 @@ class _EditInfoDialogState extends State<EditInfoDialog> {
           title: s.phoneNumber,
           controller: phoneNumberTextController,
           prefixIcon: createPrimaryColorIcon(iconData: Icons.phone_outlined),
-          hint: userProfile.phoneNumber,
+          hint: userProfile?.phoneNumber,
         ),
         AppTextFormField(
           title: s.email,
           controller: emailTextController,
           prefixIcon: createPrimaryColorIcon(iconData: Icons.mail_outline),
-          hint: userProfile.email ?? "N/A",
+          hint: userProfile?.email ?? s.notAvailable,
         ),
         AppTextFormField(
           controller: genderTextController,
           readOnly: true,
           onTap: () {
             setState(() {
-              userProfile = userProfile.copyWith(
-                gender: userProfile.gender == Gender.male
+              userProfile = userProfile?.copyWith(
+                gender: userProfile?.gender == Gender.male
                     ? Gender.female
                     : Gender.male,
               );
-              genderTextController.text = userProfile.gender == Gender.male
+              genderTextController.text = userProfile?.gender == Gender.male
                   ? S.of(context).male
                   : S.of(context).female;
             });
           },
           title: s.gender,
           prefixIcon: createPrimaryColorIcon(iconData: Icons.wc_outlined),
-          hint: userProfile.gender == Gender.male
+          hint: userProfile?.gender == Gender.male
               ? S.of(context).male
               : S.of(context).female,
         ),
@@ -148,13 +171,37 @@ class _EditInfoDialogState extends State<EditInfoDialog> {
           title: s.id,
           controller: idTextController,
           prefixIcon: createPrimaryColorIcon(iconData: Icons.badge),
-          hint: userProfile.id,
+          hint: userProfile?.id,
         ),
         AppTextFormField(
           title: s.address,
           controller: addressTextController,
           prefixIcon: createPrimaryColorIcon(iconData: Icons.place_outlined),
-          hint: userProfile.address,
+          hint: userProfile?.address,
+        ),
+        AppTextFormField(
+          title: s.emergencyContact,
+          controller: emergencyContactController,
+          prefixIcon: createPrimaryColorIcon(
+            iconData: Icons.contact_emergency_outlined,
+          ),
+          hint: userProfile?.emergencyContact ?? s.notAvailable,
+        ),
+        AppTextFormField(
+          title: s.bloodType,
+          controller: bloodTypeController,
+          prefixIcon: createPrimaryColorIcon(
+            iconData: Icons.bloodtype_outlined,
+          ),
+          hint: userProfile?.bloodType ?? s.notAvailable,
+        ),
+        AppTextFormField(
+          title: s.allergies,
+          controller: allergiesController,
+          prefixIcon: createPrimaryColorIcon(
+            iconData: Icons.warning_amber_outlined,
+          ),
+          hint: userProfile?.allergies ?? s.notAvailable,
         ),
       ],
     );
@@ -192,6 +239,9 @@ class _EditInfoDialogState extends State<EditInfoDialog> {
                       : Gender.female,
                   id: idTextController.text,
                   address: addressTextController.text,
+                  emergencyContact: emergencyContactController.text,
+                  bloodType: bloodTypeController.text,
+                  allergies: allergiesController.text,
                 );
                 Navigator.pop(context);
               },

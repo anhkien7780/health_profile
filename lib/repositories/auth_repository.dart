@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:health_profile/configs/app_configs.dart';
 import 'package:health_profile/database/secure_storage_helper.dart';
+import 'package:health_profile/repositories/user_profile_repository.dart';
 
 abstract class AuthRepository {
   Future<String> login(String email, String password);
@@ -12,26 +13,27 @@ abstract class AuthRepository {
 
 class AuthRepositoryImpl implements AuthRepository {
   final Dio _dio;
+  final UserProfileRepository _userProfileRepository;
 
-  AuthRepositoryImpl({Dio? dio})
-      : _dio = dio ??
-            Dio(
-              BaseOptions(
-                baseUrl: AppConfigs.baseUrl,
-                connectTimeout: const Duration(seconds: 10),
-                receiveTimeout: const Duration(seconds: 10),
-              ),
-            );
+  AuthRepositoryImpl({Dio? dio, UserProfileRepository? userProfileRepository})
+    : _dio =
+          dio ??
+          Dio(
+            BaseOptions(
+              baseUrl: AppConfigs.baseUrl,
+              connectTimeout: const Duration(seconds: 10),
+              receiveTimeout: const Duration(seconds: 10),
+            ),
+          ),
+      _userProfileRepository =
+          userProfileRepository ?? UserProfileRepositoryImpl();
 
   @override
   Future<String> login(String email, String password) async {
     try {
       final response = await _dio.post(
         AppConfigs.loginEndpoint,
-        data: {
-          "email": email,
-          "password": password,
-        },
+        data: {"email": email, "password": password},
       );
 
       if (response.statusCode == 200 && response.data != null) {
@@ -55,7 +57,7 @@ class AuthRepositoryImpl implements AuthRepository {
       }
       throw Exception("Network error: ${e.message}");
     } catch (e) {
-      throw Exception("An unexpected error occurred: $e");
+      throw Exception("An unexpected error occurred: \$e");
     }
   }
 
@@ -67,11 +69,13 @@ class AuthRepositoryImpl implements AuthRepository {
         data: userData,
       );
 
-      if ((response.statusCode == 200 || response.statusCode == 201) && response.data != null) {
+      if ((response.statusCode == 200 || response.statusCode == 201) &&
+          response.data != null) {
         final data = response.data;
         if (data['success'] == true) {
           final token = data['data']['token'];
           await SecureStorageHelper.setAccessToken(token);
+          await _userProfileRepository.saveUserProfile(userData);
           return token;
         } else {
           throw Exception(data['message'] ?? "Registration failed");
@@ -88,7 +92,7 @@ class AuthRepositoryImpl implements AuthRepository {
       }
       throw Exception("Network error: ${e.message}");
     } catch (e) {
-      throw Exception("An unexpected error occurred: $e");
+      throw Exception("An unexpected error occurred: \$e");
     }
   }
 
@@ -100,11 +104,7 @@ class AuthRepositoryImpl implements AuthRepository {
 
       final response = await _dio.post(
         AppConfigs.logoutEndpoint,
-        options: Options(
-          headers: {
-            "Authorization": "Bearer $token",
-          },
-        ),
+        options: Options(headers: {"Authorization": "Bearer \$token"}),
       );
 
       if (response.statusCode == 200 && response.data != null) {
@@ -122,7 +122,7 @@ class AuthRepositoryImpl implements AuthRepository {
       }
       throw Exception("Network error: ${e.message}");
     } catch (e) {
-      throw Exception("An unexpected error occurred: $e");
+      throw Exception("An unexpected error occurred: \$e");
     } finally {
       await SecureStorageHelper.removeAccessToken();
     }
