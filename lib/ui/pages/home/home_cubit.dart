@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_profile/models/enum/gender.dart';
 import 'package:health_profile/models/enum/loading_status.dart';
+import 'package:health_profile/repositories/appointment_repository.dart';
 import 'package:health_profile/repositories/auth_repository.dart';
 import 'package:health_profile/repositories/user_profile_repository.dart';
 import 'package:health_profile/ui/pages/home/home_navigator.dart';
@@ -15,21 +16,32 @@ class HomeCubit extends Cubit<HomeState> {
   final HomeNavigator navigator;
   final AuthRepository authRepository;
   final UserProfileRepository userProfileRepository;
+  final AppointmentRepository appointmentRepository;
 
   HomeCubit({
     required this.navigator,
     required this.authRepository,
     required this.userProfileRepository,
+    required this.appointmentRepository,
   }) : super(const HomeState()) {
-    _loadUserProfile();
+    _initialLoad();
   }
 
   final TextEditingController textController = TextEditingController();
 
-  Future<void> _loadUserProfile() async {
-    final userProfile = await userProfileRepository.getUserProfile();
-    if (userProfile != null) {
-      emit(state.copyWith(userProfile: userProfile));
+  Future<void> _initialLoad() async {
+    emit(state.copyWith(loadingStatus: LoadingStatus.loading));
+    try {
+      final userProfile = await userProfileRepository.getUserProfile();
+      final appointments = await appointmentRepository.getAppointments();
+      emit(state.copyWith(
+        userProfile: userProfile,
+        appointments: appointments,
+        loadingStatus: LoadingStatus.finish,
+      ));
+    } catch (e) {
+      log("Initial load error: $e");
+      emit(state.copyWith(loadingStatus: LoadingStatus.error));
     }
   }
 

@@ -60,25 +60,35 @@ class HomeBody extends StatelessWidget {
             ),
             BlocBuilder<HomeCubit, HomeState>(
               buildWhen: (pre, current) =>
-                  pre.appointmentsCount != current.appointmentsCount,
+                  pre.appointments.length != current.appointments.length,
               builder: (context, state) {
-                return AppBadge(number: state.appointmentsCount);
+                return AppBadge(number: state.appointments.length);
               },
             ),
           ],
         ),
         Expanded(
-          child: ListView.builder(
-            itemCount: 10,
-            itemBuilder: (context, index) => Padding(
-              padding: const EdgeInsets.only(top: AppDimens.paddingSmall),
-              child: AppointmentItem(
-                orderNumber: 10,
-                hospitalName: "Bệnh viện K Cơ sở 1",
-                time: "13:30",
-                doctorName: "Bác sỹ A",
-              ),
-            ),
+          child: BlocBuilder<HomeCubit, HomeState>(
+            buildWhen: (previous, current) =>
+                previous.appointments != current.appointments,
+            builder: (context, state) {
+              return ListView.builder(
+                itemCount: state.appointments.length,
+                itemBuilder: (context, index) {
+                  final appointment = state.appointments[index];
+                  return Padding(
+                    padding:
+                        const EdgeInsets.only(top: AppDimens.paddingSmall),
+                    child: AppointmentItem(
+                      orderNumber: appointment.orderNumber,
+                      hospitalName: appointment.hospitalName,
+                      time: appointment.time,
+                      doctorName: appointment.doctorName,
+                    ),
+                  );
+                },
+              );
+            },
           ),
         ),
       ],

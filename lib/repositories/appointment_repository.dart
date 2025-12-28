@@ -1,4 +1,5 @@
 import 'package:health_profile/models/entities/appointment.dart';
+import 'package:health_profile/models/entities/appointment_display.dart';
 import 'package:health_profile/models/entities/doctor.dart';
 import 'package:health_profile/models/entities/hospital.dart';
 import 'package:health_profile/models/entities/schedule_slot.dart';
@@ -11,6 +12,8 @@ abstract class AppointmentRepository {
   Future<List<ScheduleSlot>> getScheduleSlots();
 
   Future<void> bookAppointment(Appointment appointment);
+
+  Future<List<AppointmentDisplay>> getAppointments();
 }
 
 class AppointmentRepositoryImpl extends AppointmentRepository {
@@ -136,5 +139,30 @@ class AppointmentRepositoryImpl extends AppointmentRepository {
     await Future.delayed(const Duration(seconds: 2));
     // Simulate success
     return;
+  }
+
+  @override
+  Future<List<AppointmentDisplay>> getAppointments() async {
+    await Future.delayed(const Duration(seconds: 1));
+    return [
+      AppointmentDisplay(
+        orderNumber: 1,
+        hospitalName: 'Bệnh viện K Cơ sở 1',
+        time: '08:30',
+        doctorName: 'Bác sỹ A',
+      ),
+      AppointmentDisplay(
+        orderNumber: 2,
+        hospitalName: 'Bệnh viện K Cơ sở 2',
+        time: '09:00',
+        doctorName: 'Bác sỹ B',
+      ),
+      AppointmentDisplay(
+        orderNumber: 3,
+        hospitalName: 'Bệnh viện K Cơ sở 3',
+        time: '09:30',
+        doctorName: 'Bác sỹ C',
+      ),
+    ];
   }
 }

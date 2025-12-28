@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_profile/common/app_dimens.dart';
 import 'package:health_profile/models/enum/loading_status.dart';
+import 'package:health_profile/repositories/appointment_repository.dart';
 import 'package:health_profile/repositories/auth_repository.dart';
 import 'package:health_profile/repositories/user_profile_repository.dart';
 import 'package:health_profile/ui/pages/home/home_cubit.dart';
@@ -24,6 +25,7 @@ class HomePage extends StatelessWidget {
         navigator: HomeNavigator(context),
         authRepository: context.read<AuthRepository>(),
         userProfileRepository: context.read<UserProfileRepository>(),
+        appointmentRepository: context.read<AppointmentRepository>(),
       ),
       child: const HomeChildPage(),
     );
