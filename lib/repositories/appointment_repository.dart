@@ -8,13 +8,15 @@ import 'package:health_profile/models/entities/appointment_display.dart';
 import 'package:health_profile/models/entities/doctor.dart';
 import 'package:health_profile/models/entities/hospital.dart';
 import 'package:health_profile/models/entities/schedule_slot.dart';
+import 'package:health_profile/utils/date_format_helper.dart';
 
 abstract class AppointmentRepository {
   Future<List<Hospital>> getHospitals();
 
   Future<List<Doctor>> getDoctors(int hospitalId);
 
-  Future<List<ScheduleSlot>> getScheduleSlots();
+  Future<List<ScheduleSlot>> getScheduleSlots(
+      {required int doctorId, required String date});
 
   Future<void> bookAppointment(Appointment appointment);
 
@@ -75,26 +77,93 @@ class AppointmentRepositoryImpl extends AppointmentRepository {
   }
 
   @override
-  Future<List<ScheduleSlot>> getScheduleSlots() async {
-    await Future.delayed(const Duration(seconds: 1));
-    return [
-      ScheduleSlot(
-        id: 1,
-        roomName: "Phòng khám dị ứng (P.312 Nhà C)",
-        slots: ["07:00", "07:15", "07:30", "08:00", "13:00"],
-      ),
-      ScheduleSlot(
-        id: 2,
-        roomName: "Phòng khám dị ứng (P.412 Nhà C)",
-        slots: ["08:00", "13:00", "13:30", "14:00", "14:30"],
-      ),
-    ];
+  Future<List<ScheduleSlot>> getScheduleSlots(
+      {required int doctorId, required String date}) async {
+    try {
+      final token = await SecureStorageHelper.getAccessToken();
+      if (token == null) {
+        throw Exception('Unauthorized: No token found.');
+      }
+
+      final response = await _dio.get(
+        AppConfigs.availableSlotsEndpoint(doctorId, date),
+        options: Options(headers: {'Authorization': 'Bearer $token'}),
+      );
+
+      if (response.statusCode == 200 && response.data['success']) {
+        final List<dynamic> data = response.data['data'];
+        final availableSlots = data
+            .where((slot) => slot['available'] == true)
+            .map((slot) => (slot['time'] as String).substring(0, 5))
+            .toList();
+
+        final morningSlots = availableSlots
+            .where((time) => int.parse(time.split(':')[0]) < 12)
+            .toList();
+
+        final afternoonSlots = availableSlots
+            .where((time) => int.parse(time.split(':')[0]) >= 12)
+            .toList();
+
+        final result = <ScheduleSlot>[];
+        if (morningSlots.isNotEmpty) {
+          result.add(
+            ScheduleSlot(id: 1, roomName: 'Sáng', slots: morningSlots),
+          );
+        }
+        if (afternoonSlots.isNotEmpty) {
+          result.add(
+            ScheduleSlot(id: 2, roomName: 'Chiều', slots: afternoonSlots),
+          );
+        }
+        return result;
+      } else {
+        throw Exception('Failed to load schedule slots');
+      }
+    } catch (e) {
+      throw Exception('Failed to load schedule slots: $e');
+    }
   }
 
   @override
   Future<void> bookAppointment(Appointment appointment) async {
-    await Future.delayed(const Duration(seconds: 2));
-    await getAppointments();
+    try {
+      final token = await SecureStorageHelper.getAccessToken();
+      if (token == null) {
+        throw Exception('Unauthorized: No token found.');
+      }
+
+      final allDoctorsInHospital = await getDoctors(appointment.hospital.id);
+      final fullDoctorInfo = allDoctorsInHospital.firstWhere(
+        (doc) => doc.id == appointment.doctor.id,
+        orElse: () => throw Exception('Could not find doctor in the hospital'),
+      );
+
+      final body = {
+        'doctorId': fullDoctorInfo.id,
+        'hospitalId': fullDoctorInfo.hospitalId,
+        'departmentId': fullDoctorInfo.departmentId,
+        'appointmentDate': DateFormatHelper.dateToApiString(appointment.date),
+        'appointmentTime': DateFormatHelper.dateToTimeString(appointment.time),
+        'notes': appointment.note,
+      };
+
+      final response = await _dio.post(
+        AppConfigs.bookAppointmentEndpoint,
+        data: body,
+        options: Options(headers: {'Authorization': 'Bearer $token'}),
+      );
+
+      if (response.statusCode == 201 && response.data['success']) {
+        await getAppointments();
+      } else {
+        throw Exception(
+          'Failed to book appointment: ${response.data['message']}',
+        );
+      }
+    } catch (e) {
+      throw Exception('Failed to book appointment: $e');
+    }
   }
 
   @override
@@ -107,11 +176,7 @@ class AppointmentRepositoryImpl extends AppointmentRepository {
 
       final response = await _dio.get(
         AppConfigs.upcomingAppointmentsEndpoint,
-        options: Options(
-          headers: {
-            'Authorization': 'Bearer $token',
-          },
-        ),
+        options: Options(headers: {'Authorization': 'Bearer $token'}),
       );
 
       if (response.statusCode == 200 && response.data['success']) {

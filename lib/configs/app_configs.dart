@@ -12,15 +12,17 @@ class AppConfigs {
   static const String registerEndpoint = "/auth/register";
   static const String hospitalsEndpoint = "/hospitals";
   static const String upcomingAppointmentsEndpoint = "/patients/appointments/upcoming";
-
-  // Patient Profile
   static const String patientProfileEndpoint = "/patients/me";
+  static const String bookAppointmentEndpoint = "/patients/appointments";
 
   static String doctorsEndpoint(int hospitalId) => "/doctors/hospital/$hospitalId";
 
+  static String availableSlotsEndpoint(int doctorId, String date) =>
+      '/doctors/$doctorId/available-slots?date=$date';
   static DateFormat get format => DateFormat("dd/MM/yyyy");
   static DateFormat get timeFormat => DateFormat("HH:mm");
   static DateFormat get dayOfWeekFormat => DateFormat("EEEE");
   static DateFormat get dayMonthFormat => DateFormat("dd/MM");
   static DateFormat get dayMonthYearFormat => DateFormat("dd/MM/yyyy");
+  static DateFormat get apiDateFormat => DateFormat("yyyy-MM-dd");
 }

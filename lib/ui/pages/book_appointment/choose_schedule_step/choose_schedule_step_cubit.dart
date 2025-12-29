@@ -4,6 +4,7 @@ import 'package:health_profile/models/enum/loading_status.dart';
 import 'package:health_profile/repositories/appointment_repository.dart';
 import 'package:health_profile/ui/pages/book_appointment/book_appointment_cubit.dart';
 import 'package:health_profile/ui/pages/book_appointment/choose_schedule_step/choose_schedule_step_state.dart';
+import 'package:intl/intl.dart';
 
 class ChooseScheduleStepCubit extends Cubit<ChooseScheduleStepState> {
   ChooseScheduleStepCubit({
@@ -26,7 +27,11 @@ class ChooseScheduleStepCubit extends Cubit<ChooseScheduleStepState> {
     if (state.selectedDate == null) return;
     emit(state.copyWith(loadingStatus: LoadingStatus.loading));
     try {
-      final slots = await appointmentRepository.getScheduleSlots();
+      final formattedDate = DateFormat('yyyy-MM-dd').format(state.selectedDate!);
+      final slots = await appointmentRepository.getScheduleSlots(
+        doctorId: bookAppointmentCubit.state.doctor!.id,
+        date: formattedDate,
+      );
       emit(
         state.copyWith(scheduleSlots: slots, loadingStatus: LoadingStatus.idle),
       );
