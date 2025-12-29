@@ -8,6 +8,7 @@ class AppConfigs {
   static const String logoutEndpoint = "/auth/logout";
   static const String registerEndpoint = "/auth/register";
   static const String hospitalsEndpoint = "/hospitals";
+  static const String upcomingAppointmentsEndpoint = "/patients/appointments/upcoming";
 
   static String doctorsEndpoint(int hospitalId) => "/doctors/hospital/$hospitalId";
 

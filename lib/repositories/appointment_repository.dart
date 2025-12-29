@@ -2,12 +2,12 @@ import 'dart:async';
 
 import 'package:dio/dio.dart';
 import 'package:health_profile/configs/app_configs.dart';
+import 'package:health_profile/database/secure_storage_helper.dart';
 import 'package:health_profile/models/entities/appointment.dart';
 import 'package:health_profile/models/entities/appointment_display.dart';
 import 'package:health_profile/models/entities/doctor.dart';
 import 'package:health_profile/models/entities/hospital.dart';
 import 'package:health_profile/models/entities/schedule_slot.dart';
-import 'package:intl/intl.dart';
 
 abstract class AppointmentRepository {
   Future<List<Hospital>> getHospitals();
@@ -29,27 +29,6 @@ class AppointmentRepositoryImpl extends AppointmentRepository {
   final Dio _dio;
   final _appointmentsController =
       StreamController<List<AppointmentDisplay>>.broadcast();
-  final List<AppointmentDisplay> _bookedAppointments = [];
-  final List<AppointmentDisplay> _predefinedAppointments = [
-    AppointmentDisplay(
-      orderNumber: 1,
-      hospitalName: 'Bệnh viện K Cơ sở 1',
-      time: '08:30',
-      doctorName: 'Bác sỹ A',
-    ),
-    AppointmentDisplay(
-      orderNumber: 2,
-      hospitalName: 'Bệnh viện K Cơ sở 2',
-      time: '09:00',
-      doctorName: 'Bác sỹ B',
-    ),
-    AppointmentDisplay(
-      orderNumber: 3,
-      hospitalName: 'Bệnh viện K Cơ sở 3',
-      time: '09:30',
-      doctorName: 'Bác sỹ C',
-    ),
-  ];
 
   AppointmentRepositoryImpl({Dio? dio})
       : _dio = dio ??
@@ -115,21 +94,42 @@ class AppointmentRepositoryImpl extends AppointmentRepository {
   @override
   Future<void> bookAppointment(Appointment appointment) async {
     await Future.delayed(const Duration(seconds: 2));
-    final newAppointment = AppointmentDisplay(
-      orderNumber:
-          _predefinedAppointments.length + _bookedAppointments.length + 1,
-      hospitalName: appointment.hospital.title,
-      time: DateFormat('HH:mm').format(appointment.time),
-      doctorName: appointment.doctor.title,
-    );
-    _bookedAppointments.add(newAppointment);
-    _appointmentsController.add([..._predefinedAppointments, ..._bookedAppointments]);
+    await getAppointments();
   }
 
   @override
   Future<List<AppointmentDisplay>> getAppointments() async {
-    await Future.delayed(const Duration(seconds: 1));
-    return [..._predefinedAppointments, ..._bookedAppointments];
+    try {
+      final token = await SecureStorageHelper.getAccessToken();
+      if (token == null) {
+        throw Exception('Unauthorized: No token found.');
+      }
+
+      final response = await _dio.get(
+        AppConfigs.upcomingAppointmentsEndpoint,
+        options: Options(
+          headers: {
+            'Authorization': 'Bearer $token',
+          },
+        ),
+      );
+
+      if (response.statusCode == 200 && response.data['success']) {
+        final List<dynamic> data = response.data['data'];
+        final appointments =
+            data.map((json) => AppointmentDisplay.fromJson(json)).toList();
+        _appointmentsController.add(appointments);
+        return appointments;
+      } else {
+        final error = 'Failed to load upcoming appointments';
+        _appointmentsController.addError(error);
+        throw Exception(error);
+      }
+    } catch (e) {
+      final error = 'Failed to load upcoming appointments: $e';
+      _appointmentsController.addError(error);
+      throw Exception(error);
+    }
   }
 
   @override
