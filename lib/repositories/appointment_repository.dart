@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:health_profile/configs/app_configs.dart';
@@ -181,6 +182,7 @@ class AppointmentRepositoryImpl extends AppointmentRepository {
 
       if (response.statusCode == 200 && response.data['success']) {
         final List<dynamic> data = response.data['data'];
+        log("Appointments: $data");
         final appointments = data
             .where((json) => json['status'] == 'PENDING')
             .map((json) => AppointmentDisplay.fromJson(json))
