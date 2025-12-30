@@ -16,6 +16,9 @@ class AppConfigs {
   static const String bookAppointmentEndpoint = "/patients/appointments";
 
   static String medicalRecordEndpoint(int patientId) => "/medical-records/patient/$patientId";
+  static String medicalRecordDetailEndpoint(int recordId) => "/medical-records/$recordId";
+  static String prescriptionByMedicalRecordEndpoint(String medicalRecordId) =>
+      "/prescriptions/medical-record/$medicalRecordId";
 
   static String doctorsEndpoint(int hospitalId) => "/doctors/hospital/$hospitalId";
 

@@ -13,7 +13,7 @@ class MedicalRecordListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => MedicalRecordListCubit(
-        medicalRecordRepository: MedicalRecordRepositoryImpl(),
+        medicalRecordRepository: context.read<MedicalRecordRepository>(),
         userProfileRepository: context.read<UserProfileRepository>(),
         authRepository: context.read<AuthRepository>(),
       ),

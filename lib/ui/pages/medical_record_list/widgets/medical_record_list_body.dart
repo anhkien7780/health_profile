@@ -35,7 +35,7 @@ class MedicalRecordListBody extends StatelessWidget {
                 onPressed: () => context.pop(),
               ),
               title: Text(
-                s.medicalRecord,
+                s.medicalRecordDetail,
                 style: theme.textTheme.titleLarge?.copyWith(
                   color: theme.colorScheme.onPrimaryFixed,
                 ),

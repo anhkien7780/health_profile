@@ -5,6 +5,7 @@ import 'package:health_profile/ui/pages/change_password/change_password_page.dar
 import 'package:health_profile/ui/pages/chat/chat_page.dart';
 import 'package:health_profile/ui/pages/home/home_page.dart';
 import 'package:health_profile/ui/pages/login/login_page.dart';
+import 'package:health_profile/ui/pages/medical_record_detail/medical_record_detail_page.dart';
 import 'package:health_profile/ui/pages/medical_record_list/medical_record_list_page.dart';
 import 'package:health_profile/ui/pages/onboarding/onboarding_page.dart';
 import 'package:health_profile/ui/pages/profile_register/profile_register_page.dart';
@@ -29,7 +30,7 @@ class AppRouter {
   static final chat = "/chat";
   static final bookAppointment = "/bookAppointment";
   static const medicalRecordList = '/medicalRecordList';
-
+  static const medicalRecordDetail = '/medicalRecordDetail';
 
   static final GoRouter routers = GoRouter(
     routes: _routers,
@@ -121,11 +122,19 @@ class AppRouter {
         return BookAppointmentPage();
       },
     ),
-     GoRoute(
+    GoRoute(
       path: medicalRecordList,
       name: medicalRecordList,
       builder: (context, state) {
         return const MedicalRecordListPage();
+      },
+    ),
+    GoRoute(
+      path: '$medicalRecordDetail/:recordId',
+      name: medicalRecordDetail,
+      builder: (context, state) {
+        final recordId = int.parse(state.pathParameters['recordId']!);
+        return MedicalRecordDetailPage(recordId: recordId);
       },
     ),
   ];

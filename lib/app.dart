@@ -6,6 +6,8 @@ import 'package:health_profile/global_blocs/settings/app_setting_cubit.dart';
 import 'package:health_profile/models/enum/language.dart';
 import 'package:health_profile/repositories/appointment_repository.dart';
 import 'package:health_profile/repositories/auth_repository.dart';
+import 'package:health_profile/repositories/medical_record_repository.dart';
+import 'package:health_profile/repositories/prescription_repository.dart';
 import 'package:health_profile/repositories/user_profile_repository.dart';
 import 'package:health_profile/router/router_config.dart';
 import 'package:health_profile/utils/create_text_theme.dart';
@@ -28,6 +30,12 @@ class MyApp extends StatelessWidget {
         ),
         RepositoryProvider<UserProfileRepository>(
           create: (context) => UserProfileRepositoryImpl(),
+        ),
+        RepositoryProvider<MedicalRecordRepository>(
+          create: (context) => MedicalRecordRepositoryImpl(),
+        ),
+        RepositoryProvider<PrescriptionRepository>(
+          create: (context) => PrescriptionRepositoryImpl(),
         ),
       ],
       child: BlocProvider<AppSettingCubit>(

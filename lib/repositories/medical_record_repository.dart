@@ -7,6 +7,7 @@ import 'package:health_profile/models/entities/medical_record.dart';
 
 abstract class MedicalRecordRepository {
   Future<List<MedicalRecord>> getMedicalRecords(int patientId);
+  Future<MedicalRecord> getMedicalRecordDetail(int recordId);
 }
 
 class MedicalRecordRepositoryImpl extends MedicalRecordRepository {
@@ -43,6 +44,29 @@ class MedicalRecordRepositoryImpl extends MedicalRecordRepository {
       }
     } catch (e) {
       throw Exception('Failed to load medical records: $e');
+    }
+  }
+
+  @override
+  Future<MedicalRecord> getMedicalRecordDetail(int recordId) async {
+    try {
+      final token = await SecureStorageHelper.getAccessToken();
+      if (token == null) {
+        throw Exception('Unauthorized: No token found.');
+      }
+
+      final response = await _dio.get(
+        AppConfigs.medicalRecordDetailEndpoint(recordId),
+        options: Options(headers: {'Authorization': 'Bearer $token'}),
+      );
+
+      if (response.statusCode == 200 && response.data['success']) {
+        return MedicalRecord.fromJson(response.data['data']);
+      } else {
+        throw Exception('Failed to load medical record detail');
+      }
+    } catch (e) {
+      throw Exception('Failed to load medical record detail: $e');
     }
   }
 }
