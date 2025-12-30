@@ -120,5 +120,8 @@
   "pendingPaymentAtCounter": "Chờ thanh toán tại quầy",
   "presentCodeAtCounter": "Vui lòng xuất trình mã giao dịch dưới đây tại quầy để hoàn tất thanh toán.",
   "transactionCode": "Mã giao dịch",
-  "understood": "Đã hiểu"
+  "understood": "Đã hiểu",
+  "paymentConfirmedTitle": "Thanh toán đã được xác nhận",
+  "paymentConfirmedMessage": "Lịch hẹn này đã được thanh toán thành công.",
+  "backToHome": "Về trang chủ"
 }

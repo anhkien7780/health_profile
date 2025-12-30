@@ -8,6 +8,7 @@ import 'package:health_profile/ui/pages/login/login_page.dart';
 import 'package:health_profile/ui/pages/medical_record_detail/medical_record_detail_page.dart';
 import 'package:health_profile/ui/pages/medical_record_list/medical_record_list_page.dart';
 import 'package:health_profile/ui/pages/onboarding/onboarding_page.dart';
+import 'package:health_profile/ui/pages/payment_confirmed/payment_confirmed_page.dart';
 import 'package:health_profile/ui/pages/payment_result/payment_result_page.dart';
 import 'package:health_profile/ui/pages/payment_selection/payment_selection_page.dart';
 import 'package:health_profile/ui/pages/profile_register/profile_register_page.dart';
@@ -37,6 +38,7 @@ class AppRouter {
   static const paymentSelection = '/paymentSelection';
   static const webPayment = '/webPayment';
   static const paymentResult = '/paymentResult';
+  static const paymentConfirmed = '/paymentConfirmed';
 
   static final GoRouter routers = GoRouter(
     routes: _routers,
@@ -165,6 +167,13 @@ class AppRouter {
       builder: (context, state) {
         final transactionRef = state.uri.queryParameters['transactionRef']!;
         return PaymentResultPage(transactionRef: transactionRef);
+      },
+    ),
+    GoRoute(
+      path: paymentConfirmed,
+      name: paymentConfirmed,
+      builder: (context, state) {
+        return const PaymentConfirmedPage();
       },
     ),
   ];

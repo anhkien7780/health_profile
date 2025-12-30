@@ -1,5 +1,5 @@
 enum PaymentMethod {
-  VNPAY,
-  CASH,
-  CARD,
+  vnPay,
+  cash,
+  card,
 }

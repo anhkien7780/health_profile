@@ -27,7 +27,7 @@ class PaymentTransaction extends Equatable {
     return PaymentTransaction(
       id: json['id'],
       appointmentId: json['appointmentId'],
-      amount: json['amount'],
+      amount: (json['amount'] as num).toInt(),
       paymentMethod: json['paymentMethod'],
       status: json['status'],
       transactionRef: json['transactionRef'],

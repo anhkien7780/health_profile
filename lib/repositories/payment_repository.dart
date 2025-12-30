@@ -9,6 +9,9 @@ import 'package:health_profile/models/enum/payment_method.dart';
 abstract class PaymentRepository {
   Future<PaymentTransaction> createPaymentTransaction(
       {required int appointmentId, required PaymentMethod paymentMethod});
+
+  Future<List<PaymentTransaction>> getTransactionsForAppointment(
+      int appointmentId);
 }
 
 class PaymentRepositoryImpl extends PaymentRepository {
@@ -37,7 +40,7 @@ class PaymentRepositoryImpl extends PaymentRepository {
         '/payments',
         data: {
           'appointmentId': appointmentId,
-          'paymentMethod': paymentMethod.name,
+          'paymentMethod': paymentMethod.name.toUpperCase(), // Convert to uppercase for the API
         },
         options: Options(headers: {'Authorization': 'Bearer $token'}),
       );
@@ -49,6 +52,31 @@ class PaymentRepositoryImpl extends PaymentRepository {
       }
     } catch (e) {
       throw Exception('Failed to create payment transaction: $e');
+    }
+  }
+
+  @override
+  Future<List<PaymentTransaction>> getTransactionsForAppointment(
+      int appointmentId) async {
+    try {
+      final token = await SecureStorageHelper.getAccessToken();
+      if (token == null) {
+        throw Exception('Unauthorized: No token found.');
+      }
+
+      final response = await _dio.get(
+        '/payments/appointment/$appointmentId',
+        options: Options(headers: {'Authorization': 'Bearer $token'}),
+      );
+
+      if (response.statusCode == 200 && response.data['success']) {
+        final List<dynamic> data = response.data['data'];
+        return data.map((json) => PaymentTransaction.fromJson(json)).toList();
+      } else {
+        throw Exception('Failed to load transactions');
+      }
+    } catch (e) {
+      throw Exception('Failed to load transactions: $e');
     }
   }
 }

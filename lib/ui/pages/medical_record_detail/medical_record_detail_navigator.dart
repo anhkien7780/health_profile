@@ -13,4 +13,8 @@ class MedicalRecordDetailNavigator {
       pathParameters: {'appointmentId': appointmentId.toString()},
     );
   }
+
+  void navigateToPaymentConfirmed() {
+    context.pushNamed(AppRouter.paymentConfirmed);
+  }
 }
