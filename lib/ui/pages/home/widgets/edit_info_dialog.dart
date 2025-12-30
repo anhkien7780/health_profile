@@ -141,12 +141,6 @@ class _EditInfoDialogState extends State<EditInfoDialog> {
           hint: userProfile?.phoneNumber,
         ),
         AppTextFormField(
-          title: s.email,
-          controller: emailTextController,
-          prefixIcon: createPrimaryColorIcon(iconData: Icons.mail_outline),
-          hint: userProfile?.email ?? s.notAvailable,
-        ),
-        AppTextFormField(
           controller: genderTextController,
           readOnly: true,
           onTap: () {
@@ -166,12 +160,6 @@ class _EditInfoDialogState extends State<EditInfoDialog> {
           hint: userProfile?.gender == Gender.male
               ? S.of(context).male
               : S.of(context).female,
-        ),
-        AppTextFormField(
-          title: s.id,
-          controller: idTextController,
-          prefixIcon: createPrimaryColorIcon(iconData: Icons.badge),
-          hint: userProfile?.id,
         ),
         AppTextFormField(
           title: s.address,

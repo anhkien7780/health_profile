@@ -56,16 +56,6 @@ class UserProfile {
         "value": phoneNumber,
       },
       {
-        "icon": Icons.email_outlined,
-        "label": s.email,
-        "value": (email?.isNotEmpty ?? false) ? email! : s.notAvailable,
-      },
-      {
-        "icon": Icons.account_circle_outlined,
-        "label": s.username,
-        "value": username,
-      },
-      {
         "icon": Icons.wc_outlined,
         "label": s.gender,
         "value": gender == Gender.male ? s.male : s.female,
