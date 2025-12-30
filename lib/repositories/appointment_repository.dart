@@ -181,8 +181,10 @@ class AppointmentRepositoryImpl extends AppointmentRepository {
 
       if (response.statusCode == 200 && response.data['success']) {
         final List<dynamic> data = response.data['data'];
-        final appointments =
-            data.map((json) => AppointmentDisplay.fromJson(json)).toList();
+        final appointments = data
+            .where((json) => json['status'] == 'PENDING')
+            .map((json) => AppointmentDisplay.fromJson(json))
+            .toList();
         _appointmentsController.add(appointments);
         return appointments;
       } else {

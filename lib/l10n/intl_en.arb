@@ -120,5 +120,8 @@
   "pendingPaymentAtCounter": "Pending Payment at Counter",
   "presentCodeAtCounter": "Please present the transaction code below at the counter to complete your payment.",
   "transactionCode": "Transaction Code",
-  "understood": "Understood"
+  "understood": "Understood",
+  "paymentConfirmedTitle": "Payment Confirmed",
+  "paymentConfirmedMessage": "This appointment has been successfully paid for.",
+  "backToHome": "Back to Home"
 }

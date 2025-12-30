@@ -46,19 +46,19 @@ class PaymentSelectionBody extends StatelessWidget {
                   AppElevatedButton(
                     onClick: () => context
                         .read<PaymentSelectionCubit>()
-                        .createPayment(PaymentMethod.VNPAY),
+                        .createPayment(PaymentMethod.vnPay),
                     text: s.payWithVnPay,
                   ),
                   AppElevatedButton(
                     onClick: () => context
                         .read<PaymentSelectionCubit>()
-                        .createPayment(PaymentMethod.CASH),
+                        .createPayment(PaymentMethod.cash),
                     text: s.payWithCash,
                   ),
                   AppElevatedButton(
                     onClick: () => context
                         .read<PaymentSelectionCubit>()
-                        .createPayment(PaymentMethod.CARD),
+                        .createPayment(PaymentMethod.card),
                     text: s.payWithCard,
                   ),
                 ],
