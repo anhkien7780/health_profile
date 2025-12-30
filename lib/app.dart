@@ -7,6 +7,7 @@ import 'package:health_profile/models/enum/language.dart';
 import 'package:health_profile/repositories/appointment_repository.dart';
 import 'package:health_profile/repositories/auth_repository.dart';
 import 'package:health_profile/repositories/medical_record_repository.dart';
+import 'package:health_profile/repositories/payment_repository.dart';
 import 'package:health_profile/repositories/prescription_repository.dart';
 import 'package:health_profile/repositories/user_profile_repository.dart';
 import 'package:health_profile/router/router_config.dart';
@@ -36,6 +37,9 @@ class MyApp extends StatelessWidget {
         ),
         RepositoryProvider<PrescriptionRepository>(
           create: (context) => PrescriptionRepositoryImpl(),
+        ),
+        RepositoryProvider<PaymentRepository>(
+          create: (context) => PaymentRepositoryImpl(),
         ),
       ],
       child: BlocProvider<AppSettingCubit>(

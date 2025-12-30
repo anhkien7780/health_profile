@@ -109,5 +109,10 @@
   "frequency": "Frequency",
   "duration": "Duration",
   "quantity": "Quantity",
-  "instructions": "Instructions"
+  "instructions": "Instructions",
+  "paymentMethodSelectionTitle": "Select Payment Method",
+  "amountToBePaid": "Amount to be paid",
+  "payWithVnPay": "Pay with VNPAY",
+  "payWithCash": "Pay with Cash at the counter",
+  "payWithCard": "Pay with Card at the counter"
 }

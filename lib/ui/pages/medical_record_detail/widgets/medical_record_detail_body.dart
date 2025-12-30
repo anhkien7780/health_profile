@@ -6,6 +6,7 @@ import 'package:health_profile/generated/l10n.dart';
 import 'package:health_profile/models/entities/prescription_item.dart';
 import 'package:health_profile/models/enum/loading_status.dart';
 import 'package:health_profile/ui/pages/medical_record_detail/medical_record_detail_cubit.dart';
+import 'package:health_profile/ui/pages/medical_record_detail/medical_record_detail_navigator.dart';
 import 'package:health_profile/ui/pages/medical_record_detail/medical_record_detail_state.dart';
 import 'package:health_profile/ui/widgets/app_loading/app_loading.dart';
 import 'package:health_profile/ui/widgets/buttons/app_elevated_button.dart';
@@ -51,22 +52,32 @@ class MedicalRecordDetailBody extends StatelessWidget {
 
   Widget _buildButtons(BuildContext context) {
     final s = S.of(context);
-    return Row(
-      children: [
-        Expanded(
-          child: AppElevatedButton(
-            onClick: () {},
-            text: s.chatWithDoctor,
-          ),
-        ),
-        const SizedBox(width: AppDimens.paddingMedium),
-        Expanded(
-          child: AppElevatedButton(
-            onClick: () {},
-            text: s.payment,
-          ),
-        ),
-      ],
+    final navigator = MedicalRecordDetailNavigator(context);
+    return BlocBuilder<MedicalRecordDetailCubit, MedicalRecordDetailState>(
+      builder: (context, state) {
+        return Row(
+          children: [
+            Expanded(
+              child: AppElevatedButton(
+                onClick: () {},
+                text: s.chatWithDoctor,
+              ),
+            ),
+            const SizedBox(width: AppDimens.paddingMedium),
+            Expanded(
+              child: AppElevatedButton(
+                onClick: () {
+                  final appointmentId = state.medicalRecord?.appointmentId;
+                  if (appointmentId != null) {
+                    navigator.navigateToPaymentSelection(appointmentId);
+                  }
+                },
+                text: s.payment,
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 

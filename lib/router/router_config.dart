@@ -8,6 +8,7 @@ import 'package:health_profile/ui/pages/login/login_page.dart';
 import 'package:health_profile/ui/pages/medical_record_detail/medical_record_detail_page.dart';
 import 'package:health_profile/ui/pages/medical_record_list/medical_record_list_page.dart';
 import 'package:health_profile/ui/pages/onboarding/onboarding_page.dart';
+import 'package:health_profile/ui/pages/payment_selection/payment_selection_page.dart';
 import 'package:health_profile/ui/pages/profile_register/profile_register_page.dart';
 import 'package:health_profile/ui/pages/sign_up/sign_up_page.dart';
 import 'package:health_profile/ui/pages/splash/splash_page.dart';
@@ -31,6 +32,7 @@ class AppRouter {
   static final bookAppointment = "/bookAppointment";
   static const medicalRecordList = '/medicalRecordList';
   static const medicalRecordDetail = '/medicalRecordDetail';
+  static const paymentSelection = '/paymentSelection';
 
   static final GoRouter routers = GoRouter(
     routes: _routers,
@@ -135,6 +137,14 @@ class AppRouter {
       builder: (context, state) {
         final recordId = int.parse(state.pathParameters['recordId']!);
         return MedicalRecordDetailPage(recordId: recordId);
+      },
+    ),
+    GoRoute(
+      path: '$paymentSelection/:appointmentId',
+      name: paymentSelection,
+      builder: (context, state) {
+        final appointmentId = int.parse(state.pathParameters['appointmentId']!);
+        return PaymentSelectionPage(appointmentId: appointmentId);
       },
     ),
   ];
