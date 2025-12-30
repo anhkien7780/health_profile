@@ -15,12 +15,8 @@ class LoginCubit extends Cubit<LoginState> {
   final LoginNavigator navigator;
   final AuthRepository authRepository;
 
-  final TextEditingController emailController = TextEditingController(
-    text: "patient@test.com",
-  );
-  final TextEditingController passwordController = TextEditingController(
-    text: "password123",
-  );
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   Future<void> onSignInButtonPressed() async {
     final email = emailController.text;
