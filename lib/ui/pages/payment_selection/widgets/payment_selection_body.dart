@@ -28,35 +28,33 @@ class PaymentSelectionBody extends StatelessWidget {
               padding: const EdgeInsets.all(AppDimens.paddingBig),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
+                spacing: AppDimens.paddingNormal,
                 children: [
                   Text(
                     s.amountToBePaid,
                     style: theme.textTheme.titleLarge,
                     textAlign: TextAlign.center,
                   ),
-                  const SizedBox(height: AppDimens.paddingSmall),
                   Text(
-                    '500,000 VND', // TODO: Make this dynamic if needed
+                    '500,000 VND',
                     style: theme.textTheme.headlineMedium?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  const SizedBox(height: AppDimens.paddingBig),
+                  const SizedBox(height: AppDimens.paddingBig - AppDimens.paddingNormal),
                   AppElevatedButton(
                     onClick: () => context
                         .read<PaymentSelectionCubit>()
                         .createPayment(PaymentMethod.VNPAY),
                     text: s.payWithVnPay,
                   ),
-                  const SizedBox(height: AppDimens.paddingNormal),
                   AppElevatedButton(
                     onClick: () => context
                         .read<PaymentSelectionCubit>()
                         .createPayment(PaymentMethod.CASH),
                     text: s.payWithCash,
                   ),
-                  const SizedBox(height: AppDimens.paddingNormal),
                   AppElevatedButton(
                     onClick: () => context
                         .read<PaymentSelectionCubit>()

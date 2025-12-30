@@ -27,8 +27,9 @@ class PaymentSelectionCubit extends Cubit<PaymentSelectionState> {
 
       if (transaction.paymentUrl != null) {
         navigator.navigateToWebPayment(transaction.paymentUrl!);
+      } else if (transaction.transactionRef != null) {
+        navigator.navigateToPaymentResult(transaction.transactionRef!);
       }
-      // TODO: Handle navigation for CASH and CARD methods
     } catch (e) {
       emit(state.copyWith(loadingStatus: LoadingStatus.error));
     }

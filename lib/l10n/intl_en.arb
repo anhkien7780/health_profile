@@ -115,5 +115,10 @@
   "payWithVnPay": "Pay with VNPAY",
   "payWithCash": "Pay with Cash at the counter",
   "payWithCard": "Pay with Card at the counter",
-  "securePaymentTitle": "Secure Payment"
+  "securePaymentTitle": "Secure Payment",
+  "paymentResultTitle": "Payment Result",
+  "pendingPaymentAtCounter": "Pending Payment at Counter",
+  "presentCodeAtCounter": "Please present the transaction code below at the counter to complete your payment.",
+  "transactionCode": "Transaction Code",
+  "understood": "Understood"
 }

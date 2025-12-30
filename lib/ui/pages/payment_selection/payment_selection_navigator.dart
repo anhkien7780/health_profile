@@ -13,4 +13,11 @@ class PaymentSelectionNavigator {
       queryParameters: {'paymentUrl': paymentUrl},
     );
   }
+
+  void navigateToPaymentResult(String transactionRef) {
+    context.pushNamed(
+      AppRouter.paymentResult,
+      queryParameters: {'transactionRef': transactionRef},
+    );
+  }
 }
