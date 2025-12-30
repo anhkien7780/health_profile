@@ -28,6 +28,7 @@
   "loginButton": "Đăng nhập",
   "logout": "Đăng xuất",
   "male": "Nam",
+  "medicalRecord": "Hồ sơ bệnh án",
   "next": "Tiếp tục",
   "onBoardingFirstDetail": "Ứng dụng hỗ trợ tra cứu hồ sơ bệnh án ngay khi có kết quả. Đặt lịch khám với bác sỹ nhanh ngọn và đúng nhu cầu của bản thân.",
   "onboardingFirstHeadline": "Tra cứu hồ sơ bệnh án, hẹn lịch khám bệnh nhanh chóng",

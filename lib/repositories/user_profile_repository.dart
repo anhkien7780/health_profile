@@ -73,13 +73,18 @@ class UserProfileRepositoryImpl implements UserProfileRepository {
 
       if (response.statusCode == 200 && response.data['success']) {
         final profileData = response.data['data'];
+        log('Raw profile data from server: $profileData');
         await SharedPreferencesHelper.saveUserProfile(profileData);
-        return UserProfile.fromJson(profileData);
+        final userProfile = UserProfile.fromJson(profileData);
+        log('Fetched user profile from server: ${userProfile.toJson()}');
+        return userProfile;
       }
     } catch (e) {
       log('Failed to fetch profile from server, falling back to local storage. Error: $e');
     }
 
-    return SharedPreferencesHelper.getUserProfile();
+    final localProfile = await SharedPreferencesHelper.getUserProfile();
+    log('Fetched user profile from local storage: ${localProfile?.toJson()}');
+    return localProfile;
   }
 }

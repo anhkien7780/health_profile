@@ -5,6 +5,7 @@ import 'package:health_profile/ui/pages/change_password/change_password_page.dar
 import 'package:health_profile/ui/pages/chat/chat_page.dart';
 import 'package:health_profile/ui/pages/home/home_page.dart';
 import 'package:health_profile/ui/pages/login/login_page.dart';
+import 'package:health_profile/ui/pages/medical_record_list/medical_record_list_page.dart';
 import 'package:health_profile/ui/pages/onboarding/onboarding_page.dart';
 import 'package:health_profile/ui/pages/profile_register/profile_register_page.dart';
 import 'package:health_profile/ui/pages/sign_up/sign_up_page.dart';
@@ -27,6 +28,8 @@ class AppRouter {
   static final home = "/home";
   static final chat = "/chat";
   static final bookAppointment = "/bookAppointment";
+  static const medicalRecordList = '/medicalRecordList';
+
 
   static final GoRouter routers = GoRouter(
     routes: _routers,
@@ -116,6 +119,13 @@ class AppRouter {
       name: bookAppointment,
       builder: (context, state) {
         return BookAppointmentPage();
+      },
+    ),
+     GoRoute(
+      path: medicalRecordList,
+      name: medicalRecordList,
+      builder: (context, state) {
+        return const MedicalRecordListPage();
       },
     ),
   ];

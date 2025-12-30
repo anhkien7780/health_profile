@@ -11,6 +11,7 @@ class UserProfile {
     required this.username,
     required this.gender,
     required this.id,
+    required this.userId,
     required this.address,
     this.emergencyContact,
     this.bloodType,
@@ -24,24 +25,26 @@ class UserProfile {
   final String username;
   final Gender gender;
   final String id;
+  final int userId;
   final String address;
   final String? emergencyContact;
   final String? bloodType;
   final String? allergies;
 
   Map<String, dynamic> toJson() => {
-    "fullName": fullName,
-    "dateOfBirth": birthDay,
-    "phone": phoneNumber,
-    "email": email ?? '',
-    "username": username,
-    "gender": gender.name.toUpperCase(),
-    "id": id,
-    "address": address,
-    "emergencyContact": emergencyContact ?? '',
-    "bloodType": bloodType ?? '',
-    "allergies": allergies ?? '',
-  };
+        "fullName": fullName,
+        "dateOfBirth": birthDay,
+        "phone": phoneNumber,
+        "email": email ?? '',
+        "username": username,
+        "gender": gender.name.toUpperCase(),
+        "id": id,
+        "userId": userId,
+        "address": address,
+        "emergencyContact": emergencyContact ?? '',
+        "bloodType": bloodType ?? '',
+        "allergies": allergies ?? '',
+      };
 
   List<Map<String, dynamic>> toInfoList(S s) {
     return [
@@ -99,7 +102,8 @@ class UserProfile {
       gender: (json["gender"] as String? ?? 'MALE').toUpperCase() == 'FEMALE'
           ? Gender.female
           : Gender.male,
-      id: json["id"] ?? '',
+      id: (json["patientId"] ?? 0).toString(),
+      userId: json["userId"] ?? 0,
       address: json["address"] ?? '',
       emergencyContact: json["emergencyContact"],
       bloodType: json["bloodType"],
@@ -115,6 +119,7 @@ class UserProfile {
     String? username,
     Gender? gender,
     String? id,
+    int? userId,
     String? address,
     String? emergencyContact,
     String? bloodType,
@@ -128,6 +133,7 @@ class UserProfile {
       username: username ?? this.username,
       gender: gender ?? this.gender,
       id: id ?? this.id,
+      userId: userId ?? this.userId,
       address: address ?? this.address,
       emergencyContact: emergencyContact ?? this.emergencyContact,
       bloodType: bloodType ?? this.bloodType,

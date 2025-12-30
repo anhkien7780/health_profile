@@ -45,6 +45,7 @@
   "save": "Save",
   "male": "Male",
   "female": "Female",
+  "medicalRecord": "Medical Record",
   "completed": "Completed",
   "profileRegister": "Profile Register",
   "newPasswordHint": "Enter new password",

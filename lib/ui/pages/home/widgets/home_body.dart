@@ -46,10 +46,12 @@ class HomeBody extends StatelessWidget {
               ),
               Flexible(
                 child: AppElevatedButton(
-                  onClick: () {},
+                  onClick: () {
+                    context.pushNamed(AppRouter.medicalRecordList);
+                  },
                   height: AppDimens.buttonHeightBig,
-                  icon: Icon(Icons.search, size: AppDimens.iconSizeNormal),
-                  text: S.of(context).diagnoseDisease,
+                  icon: Icon(Icons.medical_information, size: AppDimens.iconSizeNormal),
+                  text: S.of(context).medicalRecord,
                 ),
               ),
             ],
