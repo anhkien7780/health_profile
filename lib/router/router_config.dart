@@ -13,6 +13,7 @@ import 'package:health_profile/ui/pages/profile_register/profile_register_page.d
 import 'package:health_profile/ui/pages/sign_up/sign_up_page.dart';
 import 'package:health_profile/ui/pages/splash/splash_page.dart';
 import 'package:health_profile/ui/pages/verify_code/verify_code_page.dart';
+import 'package:health_profile/ui/pages/web_payment/web_payment_page.dart';
 
 import '../ui/pages/forgot_password/forgot_password_page.dart';
 
@@ -33,6 +34,7 @@ class AppRouter {
   static const medicalRecordList = '/medicalRecordList';
   static const medicalRecordDetail = '/medicalRecordDetail';
   static const paymentSelection = '/paymentSelection';
+  static const webPayment = '/webPayment';
 
   static final GoRouter routers = GoRouter(
     routes: _routers,
@@ -145,6 +147,14 @@ class AppRouter {
       builder: (context, state) {
         final appointmentId = int.parse(state.pathParameters['appointmentId']!);
         return PaymentSelectionPage(appointmentId: appointmentId);
+      },
+    ),
+    GoRoute(
+      path: webPayment,
+      name: webPayment,
+      builder: (context, state) {
+        final paymentUrl = state.uri.queryParameters['paymentUrl']!;
+        return WebPaymentPage(paymentUrl: paymentUrl);
       },
     ),
   ];

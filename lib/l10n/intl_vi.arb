@@ -114,5 +114,6 @@
   "amountToBePaid": "Số tiền cần thanh toán",
   "payWithVnPay": "Thanh toán qua VNPAY",
   "payWithCash": "Thanh toán bằng tiền mặt tại quầy",
-  "payWithCard": "Thanh toán bằng thẻ tại quầy"
+  "payWithCard": "Thanh toán bằng thẻ tại quầy",
+  "securePaymentTitle": "Thanh toán an toàn"
 }
